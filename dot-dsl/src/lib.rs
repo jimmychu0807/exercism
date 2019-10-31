@@ -1,3 +1,5 @@
+// Inspired by JPRoland's solution:
+//   https://exercism.io/tracks/rust/exercises/dot-dsl/solutions/f40ddaa98c2e4f53a514c90b4ca3e37b
 pub mod graph {
 
   use graph_items::{edge::Edge, node::Node};
