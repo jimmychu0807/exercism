@@ -44,10 +44,9 @@ pub fn solve(capacity_1: u8, capacity_2: u8, goal: u8, start_bucket: &Bucket) ->
   let mut seen = HashSet::new();
   // empty state
   seen.insert(((0, capacity_1), (0, capacity_2)));
-  // opposite start state
-  seen.insert(((capacity_1 - curr_cap_1, capacity_1), (capacity_2 - curr_cap_2, capacity_2)));
-  // current start state
-  seen.insert((bucket_1.clone(), bucket_2.clone()));
+  // both initial states are marked as seen
+  seen.insert(((0, capacity_1), (capacity_2, capacity_2)));
+  seen.insert(((capacity_1, capacity_1), (0, capacity_2)));
   rec_solve((bucket_1, bucket_2), &mut seen, goal, 1)
 }
 
