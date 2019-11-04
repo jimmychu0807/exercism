@@ -1,4 +1,5 @@
 use std::cmp::{min};
+use std::collections::HashSet;
 
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub enum Bucket {
@@ -40,24 +41,24 @@ pub fn solve(capacity_1: u8, capacity_2: u8, goal: u8, start_bucket: &Bucket) ->
     return get_solution((bucket_1, bucket_2), goal, 1);
   }
 
-  let mut disabled_states = vec![
-    ((0, capacity_1), (0, capacity_2)),
-    // do not allow opposite start state
-    ((capacity_1 - curr_cap_1, capacity_1), (capacity_2 - curr_cap_2, capacity_2)),
-    (bucket_1.clone(), bucket_2.clone()),
-  ];
-
-  rec_solve((bucket_1, bucket_2), &mut disabled_states, goal, 1)
+  let mut seen = HashSet::new();
+  // empty state
+  seen.insert(((0, capacity_1), (0, capacity_2)));
+  // opposite start state
+  seen.insert(((capacity_1 - curr_cap_1, capacity_1), (capacity_2 - curr_cap_2, capacity_2)));
+  // current start state
+  seen.insert((bucket_1.clone(), bucket_2.clone()));
+  rec_solve((bucket_1, bucket_2), &mut seen, goal, 1)
 }
 
-pub fn rec_solve(state: BucketState, disabled_states: &mut Vec<BucketState>, goal: u8, moves: u8)
+pub fn rec_solve(state: BucketState, seen: &mut HashSet<BucketState>, goal: u8, moves: u8)
   -> Option<BucketStats> {
 
   let bucket_1 = state.0;
   let bucket_2 = state.1;
 
   // println!("moves: {:?}, state: {:?}", moves, state);
-  // println!("disabled_states: {:?}", disabled_states);
+  // println!("seen: {:?}", seen);
 
   if bucket_1.0 == goal || bucket_2.0 == goal {
     // println!("found solution: {:?}", state);
@@ -82,12 +83,13 @@ pub fn rec_solve(state: BucketState, disabled_states: &mut Vec<BucketState>, goa
 
   let mut results: Vec<BucketStats> = all_new_states
     .into_iter()
-    .filter_map(|new_state| if disabled_states.contains(&new_state) {
-      None
-    } else {
-      // add in a new disable state, call the rec function
-      disabled_states.push(new_state.clone());
-      rec_solve(new_state.clone(), disabled_states, goal, moves + 1)
+    .filter_map(|new_state| match seen.contains(&new_state) {
+      true => None,
+      false => {
+        // add in a new disable state, call the rec function
+        seen.insert(new_state.clone());
+        rec_solve(new_state.clone(), seen, goal, moves + 1)
+      },
     }) // this returned `BucketStats`, not `Option<BucketStats>`. Feature of filter_map.
     .collect();
 
