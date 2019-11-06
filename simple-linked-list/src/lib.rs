@@ -1,85 +1,68 @@
-use std::rc::Rc;
 use std::iter::FromIterator;
 use std::fmt::Debug;
+use std::ops::Deref;
 
 #[derive(Debug)]
 struct Node<T: Debug> {
   data: T,
-  next: Option<Rc<Node<T>>>,
-}
-
-impl<T: Debug> Node<T> {
-  fn new(obj: T) -> Self {
-    Node { data: obj, next: None }
-  }
+  next: Option<Box<Node<T>>>,
 }
 
 #[derive(Debug)]
 pub struct SimpleLinkedList<T: Debug> {
-  head: Option<Rc<Node<T>>>,
-  tail: Option<Rc<Node<T>>>,
+  head: Option<Box<Node<T>>>,
+  size: usize,
 }
 
 impl<T: Debug> SimpleLinkedList<T> {
   pub fn new() -> Self {
-    SimpleLinkedList { head: None, tail: None }
+    SimpleLinkedList { head: None, size: 0 }
   }
 
   pub fn len(&self) -> usize {
-    let mut node = &self.head;
-    let mut llen: usize = 0;
-
-    while node.is_some() {
-      llen += 1;
-      // WHY: this work?
-      node = &node.as_ref().unwrap().next;
-    }
-    llen
+    self.size
   }
 
   pub fn push(&mut self, _element: T) {
-    let node_rc = Rc::new(Node::new(_element));
-    if self.head.is_none() {
-      self.head = Some(Rc::clone(&node_rc));
-      self.tail = Some(Rc::clone(&node_rc));
-    } else {
-      if Rc::ptr_eq(self.head.as_ref().unwrap(), self.tail.as_ref().unwrap()) {
-        // println!("before: count: {}, obj: {:?}", Rc::strong_count(head_rc), head_rc);
-        // drop(self.tail.as_mut().unwrap());
-        // println!("after: count: {}, obj: {:?}", Rc::strong_count(head_rc), head_rc);
-        self.tail = None;
-        let head_rc = self.head.as_mut().unwrap();
-        let mut head_node = Rc::get_mut(head_rc).unwrap();
-        head_node.next = Some(Rc::clone(&node_rc));
-        self.tail = Some(Rc::clone(&node_rc));
-      } else {
-        let node_ptr = Rc::into_raw(*self.tail.as_mut().unwrap());
-        let mut tail_node: Node<T> = (*node_ptr).into();
-        // let mut tail_node = Rc::get_mut(&mut tail_rc).unwrap();
-        tail_node.next = Some(Rc::clone(&node_rc));
-        self.tail = Some(Rc::clone(&node_rc));
-      }
-    }
+    let head_box = self.head.take();
+    self.head = Some(Box::new(Node { data: _element, next: head_box }));
+    self.size += 1;
   }
 
-  // pub fn pop(&mut self) -> Option<T> {
-  //     unimplemented!()
-  // }
+  pub fn pop(&mut self) -> Option<T> {
+    let head_box_opt = self.head.take();
+    if head_box_opt.is_none() { return None }
 
-  // pub fn peek(&self) -> Option<&T> {
-  //     unimplemented!()
-  // }
+    let head_box = head_box_opt.unwrap();
+    self.head = head_box.next;
+    self.size -= 1;
+    Some(head_box.data)
+  }
 
-  // pub fn rev(self) -> SimpleLinkedList<T> {
-  //     unimplemented!()
-  // }
+  pub fn peek(&self) -> Option<&T> {
+    if self.head.is_none() { return None }
+
+    let node_b_r = self.head.as_ref().unwrap();
+    let node_r = node_b_r.deref();
+    Some(&node_r.data)
+  }
+
+  pub fn rev(mut self) -> SimpleLinkedList<T> {
+    let mut list = SimpleLinkedList::<T>::new();
+    while self.peek().is_some() {
+      list.push(self.pop().unwrap());
+    }
+    list
+  }
 }
 
-// impl<T> FromIterator<T> for SimpleLinkedList<T> {
-//   fn from_iter<I: IntoIterator<Item = T>>(_iter: I) -> Self {
-//     unimplemented!()
-//   }
-// }
+impl<T: Debug> FromIterator<T> for SimpleLinkedList<T> {
+  fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
+    let mut list = SimpleLinkedList::<T>::new();
+    for item in iter { list.push(item) }
+    list
+  }
+}
 
 // In general, it would be preferable to implement IntoIterator for SimpleLinkedList<T>
 // instead of implementing an explicit conversion to a vector. This is because, together,
@@ -93,7 +76,13 @@ impl<T: Debug> SimpleLinkedList<T> {
 // demands more of the student than we expect at this point in the track.
 
 impl<T: Debug> Into<Vec<T>> for SimpleLinkedList<T> {
-    fn into(self) -> Vec<T> {
-        unimplemented!()
+  fn into(self) -> Vec<T> {
+    let mut rev_list = self.rev();
+    let mut vec = vec![];
+
+    while rev_list.peek().is_some() {
+      vec.push(rev_list.pop().unwrap());
     }
+    vec
+  }
 }
