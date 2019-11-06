@@ -1,6 +1,5 @@
 use std::iter::FromIterator;
 use std::fmt::Debug;
-use std::ops::Deref;
 
 #[derive(Debug)]
 struct Node<T: Debug> {
@@ -24,27 +23,27 @@ impl<T: Debug> SimpleLinkedList<T> {
   }
 
   pub fn push(&mut self, _element: T) {
-    let head_box = self.head.take();
-    self.head = Some(Box::new(Node { data: _element, next: head_box }));
+    self.head = Some(Box::new(Node { data: _element, next: self.head.take() }));
     self.size += 1;
   }
 
   pub fn pop(&mut self) -> Option<T> {
-    let head_box_opt = self.head.take();
-    if head_box_opt.is_none() { return None }
-
-    let head_box = head_box_opt.unwrap();
-    self.head = head_box.next;
-    self.size -= 1;
-    Some(head_box.data)
+    let head_opt = self.head.take();
+    match head_opt {
+      None => None,
+      Some(head_box) => {
+        self.head = head_box.next;
+        self.size -= 1;
+        Some(head_box.data)
+      }
+    }
   }
 
   pub fn peek(&self) -> Option<&T> {
-    if self.head.is_none() { return None }
-
-    let node_b_r = self.head.as_ref().unwrap();
-    let node_r = node_b_r.deref();
-    Some(&node_r.data)
+    match &self.head {
+      None => None,
+      Some(head_box) => Some(&head_box.data)
+    }
   }
 
   pub fn rev(mut self) -> SimpleLinkedList<T> {
@@ -59,7 +58,9 @@ impl<T: Debug> SimpleLinkedList<T> {
 impl<T: Debug> FromIterator<T> for SimpleLinkedList<T> {
   fn from_iter<I: IntoIterator<Item = T>>(iter: I) -> Self {
     let mut list = SimpleLinkedList::<T>::new();
-    for item in iter { list.push(item) }
+    for item in iter {
+      list.push(item)
+    }
     list
   }
 }
