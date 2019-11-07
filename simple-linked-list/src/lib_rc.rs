@@ -1,11 +1,12 @@
 use std::rc::Rc;
-use std::iter::FromIterator;
+use std::cell::{RefCell, RefMut};
+// use std::iter::FromIterator;
 use std::fmt::Debug;
 
 #[derive(Debug)]
 struct Node<T: Debug> {
   data: T,
-  next: Option<Rc<Node<T>>>,
+  next: Option<Rc<RefCell<Node<T>>>>,
 }
 
 impl<T: Debug> Node<T> {
@@ -16,55 +17,56 @@ impl<T: Debug> Node<T> {
 
 #[derive(Debug)]
 pub struct SimpleLinkedList<T: Debug> {
-  head: Option<Rc<Node<T>>>,
-  tail: Option<Rc<Node<T>>>,
+  head: Option<Rc<RefCell<Node<T>>>>,
+  tail: Option<Rc<RefCell<Node<T>>>>,
+  len: usize,
 }
 
 impl<T: Debug> SimpleLinkedList<T> {
   pub fn new() -> Self {
-    SimpleLinkedList { head: None, tail: None }
+    SimpleLinkedList { head: None, tail: None, len: 0 }
   }
 
   pub fn len(&self) -> usize {
-    let mut node = &self.head;
-    let mut llen: usize = 0;
-
-    while node.is_some() {
-      llen += 1;
-      // WHY: this work?
-      node = &node.as_ref().unwrap().next;
-    }
-    llen
+    self.len
   }
 
   pub fn push(&mut self, _element: T) {
-    let node_rc = Rc::new(Node::new(_element));
-    if self.head.is_none() {
-      self.head = Some(Rc::clone(&node_rc));
-      self.tail = Some(Rc::clone(&node_rc));
-    } else {
-      if Rc::ptr_eq(self.head.as_ref().unwrap(), self.tail.as_ref().unwrap()) {
-        // println!("before: count: {}, obj: {:?}", Rc::strong_count(head_rc), head_rc);
-        // drop(self.tail.as_mut().unwrap());
-        // println!("after: count: {}, obj: {:?}", Rc::strong_count(head_rc), head_rc);
-        self.tail = None;
-        let head_rc = self.head.as_mut().unwrap();
-        let mut head_node = Rc::get_mut(head_rc).unwrap();
-        head_node.next = Some(Rc::clone(&node_rc));
-        self.tail = Some(Rc::clone(&node_rc));
-      } else {
-        let node_ptr = Rc::into_raw(*self.tail.as_mut().unwrap());
-        let mut tail_node: Node<T> = (*node_ptr).into();
-        // let mut tail_node = Rc::get_mut(&mut tail_rc).unwrap();
-        tail_node.next = Some(Rc::clone(&node_rc));
-        self.tail = Some(Rc::clone(&node_rc));
+    let node_rc = Rc::new(RefCell::new(Node::new(_element)));
+    self.len += 1;
+
+    match self.head {
+      None => { self.head = Some(Rc::clone(&node_rc)); },
+      Some(_) => {
+        let mut node: RefMut<_> = self.tail.as_ref().unwrap().borrow_mut();
+        node.next = Some(Rc::clone(&node_rc));
       }
     }
+    self.tail = Some(Rc::clone(&node_rc));
   }
 
-  // pub fn pop(&mut self) -> Option<T> {
-  //     unimplemented!()
-  // }
+  pub fn pop(&mut self) -> Option<T> {
+    if self.head.is_none() { return None }
+    self.len -= 1;
+
+    // single node left in the linked list
+    if self.len == 0 {
+      let node = self.tail.as_ref().unwrap().into_inner();
+      self.head = None;
+      self.tail = None;
+      return Some(node.data);
+    }
+
+    let mut curr_rc = self.head.as_ref().unwrap();
+    let tail_node_rc = self.tail.as_ref().unwrap();
+    while !Rc::ptr_eq(curr_rc.borrow().next.as_ref().unwrap(), tail_node_rc) {
+      curr_rc = curr_rc.borrow().next.as_ref().unwrap();
+    }
+    let val = curr_rc.borrow().next.as_ref().unwrap().into_inner();
+    curr_rc.borrow_mut().next = None;
+    self.tail = Some(Rc::clone(&curr_rc));
+    Some(val.data)
+  }
 
   // pub fn peek(&self) -> Option<&T> {
   //     unimplemented!()
