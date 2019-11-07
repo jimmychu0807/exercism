@@ -85,3 +85,14 @@ fn test_into_vector() {
   let s_as_vec: Vec<i32> = s.into();
   assert_eq!(v, s_as_vec);
 }
+
+#[test]
+fn test_into_iter() {
+  let mut v = Vec::new();
+  let mut s = SimpleLinkedList::new();
+  for i in 1..4 {
+    v.push(i);
+    s.push(i);
+  }
+  assert_eq!(v, s.into_iter().collect::<Vec<_>>());
+}

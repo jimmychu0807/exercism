@@ -1,4 +1,4 @@
-use std::iter::FromIterator;
+use std::iter::{FromIterator, IntoIterator};
 use std::fmt::Debug;
 
 #[derive(Debug)]
@@ -40,10 +40,7 @@ impl<T: Debug> SimpleLinkedList<T> {
   }
 
   pub fn peek(&self) -> Option<&T> {
-    match &self.head {
-      None => None,
-      Some(head_box) => Some(&head_box.data)
-    }
+    self.head.as_ref().map(|node| &node.data)
   }
 
   pub fn rev(mut self) -> SimpleLinkedList<T> {
@@ -75,6 +72,18 @@ impl<T: Debug> FromIterator<T> for SimpleLinkedList<T> {
 // The reason this exercise's API includes an explicit conversion to Vec<T> instead
 // of IntoIterator is that implementing that interface is fairly complicated, and
 // demands more of the student than we expect at this point in the track.
+impl<T: Debug> IntoIterator for SimpleLinkedList<T> {
+  type Item = T;
+  type IntoIter = std::vec::IntoIter<Self::Item>;
+
+  fn into_iter(mut self) -> Self::IntoIter {
+    let mut vec: Vec<Self::Item> = vec![];
+    if self.peek().is_none() { return vec.into_iter() }
+    while self.peek().is_some() { vec.push(self.pop().unwrap()); }
+    vec.reverse();
+    vec.into_iter()
+  }
+}
 
 impl<T: Debug> Into<Vec<T>> for SimpleLinkedList<T> {
   fn into(self) -> Vec<T> {
