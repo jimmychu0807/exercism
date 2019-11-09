@@ -24,8 +24,8 @@ fn is_anagram(word1: &str, word2: &str) -> bool {
   for cw2 in word2.chars() {
     match chars_cnt.get(&cw2) {
       None => return false,
-      Some(cw2_cnt) if *cw2_cnt <= 0 => return false,
-      Some(cw2_cnt) => chars_cnt.insert(cw2, cw2_cnt - 1),
+      Some(&cw2_cnt) if cw2_cnt <= 0 => return false,
+      Some(&cw2_cnt) => chars_cnt.insert(cw2, cw2_cnt - 1),
     };
   }
 
