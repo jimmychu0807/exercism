@@ -2,11 +2,11 @@ use poker::winning_hands;
 use std::collections::HashSet;
 
 fn hs_from<'a>(input: &[&'a str]) -> HashSet<&'a str> {
-    let mut hs = HashSet::new();
-    for item in input.iter() {
-        hs.insert(*item);
-    }
-    hs
+  let mut hs = HashSet::new();
+  for item in input.iter() {
+    hs.insert(*item);
+  }
+  hs
 }
 
 /// Test that the expected output is produced from the given input
@@ -15,24 +15,24 @@ fn hs_from<'a>(input: &[&'a str]) -> HashSet<&'a str> {
 /// Note that the output can be in any order. Here, we use a HashSet to
 /// abstract away the order of outputs.
 fn test<'a, 'b>(input: &[&'a str], expected: &[&'b str]) {
-    assert_eq!(
-        hs_from(&winning_hands(input).expect("This test should produce Some value",)),
-        hs_from(expected)
-    )
+  assert_eq!(
+    hs_from(&winning_hands(input).expect("This test should produce Some value",)),
+    hs_from(expected)
+  )
 }
 
 #[test]
 fn test_single_hand_always_wins() {
-    test(&["4S 5S 7H 8D JC"], &["4S 5S 7H 8D JC"])
+  test(&["4S 5S 7H 8D JC"], &["4S 5S 7H 8D JC"])
 }
 
 #[test]
 #[ignore]
 fn test_highest_card_of_all_hands_wins() {
-    test(
-        &["4D 5S 6S 8D 3C", "2S 4C 7S 9H 10H", "3S 4S 5D 6H JH"],
-        &["3S 4S 5D 6H JH"],
-    )
+  test(
+    &["4D 5S 6S 8D 3C", "2S 4C 7S 9H 10H", "3S 4S 5D 6H JH"],
+    &["3S 4S 5D 6H JH"],
+  )
 }
 
 #[test]

@@ -13,10 +13,14 @@ use std::fmt;
 
 enum PokerHandPattern {
   StraightFlush(u32),
-  FourOfAKind(u32,u32),
+  FourOfAKind(u32, u32),
   FullHouse(u32, u32),
-  Flush(Vec<u32>),
-  PatternNone(Vec<u32>),
+  Flush(u32, u32, u32, u32, u32),
+  Straight(u32),
+  ThreeOfAKind(u32, u32, u32),
+  TwoPair(u32, u32, u32),
+  OnePair(u32, u32, u32, u32),
+  Nothing(u32, u32, u32, u32, u32),
 }
 
 impl PartialOrd for PokerHandPattern {
@@ -40,8 +44,12 @@ impl<'a> PokerHand<'a> {
   fn new(hand: &'a str) -> PokerHand {
     PokerHand {
       hand_str: hand,
-      pattern: PokerHandPattern::PatternNone(vec![]),
+      pattern: Self::get_pattern(hand),
     }
+  }
+
+  fn get_pattern(hand: &'a str) -> PokerHandPattern {
+    PokerHandPattern::StraightFlush(14)
   }
 }
 
@@ -52,7 +60,7 @@ pub fn winning_hands<'a>(hands: &[&'a str]) -> Option<Vec<&'a str>> {
   hands.sort_by(|a, b| b.pattern.partial_cmp(&a.pattern).unwrap());
   let largest = hands.first().unwrap();
 
-  // could be multiple answer, we want to retrieve them all
+  // could be multiple answers, so we want to retrieve them all
   let res = hands
     .iter()
     .filter(|hand| hand.pattern.eq(&largest.pattern))
