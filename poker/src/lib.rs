@@ -1,5 +1,6 @@
 use core::cmp::{ PartialOrd, PartialEq, Ordering };
 use std::fmt;
+use std::collections:{ HashMap };
 
 /// Given a list of poker hands, return a list of those hands which win.
 ///
@@ -13,10 +14,10 @@ use std::fmt;
 
 #[derive(Debug)]
 enum PokerHandPattern {
-  StraightFlush(u32),
+  // StraightFlush(u32),
   FourOfAKind(u32, u32),
   FullHouse(u32, u32),
-  Flush(u32, u32, u32, u32, u32),
+  // Flush(u32, u32, u32, u32, u32),
   Straight(u32),
   ThreeOfAKind(u32, u32, u32),
   TwoPair(u32, u32, u32),
@@ -36,7 +37,7 @@ impl PartialEq for PokerHandPattern {
   }
 }
 
-#[derive(Eq, Debug)]
+#[derive(Eq, Debug, Clone)]
 struct Card {
   rank: u32,
   suit: String,
@@ -97,9 +98,14 @@ struct PokerHand<'a> {
 }
 
 impl<'a> PokerHand<'a> {
-  fn new(hand_str: &'a str) -> PokerHand {
+  pub fn new(hand_str: &'a str) -> PokerHand {
     let cards = Self::get_sorted_cards(hand_str);
-    PokerHand { hand_str, cards, pattern: Self::get_pattern(hand_str) }
+    let mut hand = PokerHand {
+      hand_str,
+      cards: cards.clone(),
+      pattern: Self::get_pattern(&cards)
+    };
+
   }
 
   fn get_sorted_cards(hand_str: &'a str) -> Vec<Card> {
@@ -107,12 +113,71 @@ impl<'a> PokerHand<'a> {
       .map(|card_str| Card::new(card_str))
       .collect::<Vec<_>>();
     cards.sort();
+    cards.reverse();
     cards
   }
 
-  fn get_pattern(hand: &'a str) -> PokerHandPattern {
+  pub fn get_suit_hashmap(&self) -> HashMap {
+    Self::_get_suit_hashmap(&self.cards)
+  }
+
+  fn _get_suit_hashmap(cards: &Vec<Card>) -> HashMap {
+    let mut map = HashMap::new();
+    cards.iter().for_each(|card| match map.get_mut(card.suit) {
+      Some(val) => *val += 1,
+      None => map.insert(card.suit, 1),
+    });
+    map
+  }
+
+  pub fn get_rank_hashmap(&self) -> HashMap {
+    Self::_get_rank_hashmap(&self.cards)
+  }
+
+  fn _get_rank_hashmap(cards: &Vec<Card>) -> HashMap {
+    let mut map = HashMap::new();
+    cards.iter().for_each(|card| match map.get_mut(card.rank) {
+      Some(val) => *val += 1,
+      None => map.insert(card.rank, 1),
+    });
+    map
+  }
+
+  fn get_pattern(cards: &Vec<Card>) -> PokerHandPattern {
     // TODO: fill in actual implementation
-    PokerHandPattern::StraightFlush(14)
+    let suit_hashmap = Self::_get_suit_hashmap(cards);
+    let rank_hashmap = Self::_get_rank_hashmap(cards);
+
+    let consecutive_highest = |cards| {
+      // assume cards are sorted, highest to lowest
+      let highest = cards[0].rank;
+      if (cards[1].rank == highest - 1 &&
+        cards[2].rank == highest - 2 &&
+        cards[3].rank == highest - 3 &&
+        cards[4].rank == highest - 4) { return Some(highest) }
+
+      // check A, 5, 4, 3, 2
+      if (cards[0].rank == 14 &&
+        cards[1].rank == 5 &&
+        cards[2].rank == 4 &&
+        cards[3].rank == 3 &&
+        cards[4].rank == 2) { return Some(5) }
+
+      return None
+    }
+
+    // distinguish from highest to lowest
+    if suit_hashmap.keys().count() == 1 {
+      if rank_hashmap.keys().count() == 5 {
+        match consecutive_highest(cards) {
+          Some(val) => return PokerHandPattern::StraightFlush(val),
+          None => return PokerHandPattern::Flush(cards.map(|c| c.rank)),
+        }
+      }
+    } else if rank_hashmap.keys().count() == 2 {
+      // distinguish FourOfAKind or FullHouse
+    }
+
   }
 }
 
