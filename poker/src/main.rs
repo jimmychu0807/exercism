@@ -2,8 +2,10 @@
 use poker::{ self, Hand as PokerHand };
 use core::cmp::{ Ordering };
 
-fn main() {
-  let poker1 = PokerHand::new("4S 5S 7H 8D JC");
+fn main() -> Result<(), String> {
+  let poker1 = PokerHand::new("4S 5S 7H 8D JC")?;
+  println!("{:?}", poker1);
+
   // let poker1a = PokerHand::new("4S 5S 6H 8D JC");
   // let poker1b = PokerHand::new("4S 5S 6H 9D JC");
 
@@ -34,4 +36,5 @@ fn main() {
   // assert_eq!(poker1.eq(&poker1), true);
   // assert_eq!(poker1.partial_cmp(&poker1a), Some(Ordering::Greater));
   // assert_eq!(poker1.partial_cmp(&poker1b), Some(Ordering::Less));
+  Ok(())
 }
