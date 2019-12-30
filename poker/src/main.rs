@@ -4,7 +4,7 @@ use core::cmp::{ Ordering };
 
 fn main() -> Result<(), String> {
   let poker1 = PokerHand::new("4S 5S 7H 8D JC")?;
-  println!("{:?}", poker1);
+  println!("Hand: {:?} | Pattern: {:?}", poker1, poker1.pattern());
 
   // let poker1a = PokerHand::new("4S 5S 6H 8D JC");
   // let poker1b = PokerHand::new("4S 5S 6H 9D JC");
