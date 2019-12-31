@@ -1,5 +1,4 @@
 use core::cmp::Ordering;
-use std::error::Error;
 use std::collections::HashMap;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -63,26 +62,28 @@ impl<'a> Hand<'a> {
 
   // This method is for determining the Hand pattern
   pub fn pattern(&self) -> HandPattern {
-    let mut rank_map = HashMap::new();
-    let mut suit_map = HashMap::new();
+    let mut rank_map: HashMap<u32, u32> = HashMap::new();
+    let mut suit_map: HashMap<String, u32> = HashMap::new();
 
-    self.cards.iter().map(|c| (Hand::get_rank(c), Hand::get_suit(c)))
+    self.cards.iter().map(|c| (
+      Hand::get_rank(c).unwrap(),
+      Hand::get_suit(c).unwrap()
+    ))
       .for_each(|(rank, suit)| {
-        if rank_map.contains_key(&rank) {
-          rank_map[&rank] = rank_map[&rank] + 1;
+        if let Some(val) = rank_map.get_mut(&rank) {
+           *val = *val + 1;
         } else {
-          rank_map[&rank] = 1;
+          rank_map.insert(rank, 1);
         }
-
-        if suit_map.contains_key(&suit) {
-          suit_map[&suit] = suit_map[&suit] + 1;
+        if let Some(val) = suit_map.get_mut(&suit) {
+          *val = *val + 1;
         } else {
-          suit_map[&suit] = 1;
+          suit_map.insert(suit, 1);
         }
       });
 
-    let sorted_cards_rank = self.sorted_cards_rank();
     if rank_map.keys().count() == 5 && suit_map.keys().count() == 1 {
+      let sorted_cards_rank = self.sorted_cards_rank();
       // 同花 or 同花順
       if self.is_straight() {
         return HandPattern::StraightFlush(sorted_cards_rank[0]);
@@ -95,28 +96,28 @@ impl<'a> Hand<'a> {
         let (one_key, _) = rank_map.iter().filter(|(_, v)| **v == 1).nth(0).unwrap();
         return HandPattern::FourOfAKind(*four_key, *one_key);
       } else {
-        let Some((three_key, _)) = rank_map.iter().filter(|(_, v)| **v == 4).nth(0);
-        let Some((two_key, _)) = rank_map.iter().filter(|(_, v)| **v == 2).nth(0);
+        let (three_key, _) = rank_map.iter().filter(|(_, v)| **v == 3).nth(0).unwrap();
+        let (two_key, _) = rank_map.iter().filter(|(_, v)| **v == 2).nth(0).unwrap();
         return HandPattern::FullHouse(*three_key, *two_key);
       }
     } else if rank_map.keys().count() == 3 {
       if let Some((three_key, _)) = rank_map.iter().filter(|(_, v)| **v == 3).nth(0) {
         let mut one_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 1 { Some(*k) } else { None }).collect();
+        one_keys.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
         return HandPattern::ThreeOfAKind(*three_key, one_keys[0], one_keys[1]);
       } else {
         let mut two_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 2 { Some(*k) } else { None }).collect();
-        two_keys.sort_unstable();
-        let mut one_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 1 { Some(*k) } else { None }).collect();
-        one_keys.sort_unstable();
+        two_keys.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
+        let one_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 1 { Some(*k) } else { None }).collect();
         return HandPattern::TwoPair(two_keys[0], two_keys[1], one_keys[0]);
       }
     } else if rank_map.keys().count() == 4 {
-        let mut two_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 2 { Some(*k) } else { None }).collect();
-        two_keys.sort_unstable();
+        let two_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 2 { Some(*k) } else { None }).collect();
         let mut one_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 1 { Some(*k) } else { None }).collect();
-        one_keys.sort_unstable();
+        one_keys.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
         return HandPattern::OnePair(two_keys[0], one_keys[0], one_keys[1], one_keys[2]);
     } else { // this is the condition satisfied: rank_map.keys().count() == 5
+      let sorted_cards_rank = self.sorted_cards_rank();
       if self.is_straight() {
         // 順
         return HandPattern::Straight(sorted_cards_rank[0]);
@@ -137,8 +138,8 @@ impl<'a> Hand<'a> {
 
   fn sorted_cards_rank(&self) -> Vec<u32> {
     let mut sorted_cards_rank = self.cards.iter().map(|c| Hand::get_rank(c).unwrap()).collect::<Vec<_>>();
-    sorted_cards_rank.sort_unstable();
-    if sorted_cards_rank == vec![15, 5, 4, 3, 2] {
+    sorted_cards_rank.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
+    if sorted_cards_rank == vec![14, 5, 4, 3, 2] {
       // only in this condition, "A" is treated as 1
       sorted_cards_rank = vec![5, 4, 3, 2, 1];
     }
@@ -179,11 +180,6 @@ impl<'a> Hand<'a> {
     })
   }
 }
-
-/// Given a list of poker hands, return a list of those hands which win.
-///
-/// Note the type signature: this function should return _the same_ reference to
-/// the winning hand(s) as were passed in, not reconstructed strings which happen to be equal.
 
 pub fn winning_hands<'a>(hands: &[&'a str]) -> Option<Vec<&'a str>> {
   let mut hands_in_struct: Vec<Hand> = hands
