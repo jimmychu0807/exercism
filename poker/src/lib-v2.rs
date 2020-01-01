@@ -95,7 +95,7 @@ impl<'a> Hand<'a> {
   /// This method returns a new set of a poker hand
   pub fn new(hand_str: &'a str) -> Result<Hand, String> {
     let mut cards = vec![];
-    for card in hand_str.clone().split_whitespace() {
+    for card in hand_str.split_whitespace() {
       if Hand::valid_card(card) {
         cards.push(card);
       } else {
@@ -121,12 +121,12 @@ impl<'a> Hand<'a> {
     ))
       .for_each(|(rank, suit)| {
         if let Some(val) = rank_map.get_mut(&rank) {
-           *val = *val + 1;
+           *val += 1;
         } else {
           rank_map.insert(rank, 1);
         }
         if let Some(val) = suit_map.get_mut(&suit) {
-          *val = *val + 1;
+          *val += 1;
         } else {
           suit_map.insert(suit, 1);
         }
@@ -136,44 +136,44 @@ impl<'a> Hand<'a> {
       let sorted_cards_rank = self.sorted_cards_rank();
       // 同花 or 同花順
       if self.is_straight() {
-        return HandPattern::StraightFlush(sorted_cards_rank[0]);
+        HandPattern::StraightFlush(sorted_cards_rank[0])
       } else {
-        return HandPattern::Flush(sorted_cards_rank[0], sorted_cards_rank[1], sorted_cards_rank[2],
-          sorted_cards_rank[3], sorted_cards_rank[4]);
+        HandPattern::Flush(sorted_cards_rank[0], sorted_cards_rank[1], sorted_cards_rank[2],
+          sorted_cards_rank[3], sorted_cards_rank[4])
       }
     } else if rank_map.keys().count() == 2 {
       if let Some((four_key, _)) = rank_map.iter().filter(|(_, v)| **v == 4).nth(0) {
         let (one_key, _) = rank_map.iter().filter(|(_, v)| **v == 1).nth(0).unwrap();
-        return HandPattern::FourOfAKind(*four_key, *one_key);
+        HandPattern::FourOfAKind(*four_key, *one_key)
       } else {
         let (three_key, _) = rank_map.iter().filter(|(_, v)| **v == 3).nth(0).unwrap();
         let (two_key, _) = rank_map.iter().filter(|(_, v)| **v == 2).nth(0).unwrap();
-        return HandPattern::FullHouse(*three_key, *two_key);
+        HandPattern::FullHouse(*three_key, *two_key)
       }
     } else if rank_map.keys().count() == 3 {
       if let Some((three_key, _)) = rank_map.iter().filter(|(_, v)| **v == 3).nth(0) {
         let mut one_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 1 { Some(*k) } else { None }).collect();
         one_keys.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
-        return HandPattern::ThreeOfAKind(*three_key, one_keys[0], one_keys[1]);
+        HandPattern::ThreeOfAKind(*three_key, one_keys[0], one_keys[1])
       } else {
         let mut two_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 2 { Some(*k) } else { None }).collect();
         two_keys.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
         let one_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 1 { Some(*k) } else { None }).collect();
-        return HandPattern::TwoPair(two_keys[0], two_keys[1], one_keys[0]);
+        HandPattern::TwoPair(two_keys[0], two_keys[1], one_keys[0])
       }
     } else if rank_map.keys().count() == 4 {
         let two_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 2 { Some(*k) } else { None }).collect();
         let mut one_keys: Vec<u32> = rank_map.iter().filter_map(|(k, v)| if *v == 1 { Some(*k) } else { None }).collect();
         one_keys.sort_unstable_by(|a, b| b.partial_cmp(a).unwrap());
-        return HandPattern::OnePair(two_keys[0], one_keys[0], one_keys[1], one_keys[2]);
+        HandPattern::OnePair(two_keys[0], one_keys[0], one_keys[1], one_keys[2])
     } else { // this is the condition satisfied: rank_map.keys().count() == 5
       let sorted_cards_rank = self.sorted_cards_rank();
       if self.is_straight() {
         // 順
-        return HandPattern::Straight(sorted_cards_rank[0]);
+        HandPattern::Straight(sorted_cards_rank[0])
       } else {
-        return HandPattern::Nothing(sorted_cards_rank[0], sorted_cards_rank[1], sorted_cards_rank[2],
-          sorted_cards_rank[3], sorted_cards_rank[4]);
+        HandPattern::Nothing(sorted_cards_rank[0], sorted_cards_rank[1], sorted_cards_rank[2],
+          sorted_cards_rank[3], sorted_cards_rank[4])
       }
     }
   }
@@ -183,7 +183,7 @@ impl<'a> Hand<'a> {
     for i in 0..4 {
       if sorted_cards_rank[i] - sorted_cards_rank[i+1] != 1 { return false; }
     }
-    return true;
+    true
   }
 
   fn sorted_cards_rank(&self) -> Vec<u32> {
@@ -193,7 +193,7 @@ impl<'a> Hand<'a> {
       // only in this condition, "A" is treated as 1
       sorted_cards_rank = vec![5, 4, 3, 2, 1];
     }
-    return sorted_cards_rank;
+    sorted_cards_rank
   }
 
   fn valid_card(card: &str) -> bool {
@@ -249,7 +249,7 @@ impl<'a> Hand<'a> {
 /// ```
 pub fn winning_hands<'a>(hands: &[&'a str]) -> Option<Vec<&'a str>> {
   let mut hands_in_struct: Vec<Hand> = hands
-    .into_iter()
+    .iter()
     .map(|hand_str| match Hand::new(hand_str) {
       Ok(hand) => hand,
       Err(msg) => panic!(msg),
