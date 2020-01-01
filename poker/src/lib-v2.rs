@@ -218,3 +218,91 @@ pub fn winning_hands<'a>(hands: &[&'a str]) -> Option<Vec<&'a str>> {
     .collect::<Vec<_>>();
   Some(largest_set)
 }
+
+// Our own test cases
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn test_nothing_pattern() {
+    let poker = Hand::new("4S 5S 7H 8D JC").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::Nothing(11, 8, 7, 5, 4));
+  }
+
+  #[test]
+  fn test_straight_flush() {
+    let poker = Hand::new("4D 5D 7D 8D 6D").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::StraightFlush(8));
+  }
+
+  #[test]
+  fn test_straight_flush_a_largest() {
+    let poker = Hand::new("JD QD AD KD 10D").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::StraightFlush(14));
+  }
+
+  #[test]
+  fn test_straight_a_smallest() {
+    let poker = Hand::new("2D 3C 4D AD 5D").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::Straight(5));
+  }
+
+  #[test]
+  fn test_flush() {
+    let poker = Hand::new("2D JD QD KD AD").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::Flush(14, 13, 12, 11, 2));
+  }
+
+  #[test]
+  fn test_four_of_a_kind() {
+    let poker = Hand::new("2S 2H 2C 2D AD").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::FourOfAKind(2, 14));
+  }
+
+  #[test]
+  fn test_full_house() {
+    let poker = Hand::new("5C 2S 2H 2C 5D").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::FullHouse(2, 5));
+  }
+
+  #[test]
+  fn test_three_of_a_kind() {
+    let poker = Hand::new("2S 3D 4D 2H 2C").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::ThreeOfAKind(2, 4, 3));
+  }
+
+  #[test]
+  fn test_two_pair() {
+    let poker = Hand::new("2S 2H 3C 3D 4D").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::TwoPair(3, 2, 4));
+  }
+
+  #[test]
+  fn test_one_pair() {
+    let poker = Hand::new("2S 2H 3C 5D 4D").unwrap();
+    assert_eq!(poker.pattern(), HandPattern::OnePair(2, 5, 4, 3));
+  }
+
+  #[test]
+  fn test_pattern_equal() {
+    let poker = Hand::new("4S 5S 7H 8D JC").unwrap();
+    assert_eq!(poker.pattern().cmp(&poker.pattern()), Ordering::Equal);
+  }
+
+  #[test]
+  fn test_pattern_tuple_larger() {
+    let poker1 = Hand::new("4S 5S 7H 8D JC").unwrap();
+    let poker2 = Hand::new("4S 5S 6H 8D JC").unwrap();
+    assert_eq!(poker1.pattern().cmp(&poker2.pattern()), Ordering::Greater);
+    assert_eq!(poker2.pattern().cmp(&poker1.pattern()), Ordering::Less);
+  }
+
+  #[test]
+  fn test_pattern_rank_larger() {
+    let poker1 = Hand::new("4S 4C 6H 8D JC").unwrap();
+    let poker2 = Hand::new("4S 5S 7H 8D JC").unwrap();
+    assert_eq!(poker1.pattern().cmp(&poker2.pattern()), Ordering::Greater);
+    assert_eq!(poker2.pattern().cmp(&poker1.pattern()), Ordering::Less);
+  }
+}
