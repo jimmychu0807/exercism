@@ -1,4 +1,4 @@
-use core::cmp::Ordering;
+use core::cmp::{Ordering, Ord, PartialOrd};
 use std::collections::HashMap;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
@@ -7,7 +7,7 @@ pub struct Hand<'a> {
   cards: Vec<&'a str>
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Eq, PartialEq)]
 pub enum HandPattern {
   StraightFlush(u32),              // 同花順
   FourOfAKind(u32, u32),           // 4-1
@@ -21,18 +21,37 @@ pub enum HandPattern {
 }
 
 impl HandPattern {
-  pub fn pattern_rank(&self) -> u32 {
+  pub fn pattern_rank(&self) -> (u32, Vec<u32>) {
     match self {
-      HandPattern::StraightFlush(_) => 100,
-      HandPattern::FourOfAKind(_, _) => 90,
-      HandPattern::FullHouse(_, _) => 80,
-      HandPattern::Flush(_, _, _, _, _) => 70,
-      HandPattern::Straight(_) => 60,
-      HandPattern::ThreeOfAKind(_, _, _) => 50,
-      HandPattern::TwoPair(_, _, _) => 40,
-      HandPattern::OnePair(_, _, _, _) => 30,
-      HandPattern::Nothing(_, _, _, _, _) => 20,
+      HandPattern::StraightFlush(x1) => (100, vec![*x1]),
+      HandPattern::FourOfAKind(x1, x2) => (90, vec![*x1, *x2]),
+      HandPattern::FullHouse(x1, x2) => (80, vec![*x1, *x2]),
+      HandPattern::Flush(x1, x2, x3, x4, x5) => (70, vec![*x1, *x2, *x3, *x4, *x5]),
+      HandPattern::Straight(x1) => (60, vec![*x1]),
+      HandPattern::ThreeOfAKind(x1, x2, x3) => (50, vec![*x1, *x2, *x3]),
+      HandPattern::TwoPair(x1, x2, x3) => (40, vec![*x1, *x2, *x3]),
+      HandPattern::OnePair(x1, x2, x3, x4) => (30, vec![*x1, *x2, *x3, *x4]),
+      HandPattern::Nothing(x1, x2, x3, x4, x5) => (20, vec![*x1, *x2, *x3, *x4, *x5]),
     }
+  }
+}
+
+impl Ord for HandPattern {
+  fn cmp(&self, other: &Self) -> Ordering {
+    let (self_rank, self_tuple) = self.pattern_rank();
+    let (other_rank, other_tuple) = other.pattern_rank();
+    if self_rank != other_rank { return self_rank.cmp(&other_rank) }
+
+    for (self_el, other_el) in self_tuple.iter().zip(other_tuple.iter()) {
+      if self_el != other_el { return self_el.cmp(other_el) }
+    }
+    Ordering::Equal
+  }
+}
+
+impl PartialOrd for HandPattern {
+  fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+    Some(self.cmp(other))
   }
 }
 
@@ -56,8 +75,7 @@ impl<'a> Hand<'a> {
   }
 
   pub fn ranking(&self, other: &Hand) -> Ordering {
-    // TODO
-    Ordering::Equal
+    self.pattern().cmp(&other.pattern())
   }
 
   // This method is for determining the Hand pattern
@@ -189,8 +207,7 @@ pub fn winning_hands<'a>(hands: &[&'a str]) -> Option<Vec<&'a str>> {
       Err(msg) => panic!(msg),
     })
     .collect::<Vec<_>>();
-
-  hands_in_struct.sort_unstable_by(|a, b| a.ranking(b));
+  hands_in_struct.sort_unstable_by(|a, b| b.ranking(a));
 
   // Assume the first one is the largest, get the first one
   let largest = &hands_in_struct[0];
@@ -199,6 +216,5 @@ pub fn winning_hands<'a>(hands: &[&'a str]) -> Option<Vec<&'a str>> {
     .filter(|hand| largest.ranking(&hand) == Ordering::Equal)
     .map(|hand| hand.hand_str)
     .collect::<Vec<_>>();
-
   Some(largest_set)
 }

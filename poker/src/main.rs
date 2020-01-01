@@ -7,8 +7,8 @@ fn main() -> Result<(), String> {
   // Nothing(11, 8, 7, 5, 4)
   println!("Hand: {:?} | Pattern: {:?}", poker1, poker1.pattern());
 
-  // let poker1a = PokerHand::new("4S 5S 6H 8D JC");
-  // let poker1b = PokerHand::new("4S 5S 6H 9D JC");
+  let poker1a = PokerHand::new("4S 5S 6H 8D JC")?;
+  let poker1b = PokerHand::new("4S 5S 6H 9D JC")?;
 
   let poker2 = PokerHand::new("4D 5D 7D 8D 6D")?;
   // StraightFlush(8)
@@ -46,8 +46,9 @@ fn main() -> Result<(), String> {
   // TwoPair(2, 5, 4, 3)
   println!("Hand: {:?} | Pattern: {:?}", poker9, poker9.pattern());
 
-  // assert_eq!(poker1.eq(&poker1), true);
-  // assert_eq!(poker1.partial_cmp(&poker1a), Some(Ordering::Greater));
-  // assert_eq!(poker1.partial_cmp(&poker1b), Some(Ordering::Less));
+  assert_eq!(poker1.pattern().cmp(&poker1.pattern()), Ordering::Equal);
+  assert_eq!(poker1.pattern().cmp(&poker1a.pattern()), Ordering::Greater);
+  assert_eq!(poker1.pattern().cmp(&poker1b.pattern()), Ordering::Less);
+  assert_eq!(poker2.pattern().cmp(&poker1b.pattern()), Ordering::Greater);
   Ok(())
 }
