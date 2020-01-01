@@ -1,26 +1,55 @@
+//! `poker` is a library to represent poker hand, recognizing the poker hand pattern and perform
+//! poker hand comparison (`Ordering::Less`, `Ordering::Equal`, `Ordering::Greater`) based on the
+//! pattern and the cards.
+
 use core::cmp::{Ordering, Ord, PartialOrd};
 use std::collections::HashMap;
 
+/// Representation of a poker hand
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Hand<'a> {
-  hand_str: &'a str,
+  /// The original string that passed in to represent the hand. E.g.: `"2S 2H 3C 5D 4D"`
+  pub hand_str: &'a str,
+  /// A vector of card, basically the `hand_str` that got split_whitespace()
   cards: Vec<&'a str>
 }
 
+/// Representation of a poker hand pattern
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub enum HandPattern {
-  StraightFlush(u32),              // 同花順
-  FourOfAKind(u32, u32),           // 4-1
-  FullHouse(u32, u32),             // 3-2
-  Flush(u32, u32, u32, u32, u32),  // 同花
-  Straight(u32),                   // 順
-  ThreeOfAKind(u32, u32, u32),     // 3-1-1
-  TwoPair(u32, u32, u32),          // 2-2-1
-  OnePair(u32, u32, u32, u32),     // 2-1-1-1
+  /// 1 - just record the largest card rank
+  StraightFlush(u32),
+  /// 4-1
+  FourOfAKind(u32, u32),
+  /// 3-2
+  FullHouse(u32, u32),
+  /// 1-1-1-1-1
+  Flush(u32, u32, u32, u32, u32),
+  /// 1 - just record the largest card rank
+  Straight(u32),
+  /// 3-1-1
+  ThreeOfAKind(u32, u32, u32),
+  /// 2-2-1
+  TwoPair(u32, u32, u32),
+  /// 2-1-1-1
+  OnePair(u32, u32, u32, u32),
+  /// 1-1-1-1-1
   Nothing(u32, u32, u32, u32, u32),
 }
 
 impl HandPattern {
+  /// This function returns the relative value of the pattern and the tuple for pattern comparison
+  ///
+  /// # Examples
+  ///
+  /// Basic usage:
+  ///
+  /// ```
+  /// use poker::*;
+  ///
+  /// let poker = Hand::new("2S 2H 3C 5D 4D").unwrap();
+  /// assert_eq!(poker.pattern(), HandPattern::OnePair(2, 5, 4, 3));
+  /// ```
   pub fn pattern_rank(&self) -> (u32, Vec<u32>) {
     match self {
       HandPattern::StraightFlush(x1) => (100, vec![*x1]),
@@ -55,6 +84,7 @@ impl PartialOrd for HandPattern {
   }
 }
 
+/// ERROR_MSGS
 const ERROR_MSGS: [&str; 3] = [
   "is not a valid card.",
   "does not contain a valid rank.",
@@ -62,6 +92,7 @@ const ERROR_MSGS: [&str; 3] = [
 ];
 
 impl<'a> Hand<'a> {
+  /// This method returns a new set of a poker hand
   pub fn new(hand_str: &'a str) -> Result<Hand, String> {
     let mut cards = vec![];
     for card in hand_str.clone().split_whitespace() {
@@ -74,11 +105,12 @@ impl<'a> Hand<'a> {
     Ok(Hand { hand_str, cards })
   }
 
+  /// This comparison function is comparing the underlying hand pattern with pattern of another hand.
   pub fn ranking(&self, other: &Hand) -> Ordering {
     self.pattern().cmp(&other.pattern())
   }
 
-  // This method is for determining the Hand pattern
+  /// This method checks and returns the pattern of the hand.
   pub fn pattern(&self) -> HandPattern {
     let mut rank_map: HashMap<u32, u32> = HashMap::new();
     let mut suit_map: HashMap<String, u32> = HashMap::new();
@@ -199,6 +231,22 @@ impl<'a> Hand<'a> {
   }
 }
 
+/// This function take a set of card hands in string, and return a set of card with largest ranking.
+///
+/// Ref: [How cards are ranked in poker](https://en.wikipedia.org/wiki/List_of_poker_hands)
+///
+/// # Example
+///
+/// ```
+/// use poker::*;
+///
+/// assert_eq!(winning_hands(&[
+///   "4D 5S 6S 8D 3C",
+///   "2S 4C 7S 9H 10H",
+///   "3S 4S 5D 6H JH",
+///   "3H 4H 5C 6C JD",
+/// ]).unwrap(), &["3S 4S 5D 6H JH", "3H 4H 5C 6C JD"]);
+/// ```
 pub fn winning_hands<'a>(hands: &[&'a str]) -> Option<Vec<&'a str>> {
   let mut hands_in_struct: Vec<Hand> = hands
     .into_iter()
