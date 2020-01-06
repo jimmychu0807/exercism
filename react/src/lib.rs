@@ -1,6 +1,11 @@
+use std::collections::HashMap;
+
+// Referring to sol:
+// https://exercism.io/tracks/rust/exercises/react/solutions/f602a19d30bc48a8ae21cba1de873368
+
 /// `InputCellID` is a unique identifier for an input cell.
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct InputCellID();
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct InputCellID(u32);
 /// `ComputeCellID` is a unique identifier for a compute cell.
 /// Values of type `InputCellID` and `ComputeCellID` should not be mutually assignable,
 /// demonstrated by the following tests:
@@ -15,38 +20,44 @@ pub struct InputCellID();
 /// let input = r.create_input(111);
 /// let compute: react::InputCellID = r.create_compute(&[react::CellID::Input(input)], |_| 222).unwrap();
 /// ```
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct ComputeCellID();
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct CallbackID();
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct ComputeCellID(u32);
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct CallbackID(u32);
 
-#[derive(Clone, Copy, Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum CellID {
-    Input(InputCellID),
-    Compute(ComputeCellID),
+  Input(InputCellID),
+  Compute(ComputeCellID),
 }
 
 #[derive(Debug, PartialEq)]
 pub enum RemoveCallbackError {
-    NonexistentCell,
-    NonexistentCallback,
+  NonexistentCell,
+  NonexistentCallback,
 }
 
 pub struct Reactor<T> {
-    // Just so that the compiler doesn't complain about an unused type parameter.
-    // You probably want to delete this field.
-    dummy: ::std::marker::PhantomData<T>,
+  input_cells: HashMap<u32, T>,
+  compute_cells: HashMap<u32, T>,
+  cnt: u32,
 }
 
 // You are guaranteed that Reactor will only be tested against types that are Copy + PartialEq.
 impl<T: Copy + PartialEq> Reactor<T> {
     pub fn new() -> Self {
-        unimplemented!()
+      Reactor {
+        input_cells: HashMap::new(),
+        compute_cells: HashMap::new(),
+        cnt: 0,
+      }
     }
 
     // Creates an input cell with the specified initial value, returning its ID.
-    pub fn create_input(&mut self, _initial: T) -> InputCellID {
-        unimplemented!()
+    pub fn create_input(&mut self, initial: T) -> InputCellID {
+      self.cnt += 1;
+      self.input_cells.insert(self.cnt, initial);
+      InputCellID(self.cnt)
     }
 
     // Creates a compute cell with the specified dependencies and compute function.
@@ -63,11 +74,11 @@ impl<T: Copy + PartialEq> Reactor<T> {
     // This means that you may assume, without checking, that if the dependencies exist at creation
     // time they will continue to exist as long as the Reactor exists.
     pub fn create_compute<F: Fn(&[T]) -> T>(
-        &mut self,
-        _dependencies: &[CellID],
-        _compute_func: F,
+      &mut self,
+      _dependencies: &[CellID],
+      _compute_func: F,
     ) -> Result<ComputeCellID, CellID> {
-        unimplemented!()
+      unimplemented!()
     }
 
     // Retrieves the current value of the cell, or None if the cell does not exist.
@@ -78,7 +89,10 @@ impl<T: Copy + PartialEq> Reactor<T> {
     // It turns out this introduces a significant amount of extra complexity to this exercise.
     // We chose not to cover this here, since this exercise is probably enough work as-is.
     pub fn value(&self, id: CellID) -> Option<T> {
-        unimplemented!("Get the value of the cell whose id is {:?}", id)
+      match id {
+        CellID::Input(InputCellID(id)) => self.input_cells.get(&id).copied(),
+        CellID::Compute(ComputeCellID(id)) => self.compute_cells.get(&id).copied(),
+      }
     }
 
     // Sets the value of the specified input cell.
