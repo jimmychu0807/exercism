@@ -24,6 +24,6 @@ impl Queen {
     let x_diff = (self.pos.x as i32 - other.pos.x as i32).abs();
     let y_diff = (self.pos.y as i32 - other.pos.y as i32).abs();
 
-    return x_diff == 0 || y_diff == 0 || x_diff == y_diff
+    x_diff == 0 || y_diff == 0 || x_diff == y_diff
   }
 }
