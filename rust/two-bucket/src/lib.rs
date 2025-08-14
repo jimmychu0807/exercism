@@ -1,5 +1,4 @@
 use std::cmp::{min};
-use std::collections::HashSet;
 
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub enum Bucket {
@@ -41,23 +40,24 @@ pub fn solve(capacity_1: u8, capacity_2: u8, goal: u8, start_bucket: &Bucket) ->
     return get_solution((bucket_1, bucket_2), goal, 1);
   }
 
-  let mut seen = HashSet::new();
-  // empty state
-  seen.insert(((0, capacity_1), (0, capacity_2)));
-  // both initial states are marked as seen
-  seen.insert(((0, capacity_1), (capacity_2, capacity_2)));
-  seen.insert(((capacity_1, capacity_1), (0, capacity_2)));
-  rec_solve((bucket_1, bucket_2), &mut seen, goal, 1)
+  let mut disabled_states = vec![
+    ((0, capacity_1), (0, capacity_2)),
+    // do not allow opposite start state
+    ((capacity_1 - curr_cap_1, capacity_1), (capacity_2 - curr_cap_2, capacity_2)),
+    (bucket_1, bucket_2),
+  ];
+
+  rec_solve((bucket_1, bucket_2), &mut disabled_states, goal, 1)
 }
 
-pub fn rec_solve(state: BucketState, seen: &mut HashSet<BucketState>, goal: u8, moves: u8)
+pub fn rec_solve(state: BucketState, disabled_states: &mut Vec<BucketState>, goal: u8, moves: u8)
   -> Option<BucketStats> {
 
   let bucket_1 = state.0;
   let bucket_2 = state.1;
 
   // println!("moves: {:?}, state: {:?}", moves, state);
-  // println!("seen: {:?}", seen);
+  // println!("disabled_states: {:?}", disabled_states);
 
   if bucket_1.0 == goal || bucket_2.0 == goal {
     // println!("found solution: {:?}", state);
@@ -67,11 +67,11 @@ pub fn rec_solve(state: BucketState, seen: &mut HashSet<BucketState>, goal: u8, 
   // there are total of 6 possible ops on the two buckets
   let all_new_states = [
     // emptying or filling bucket_1
-    ((0, bucket_1.1), bucket_2.clone()),
-    ((bucket_1.1, bucket_1.1), bucket_2.clone()),
+    ((0, bucket_1.1), bucket_2),
+    ((bucket_1.1, bucket_1.1), bucket_2),
     // emptying or filling bucket_2
-    (bucket_1.clone(), (0, bucket_2.1)),
-    (bucket_1.clone(), (bucket_2.1, bucket_2.1)),
+    (bucket_1, (0, bucket_2.1)),
+    (bucket_1, (bucket_2.1, bucket_2.1)),
     // bucket_1 pouring to bucket_2
     ( (bucket_1.0 - min(bucket_1.0, bucket_2.1 - bucket_2.0), bucket_1.1),
       (bucket_2.0 + min(bucket_1.0, bucket_2.1 - bucket_2.0), bucket_2.1)),
@@ -82,19 +82,18 @@ pub fn rec_solve(state: BucketState, seen: &mut HashSet<BucketState>, goal: u8, 
 
   let mut results: Vec<BucketStats> = all_new_states
     .into_iter()
-    .filter_map(|new_state| match seen.contains(&new_state) {
-      true => None,
-      false => {
-        // add in a new disable state, call the rec function
-        seen.insert(new_state.clone());
-        rec_solve(new_state.clone(), seen, goal, moves + 1)
-      },
+    .filter_map(|new_state| if disabled_states.contains(&new_state) {
+      None
+    } else {
+      // add in a new disable state, call the rec function
+      disabled_states.push(new_state);
+      rec_solve(new_state, disabled_states, goal, moves + 1)
     }) // this returned `BucketStats`, not `Option<BucketStats>`. Feature of filter_map.
     .collect();
 
   // println!("results: {:?}", results);
 
-  if results.len() == 0 { return None }
+  if results.is_empty() { return None }
   // find the one with min `moves` and return
   results.sort_by(|s1, s2| s1.moves.partial_cmp(&s2.moves).unwrap());
   Some((*results.first().unwrap()).clone())
