@@ -1,0 +1,12 @@
+[workspace]
+members = [
+  "hello-world",
+  "reverse-string",
+  "gigasecond",
+  "clock"
+]
+resolver = "3"
+
+[workspace.dependencies]
+unicode-segmentation = "1.3.0"
+time = "0.3"
