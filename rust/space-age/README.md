@@ -1,106 +1,102 @@
 # Space Age
 
-Given an age in seconds, calculate how old someone would be on:
+Welcome to Space Age on Exercism's Rust Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-   - Mercury: orbital period 0.2408467 Earth years
-   - Venus: orbital period 0.61519726 Earth years
-   - Earth: orbital period 1.0 Earth years, 365.25 Earth days, or 31557600 seconds
-   - Mars: orbital period 1.8808158 Earth years
-   - Jupiter: orbital period 11.862615 Earth years
-   - Saturn: orbital period 29.447498 Earth years
-   - Uranus: orbital period 84.016846 Earth years
-   - Neptune: orbital period 164.79132 Earth years
+## Introduction
 
-So if you were told someone were 1,000,000,000 seconds old, you should
-be able to say that they're 31.69 Earth-years old.
+The year is 2525 and you've just embarked on a journey to visit all planets in the Solar System (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus and Neptune).
+The first stop is Mercury, where customs require you to fill out a form (bureaucracy is apparently _not_ Earth-specific).
+As you hand over the form to the customs officer, they scrutinize it and frown.
+"Do you _really_ expect me to believe you're just 50 years old?
+You must be closer to 200 years old!"
 
-If you're wondering why Pluto didn't make the cut, go watch [this
-youtube video](http://www.youtube.com/watch?v=Z_2gbGXzFbs).
+Amused, you wait for the customs officer to start laughing, but they appear to be dead serious.
+You realize that you've entered your age in _Earth years_, but the officer expected it in _Mercury years_!
+As Mercury's orbital period around the sun is significantly shorter than Earth, you're actually a lot older in Mercury years.
+After some quick calculations, you're able to provide your age in Mercury Years.
+The customs officer smiles, satisfied, and waves you through.
+You make a mental note to pre-calculate your planet-specific age _before_ future customs checks, to avoid such mix-ups.
 
-# Topics
+~~~~exercism/note
+If you're wondering why Pluto didn't make the cut, go watch [this YouTube video][pluto-video].
+
+[pluto-video]: https://www.youtube.com/watch?v=Z_2gbGXzFbs
+~~~~
+
+## Instructions
+
+Given an age in seconds, calculate how old someone would be on a planet in our Solar System.
+
+One Earth year equals 365.25 Earth days, or 31,557,600 seconds.
+If you were told someone was 1,000,000,000 seconds old, their age would be 31.69 Earth-years.
+
+For the other planets, you have to account for their orbital period in Earth Years:
+
+| Planet  | Orbital period in Earth Years |
+| ------- | ----------------------------- |
+| Mercury | 0.2408467                     |
+| Venus   | 0.61519726                    |
+| Earth   | 1.0                           |
+| Mars    | 1.8808158                     |
+| Jupiter | 11.862615                     |
+| Saturn  | 29.447498                     |
+| Uranus  | 84.016846                     |
+| Neptune | 164.79132                     |
+
+~~~~exercism/note
+The actual length of one complete orbit of the Earth around the sun is closer to 365.256 days (1 sidereal year).
+The Gregorian calendar has, on average, 365.2425 days.
+While not entirely accurate, 365.25 is the value used in this exercise.
+See [Year on Wikipedia][year] for more ways to measure a year.
+
+[year]: https://en.wikipedia.org/wiki/Year#Summary
+~~~~
+
+## Topics
 
 Some Rust topics you may want to read about while solving this problem:
 
-- Traits, both the From trait and implementing your own traits
-- Default method implementations for traits
+- Traits, both the From trait and [implementing your own traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
+- [Default method implementations](https://doc.rust-lang.org/book/ch10-02-traits.html#default-implementations) for traits
+- Macros, the use of a macro could reduce boilerplate and increase readability
+  for this exercise. For instance,
+  [a macro can implement a trait for multiple types at once](https://stackoverflow.com/questions/39150216/implementing-a-trait-for-multiple-types-at-once),
+  though it is fine to implement `years_during` in the Planet trait itself. A macro could
+  define both the structs and their implementations. Info to get started with macros can
+  be found at:
 
-
-## Rust Installation
-
-Refer to the [exercism help page][help-page] for Rust installation and learning
-resources.
-
-## Writing the Code
-
-Execute the tests with:
-
-```bash
-$ cargo test
-```
-
-All but the first test have been ignored. After you get the first test to
-pass, open the tests source file which is located in the `tests` directory
-and remove the `#[ignore]` flag from the next test and get the tests to pass
-again. Each separate test is a function with `#[test]` flag above it.
-Continue, until you pass every test.
-
-If you wish to run all ignored tests without editing the tests source file, use:
-
-```bash
-$ cargo test -- --ignored
-```
-
-To run a specific test, for example `some_test`, you can use:
-
-```bash
-$ cargo test some_test
-```
-
-If the specific test is ignored use:
-
-```bash
-$ cargo test some_test -- --ignored
-```
-
-To learn more about Rust tests refer to the [online test documentation][rust-tests]
-
-Make sure to read the [Modules][modules] chapter if you
-haven't already, it will help you with organizing your files.
-
-## Further improvements
-
-After you have solved the exercise, please consider using the additional utilities, described in the [installation guide](https://exercism.io/tracks/rust/installation), to further refine your final solution.
-
-To format your solution, inside the solution directory use
-
-```bash
-cargo fmt
-```
-
-To see, if your solution contains some common ineffective use cases, inside the solution directory use
-
-```bash
-cargo clippy --all-targets
-```
-
-## Submitting the solution
-
-Generally you should submit all files in which you implemented your solution (`src/lib.rs` in most cases). If you are using any external crates, please consider submitting the `Cargo.toml` file. This will make the review process faster and clearer.
-
-## Feedback, Issues, Pull Requests
-
-The [exercism/rust](https://github.com/exercism/rust) repository on GitHub is the home for all of the Rust exercises. If you have feedback about an exercise, or want to help implement new exercises, head over there and create an issue. Members of the rust track team are happy to help!
-
-If you want to know more about Exercism, take a look at the [contribution guide](https://github.com/exercism/docs/blob/master/contributing-to-language-tracks/README.md).
-
-[help-page]: https://exercism.io/tracks/rust/learning
-[modules]: https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html
-[cargo]: https://doc.rust-lang.org/book/ch14-00-more-about-cargo.html
-[rust-tests]: https://doc.rust-lang.org/book/ch11-02-running-tests.html
+  - [The Macros chapter in The Rust Programming Language](https://doc.rust-lang.org/stable/book/ch19-06-macros.html)
+  - [an older version of the Macros chapter with helpful detail](https://doc.rust-lang.org/1.30.0/book/first-edition/macros.html)
+  - [Rust By Example](https://doc.rust-lang.org/stable/rust-by-example/macros.html)
 
 ## Source
 
-Partially inspired by Chapter 1 in Chris Pine's online Learn to Program tutorial. [http://pine.fm/LearnToProgram/?Chapter=01](http://pine.fm/LearnToProgram/?Chapter=01)
+### Created by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @IanWhitney
+
+### Contributed to by
+
+- @ashleygwilliams
+- @bobahop
+- @coriolinus
+- @cwhakes
+- @durka
+- @eddyp
+- @efx
+- @ErikSchierboom
+- @IanWhitney
+- @joshgoebel
+- @lutostag
+- @nfiles
+- @ocstl
+- @petertseng
+- @rofrol
+- @stringparser
+- @xakon
+- @ZapAnton
+
+### Based on
+
+Partially inspired by Chapter 1 in Chris Pine's online Learn to Program tutorial. - https://pine.fm/LearnToProgram/?Chapter=01
