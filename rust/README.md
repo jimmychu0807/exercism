@@ -7,3 +7,5 @@ https://exercism.org/tracks/rust
 | 3   | Gigasecond     | [`gigasecond`](./gigasecond)          |  ✅ |
 | 4   | Clock          | [`clock`](./clock)                    |  ✅ |
 | 5   | Anagram        | [`anagram`](./anagram)                |  ✅ |
+| 6   | Space Age      | [`space-age`](./space-age)            |  ✅ |
+| 7   | Sublist        | [`sublist`](./sublist)                |     |

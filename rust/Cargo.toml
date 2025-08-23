@@ -4,7 +4,9 @@ members = [
   "reverse-string",
   "gigasecond",
   "clock",
-  "anagram"
+  "anagram",
+  "space-age",
+  "sublist"
 ]
 resolver = "3"
 
