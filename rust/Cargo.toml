@@ -3,7 +3,8 @@ members = [
   "hello-world",
   "reverse-string",
   "gigasecond",
-  "clock"
+  "clock",
+  "anagram"
 ]
 resolver = "3"
 
