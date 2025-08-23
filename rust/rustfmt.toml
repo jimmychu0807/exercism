@@ -1,4 +1,4 @@
-max_width = 110
+max_width = 100
 tab_spaces = 4
 use_small_heuristics = "Max"
 edition = "2024"

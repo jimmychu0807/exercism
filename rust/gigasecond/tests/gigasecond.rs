@@ -38,7 +38,14 @@ fn full_time_with_day_roll_over() {
 	assert_eq!(actual, expected);
 }
 
-fn datetime(year: i32, month: u8, day: u8, hour: u8, minute: u8, second: u8) -> time::PrimitiveDateTime {
+fn datetime(
+	year: i32,
+	month: u8,
+	day: u8,
+	hour: u8,
+	minute: u8,
+	second: u8,
+) -> time::PrimitiveDateTime {
 	use time::{Date, PrimitiveDateTime, Time};
 
 	PrimitiveDateTime::new(
