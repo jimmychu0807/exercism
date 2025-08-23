@@ -5,7 +5,8 @@ members = [
   "gigasecond",
   "clock",
   "anagram",
-  "space-age"
+  "space-age",
+  "sublist"
 ]
 resolver = "3"
 
