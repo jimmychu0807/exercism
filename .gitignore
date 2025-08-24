@@ -1,1 +1,5 @@
 rust/**/target
+
+# vscode related
+*.code-workspace
+.vscode/
