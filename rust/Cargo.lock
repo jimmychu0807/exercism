@@ -7,6 +7,10 @@ name = "anagram"
 version = "0.1.0"
 
 [[package]]
+name = "armstrong_numbers"
+version = "0.1.0"
+
+[[package]]
 name = "clock"
 version = "0.1.0"
 
@@ -32,6 +36,10 @@ dependencies = [
 
 [[package]]
 name = "hello_world"
+version = "0.1.0"
+
+[[package]]
+name = "luhn"
 version = "0.1.0"
 
 [[package]]

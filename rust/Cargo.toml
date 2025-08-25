@@ -7,7 +7,9 @@ members = [
   "anagram",
   "space-age",
   "sublist",
-  "flower-field"
+  "flower-field",
+  "luhn",
+  "armstrong-numbers",
 ]
 resolver = "3"
 
