@@ -11,3 +11,4 @@ https://exercism.org/tracks/rust
 | 7   | Sublist        | [`sublist`](./sublist)                |  ✅ |
 | 8   | Flower Field   | [`flower-field`](./flower-field)      |  ✅ |
 | 9   | Luhn           | [`luhn`](./luhn)                      |  ✅ |
+| 10  | Armstrong Numbers | [`armstrong-number`](./armstrong-number) | ✅ |

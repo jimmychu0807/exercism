@@ -8,7 +8,8 @@ members = [
   "space-age",
   "sublist",
   "flower-field",
-  "luhn"
+  "luhn",
+  "armstrong-numbers",
 ]
 resolver = "3"
 
