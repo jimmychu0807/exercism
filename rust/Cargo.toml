@@ -10,6 +10,7 @@ members = [
   "flower-field",
   "luhn",
   "armstrong-numbers",
+  "beer-song",
 ]
 resolver = "3"
 

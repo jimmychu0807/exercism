@@ -12,3 +12,4 @@ https://exercism.org/tracks/rust
 | 8   | Flower Field   | [`flower-field`](./flower-field)      |  ✅ |
 | 9   | Luhn           | [`luhn`](./luhn)                      |  ✅ |
 | 10  | Armstrong Numbers | [`armstrong-number`](./armstrong-number) | ✅ |
+| 11  | Beer Song      | [`beer-song`](./beer-song)             | ✅ |

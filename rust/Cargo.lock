@@ -11,6 +11,10 @@ name = "armstrong_numbers"
 version = "0.1.0"
 
 [[package]]
+name = "beer-song"
+version = "0.0.0"
+
+[[package]]
 name = "clock"
 version = "0.1.0"
 
