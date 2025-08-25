@@ -1,4 +1,4 @@
-[My exercism profile](https://exercism.org/profiles/jimmychu0807)
+[My Exercism profile](https://exercism.org/profiles/jimmychu0807)
 
 - [Rust track](./rust)
 - [Python track](./python)
