@@ -11,6 +11,7 @@ members = [
   "luhn",
   "armstrong-numbers",
   "beer-song",
+  "bottle-song",
 ]
 resolver = "3"
 
