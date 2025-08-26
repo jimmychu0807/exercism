@@ -16,3 +16,4 @@ https://exercism.org/tracks/rust
 | 12  | Bottle Song    | [`bottle-song`](./bottle-song)         | ✅ |
 | 13  | Difference of Squares | [`differences-of-squares`](./differences-of-squares) | ✅ |
 | 14  | Grains         | [`grains`](./grains)                   | ✅ |
+| 15  | Leap           | [`leap`](./leap)                       | ✅ |
