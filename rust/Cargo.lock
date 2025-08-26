@@ -35,6 +35,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "difference_of_squares"
+version = "0.1.0"
+
+[[package]]
 name = "flower_field"
 version = "0.1.0"
 
@@ -46,7 +50,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "grains"
+version = "0.1.0"
+
+[[package]]
 name = "hello_world"
+version = "0.1.0"
+
+[[package]]
+name = "leap"
 version = "0.1.0"
 
 [[package]]
