@@ -14,3 +14,4 @@ https://exercism.org/tracks/rust
 | 10  | Armstrong Numbers | [`armstrong-number`](./armstrong-number) | ✅ |
 | 11  | Beer Song      | [`beer-song`](./beer-song)             | ✅ |
 | 12  | Bottle Song    | [`bottle-song`](./bottle-song)         | ✅ |
+| 13  | Difference of Squares | [`differences-of-squares`](./differences-of-squares) | ✅ |

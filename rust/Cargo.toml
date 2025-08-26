@@ -12,6 +12,7 @@ members = [
   "armstrong-numbers",
   "beer-song",
   "bottle-song",
+  "difference-of-squares"
 ]
 resolver = "3"
 
