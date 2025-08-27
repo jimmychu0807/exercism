@@ -14,7 +14,9 @@ members = [
   "bottle-song",
   "difference-of-squares",
   "grains",
-  "leap"
+  "leap",
+  "nth-prime",
+  "prime-factors"
 ]
 resolver = "3"
 

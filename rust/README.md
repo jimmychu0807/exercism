@@ -17,3 +17,5 @@ https://exercism.org/tracks/rust
 | 13  | Difference of Squares | [`differences-of-squares`](./differences-of-squares) | ✅ |
 | 14  | Grains         | [`grains`](./grains)                   | ✅ |
 | 15  | Leap           | [`leap`](./leap)                       | ✅ |
+| 16  | Nth Prime      | [`nth-prime`](./nth-prime)             | ✅ |
+| 17  | Prime Factors  | [`prime-factors`](./prime-factors)     | ✅ |

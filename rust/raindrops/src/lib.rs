@@ -1,26 +1,14 @@
-pub struct Raindrop {
-  pub factor: u32,
-  pub voice: &'static str,
-}
-
-impl Raindrop {
-  fn factors() -> Vec<Raindrop> {
-    vec![
-      Raindrop { factor: 3, voice: "Pling" },
-      Raindrop { factor: 5, voice: "Plang" },
-      Raindrop { factor: 7, voice: "Plong" },
-    ]
-  }
-}
-
 pub fn raindrops(n: u32) -> String {
-  let mut res = String::from("");
-  for raindrop in Raindrop::factors() {
-    if n % raindrop.factor == 0 {
-      res.push_str(raindrop.voice);
-    }
-  }
+	let mut res = String::new();
+	if n % 3 == 0 {
+		res.push_str("Pling");
+	}
+	if n % 5 == 0 {
+		res.push_str("Plang");
+	}
+	if n % 7 == 0 {
+		res.push_str("Plong");
+	}
 
-  if &res == "" { res = n.to_string(); }
-  res
+	if !res.is_empty() { res } else { n.to_string() }
 }
