@@ -19,3 +19,8 @@ https://exercism.org/tracks/rust
 | 15  | Leap           | [`leap`](./leap)                       | ✅ |
 | 16  | Nth Prime      | [`nth-prime`](./nth-prime)             | ✅ |
 | 17  | Prime Factors  | [`prime-factors`](./prime-factors)     | ✅ |
+| 18  | Proverb        | [`proverb`](./proverb)                 | ✅ |
+| 19  | Raindrops      | [`raindrops`](./raindrops)             | ✅ |
+| 20  | Sum of Multiples | [`sum-of-multiples`](./sum-of-multiples) | ✅ |
+| 21  | Bob            | [`bob`](./bob)                         | ✅ |
+| 22  | High Scores    | [`high-scores`](./high-scores)         | ✅ |
