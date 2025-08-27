@@ -1,89 +1,69 @@
-# Sum Of Multiples
+# Sum of Multiples
 
-Given a number, find the sum of all the unique multiples of particular numbers up to
-but not including that number.
+Welcome to Sum of Multiples on Exercism's Rust Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-If we list all the natural numbers below 20 that are multiples of 3 or 5,
-we get 3, 5, 6, 9, 10, 12, 15, and 18.
+## Introduction
 
-The sum of these multiples is 78.
+You work for a company that makes an online, fantasy-survival game.
 
-## Rust Installation
+When a player finishes a level, they are awarded energy points.
+The amount of energy awarded depends on which magical items the player found while exploring that level.
 
-Refer to the [exercism help page][help-page] for Rust installation and learning
-resources.
+## Instructions
 
-## Writing the Code
+Your task is to write the code that calculates the energy points that get awarded to players when they complete a level.
 
-Execute the tests with:
+The points awarded depend on two things:
 
-```bash
-$ cargo test
-```
+- The level (a number) that the player completed.
+- The base value of each magical item collected by the player during that level.
 
-All but the first test have been ignored. After you get the first test to
-pass, open the tests source file which is located in the `tests` directory
-and remove the `#[ignore]` flag from the next test and get the tests to pass
-again. Each separate test is a function with `#[test]` flag above it.
-Continue, until you pass every test.
+The energy points are awarded according to the following rules:
 
-If you wish to run all ignored tests without editing the tests source file, use:
+1. For each magical item, take the base value and find all the multiples of that value that are less than the level number.
+2. Combine the sets of numbers.
+3. Remove any duplicates.
+4. Calculate the sum of all the numbers that are left.
 
-```bash
-$ cargo test -- --ignored
-```
+Let's look at an example:
 
-To run a specific test, for example `some_test`, you can use:
+**The player completed level 20 and found two magical items with base values of 3 and 5.**
 
-```bash
-$ cargo test some_test
-```
+To calculate the energy points earned by the player, we need to find all the unique multiples of these base values that are less than level 20.
 
-If the specific test is ignored use:
-
-```bash
-$ cargo test some_test -- --ignored
-```
-
-To learn more about Rust tests refer to the [online test documentation][rust-tests]
-
-Make sure to read the [Modules][modules] chapter if you
-haven't already, it will help you with organizing your files.
-
-## Further improvements
-
-After you have solved the exercise, please consider using the additional utilities, described in the [installation guide](https://exercism.io/tracks/rust/installation), to further refine your final solution.
-
-To format your solution, inside the solution directory use
-
-```bash
-cargo fmt
-```
-
-To see, if your solution contains some common ineffective use cases, inside the solution directory use
-
-```bash
-cargo clippy --all-targets
-```
-
-## Submitting the solution
-
-Generally you should submit all files in which you implemented your solution (`src/lib.rs` in most cases). If you are using any external crates, please consider submitting the `Cargo.toml` file. This will make the review process faster and clearer.
-
-## Feedback, Issues, Pull Requests
-
-The [exercism/rust](https://github.com/exercism/rust) repository on GitHub is the home for all of the Rust exercises. If you have feedback about an exercise, or want to help implement new exercises, head over there and create an issue. Members of the rust track team are happy to help!
-
-If you want to know more about Exercism, take a look at the [contribution guide](https://github.com/exercism/docs/blob/master/contributing-to-language-tracks/README.md).
-
-[help-page]: https://exercism.io/tracks/rust/learning
-[modules]: https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html
-[cargo]: https://doc.rust-lang.org/book/ch14-00-more-about-cargo.html
-[rust-tests]: https://doc.rust-lang.org/book/ch11-02-running-tests.html
+- Multiples of 3 less than 20: `{3, 6, 9, 12, 15, 18}`
+- Multiples of 5 less than 20: `{5, 10, 15}`
+- Combine the sets and remove duplicates: `{3, 5, 6, 9, 10, 12, 15, 18}`
+- Sum the unique multiples: `3 + 5 + 6 + 9 + 10 + 12 + 15 + 18 = 78`
+- Therefore, the player earns **78** energy points for completing level 20 and finding the two magical items with base values of 3 and 5.
 
 ## Source
 
-A variation on Problem 1 at Project Euler [http://projecteuler.net/problem=1](http://projecteuler.net/problem=1)
+### Created by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @IanWhitney
+
+### Contributed to by
+
+- @coriolinus
+- @cwhakes
+- @eddyp
+- @efx
+- @ErikSchierboom
+- @GoneUp
+- @hekrause
+- @leoyvens
+- @lutostag
+- @mkantor
+- @nfiles
+- @petertseng
+- @rofrol
+- @sshine
+- @stringparser
+- @xakon
+- @ZapAnton
+
+### Based on
+
+A variation on Problem 1 at Project Euler - https://projecteuler.net/problem=1
