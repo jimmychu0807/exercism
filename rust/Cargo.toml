@@ -16,7 +16,12 @@ members = [
   "grains",
   "leap",
   "nth-prime",
-  "prime-factors"
+  "prime-factors",
+  "proverb",
+  "raindrops",
+  "sum-of-multiples",
+  "bob",
+  "high-scores"
 ]
 resolver = "3"
 
