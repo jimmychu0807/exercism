@@ -21,7 +21,8 @@ members = [
   "raindrops",
   "sum-of-multiples",
   "bob",
-  "high-scores"
+  "high-scores",
+  "matching-brackets"
 ]
 resolver = "3"
 
