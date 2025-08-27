@@ -18,3 +18,4 @@ https://exercism.org/tracks/rust
 | 14  | Grains         | [`grains`](./grains)                   | ✅ |
 | 15  | Leap           | [`leap`](./leap)                       | ✅ |
 | 16  | Nth Prime      | [`nth-prime`](./nth-prime)             | ✅ |
+| 17  | Prime Factors  | [`prime-factors`](./prime-factors)     | ✅ |
