@@ -70,6 +70,10 @@ name = "high_scores"
 version = "0.1.0"
 
 [[package]]
+name = "kindergarten_garden"
+version = "0.1.0"
+
+[[package]]
 name = "leap"
 version = "0.1.0"
 

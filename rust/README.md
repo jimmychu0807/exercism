@@ -27,3 +27,4 @@ https://exercism.org/tracks/rust
 | 23  | [Matching Brackets](./matching-brackets) | ✅ |
 | 24  | [Collatz Conjecture](./collatz-conjecture) | ✅ |
 | 25  | [Series](./series)                   | ✅ |
+| 26  | [Kindergarten Garden](./kindergarten-garden) | ✅ |

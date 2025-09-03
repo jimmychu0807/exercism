@@ -24,7 +24,8 @@ members = [
   "high-scores",
   "matching-brackets",
   "collatz-conjecture",
-  "series"
+  "series",
+  "kindergarten-garden"
 ]
 resolver = "3"
 
