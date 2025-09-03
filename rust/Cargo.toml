@@ -23,7 +23,8 @@ members = [
   "bob",
   "high-scores",
   "matching-brackets",
-  "collatz-conjecture"
+  "collatz-conjecture",
+  "series"
 ]
 resolver = "3"
 

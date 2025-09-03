@@ -26,3 +26,4 @@ https://exercism.org/tracks/rust
 | 22  | [High Scores](./high-scores)         | ✅ |
 | 23  | [Matching Brackets](./matching-brackets) | ✅ |
 | 24  | [Collatz Conjecture](./collatz-conjecture) | ✅ |
+| 25  | [Series](./series)                   | ✅ |
