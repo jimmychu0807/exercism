@@ -30,6 +30,10 @@ name = "clock"
 version = "0.1.0"
 
 [[package]]
+name = "collatz_conjecture"
+version = "0.1.0"
+
+[[package]]
 name = "deranged"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -63,6 +67,10 @@ version = "0.1.0"
 
 [[package]]
 name = "high_scores"
+version = "0.1.0"
+
+[[package]]
+name = "kindergarten_garden"
 version = "0.1.0"
 
 [[package]]
@@ -149,6 +157,10 @@ dependencies = [
  "quote",
  "syn",
 ]
+
+[[package]]
+name = "series"
+version = "0.1.0"
 
 [[package]]
 name = "space_age"
