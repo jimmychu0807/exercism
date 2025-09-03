@@ -22,7 +22,8 @@ members = [
   "sum-of-multiples",
   "bob",
   "high-scores",
-  "matching-brackets"
+  "matching-brackets",
+  "collatz-conjecture"
 ]
 resolver = "3"
 
