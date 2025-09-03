@@ -47,6 +47,10 @@ name = "difference_of_squares"
 version = "0.1.0"
 
 [[package]]
+name = "eliuds_eggs"
+version = "0.1.0"
+
+[[package]]
 name = "flower_field"
 version = "0.1.0"
 
