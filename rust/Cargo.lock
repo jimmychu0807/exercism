@@ -3,6 +3,14 @@
 version = 4
 
 [[package]]
+name = "acronym"
+version = "0.1.0"
+
+[[package]]
+name = "allyourbase"
+version = "0.1.0"
+
+[[package]]
 name = "anagram"
 version = "0.1.0"
 

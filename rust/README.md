@@ -29,3 +29,5 @@ https://exercism.org/tracks/rust
 | 25  | [Series](./series)                   | ✅ |
 | 26  | [Kindergarten Garden](./kindergarten-garden) | ✅ |
 | 27  | [Eliuds Eggs](./eliuds-eggs)         | ✅ |
+| 28  | [Acronym](./acronym)                 | ✅ |
+| 29  | [All Your Base](./all-your-base)     | ✅ |

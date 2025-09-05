@@ -26,7 +26,9 @@ members = [
   "collatz-conjecture",
   "series",
   "kindergarten-garden",
-  "eliuds-eggs"
+  "eliuds-eggs",
+  "acronym",
+  "all-your-base"
 ]
 resolver = "3"
 
