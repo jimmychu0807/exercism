@@ -27,7 +27,8 @@ members = [
   "series",
   "kindergarten-garden",
   "eliuds-eggs",
-  "acronym"
+  "acronym",
+  "all-your-base"
 ]
 resolver = "3"
 
