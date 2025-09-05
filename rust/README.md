@@ -31,3 +31,8 @@ https://exercism.org/tracks/rust
 | 27  | [Eliuds Eggs](./eliuds-eggs)         | ✅ |
 | 28  | [Acronym](./acronym)                 | ✅ |
 | 29  | [All Your Base](./all-your-base)     | ✅ |
+| 30  | [Allergies](./allergies)             | ✅ |
+
+## Notes
+
+- [Libraries](https://github.com/exercism/rust-test-runner/blob/main/local-registry/Cargo.toml) that exercism auto-tester support.
