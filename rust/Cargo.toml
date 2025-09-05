@@ -28,7 +28,8 @@ members = [
   "kindergarten-garden",
   "eliuds-eggs",
   "acronym",
-  "all-your-base"
+  "all-your-base",
+  "allergies"
 ]
 resolver = "3"
 
