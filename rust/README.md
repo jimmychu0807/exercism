@@ -32,6 +32,7 @@ https://exercism.org/tracks/rust
 | 28  | [Acronym](./acronym)                 | ✅ |
 | 29  | [All Your Base](./all-your-base)     | ✅ |
 | 30  | [Allergies](./allergies)             | ✅ |
+| 31  | [Alphametics](./alphametics)         | ✅ |
 
 ## Notes
 

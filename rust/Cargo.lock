@@ -18,6 +18,10 @@ name = "allyourbase"
 version = "0.1.0"
 
 [[package]]
+name = "alphametics"
+version = "0.1.0"
+
+[[package]]
 name = "anagram"
 version = "0.1.0"
 
