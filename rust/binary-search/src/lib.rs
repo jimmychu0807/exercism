@@ -1,18 +1,35 @@
 use std::cmp::{Ord, Ordering};
 
 pub fn find<T: Ord, C: AsRef<[T]>>(container: C, key: T) -> Option<usize> {
-  let array = container.as_ref();
-  if array.is_empty() { return None; }
+	let array = container.as_ref();
+	if array.is_empty() {
+		return None;
+	}
 
-  let mut s_ind: usize = 0;
-  let mut e_ind: usize = array.len() - 1;
+	let mut left_idx: usize = 0;
+	let mut right_idx: usize = array.len() - 1;
+	let last_idx = right_idx;
 
-  loop {
-    let m_ind: usize = (e_ind + s_ind) / 2;
-    if key.cmp(&array[m_ind]) == Ordering::Equal { return Some(m_ind); }
-    else if s_ind == e_ind { return None; }
-    else if key.cmp(&array[m_ind]) == Ordering::Greater { s_ind = m_ind + 1; }
-    else if m_ind > 0 { e_ind = m_ind - 1; }
-    else { return None; }
-  }
+	while left_idx <= right_idx {
+		let m_idx: usize = (right_idx + left_idx) / 2;
+		match key.cmp(&array[m_idx]) {
+			Ordering::Equal => {
+				return Some(m_idx);
+			}
+			Ordering::Less if m_idx == 0 => {
+				return None;
+			}
+			Ordering::Less => {
+				right_idx = m_idx - 1;
+			}
+			Ordering::Greater if m_idx == last_idx => {
+				return None;
+			}
+			Ordering::Greater => {
+				left_idx = m_idx + 1;
+			}
+		}
+	}
+
+	None
 }

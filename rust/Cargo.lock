@@ -34,6 +34,10 @@ name = "beer-song"
 version = "0.0.0"
 
 [[package]]
+name = "binary_search"
+version = "0.1.0"
+
+[[package]]
 name = "bob"
 version = "0.1.0"
 
@@ -43,6 +47,10 @@ version = "0.1.0"
 dependencies = [
  "strfmt",
 ]
+
+[[package]]
+name = "bowling"
+version = "0.1.0"
 
 [[package]]
 name = "clock"
