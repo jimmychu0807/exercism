@@ -29,7 +29,8 @@ members = [
   "eliuds-eggs",
   "acronym",
   "all-your-base",
-  "allergies"
+  "allergies",
+  "alphametics"
 ]
 resolver = "3"
 
