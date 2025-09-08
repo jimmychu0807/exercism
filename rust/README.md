@@ -33,6 +33,7 @@ https://exercism.org/tracks/rust
 | 29  | [All Your Base](./all-your-base)     | ✅ |
 | 30  | [Allergies](./allergies)             | ✅ |
 | 31  | [Alphametics](./alphametics)         | ✅ |
+| 32  | [Binary Search](./binary-search)     | ✅ |
 
 ## Notes
 

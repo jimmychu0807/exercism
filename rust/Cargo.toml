@@ -30,7 +30,9 @@ members = [
   "acronym",
   "all-your-base",
   "allergies",
-  "alphametics"
+  "alphametics",
+  "binary-search",
+  "bowling"
 ]
 resolver = "3"
 
