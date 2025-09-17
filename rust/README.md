@@ -36,6 +36,7 @@ https://exercism.org/tracks/rust
 | 32  | [Binary Search](./binary-search)     | ✅ |
 | 33  | [Bowling](./bowling)                 | ✅ |
 | 34  | [DOT DSL](./dot-dsl)                 | ✅ |
+| 35  | [ETL](./etl)                         | ✅ |
 
 ## Notes
 
