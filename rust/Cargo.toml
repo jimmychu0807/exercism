@@ -33,7 +33,9 @@ members = [
   "alphametics",
   "binary-search",
   "bowling",
-  "dot-dsl"
+  "dot-dsl",
+  "etl",
+  "grade-school"
 ]
 resolver = "3"
 
