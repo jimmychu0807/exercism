@@ -34,6 +34,7 @@ https://exercism.org/tracks/rust
 | 30  | [Allergies](./allergies)             | ✅ |
 | 31  | [Alphametics](./alphametics)         | ✅ |
 | 32  | [Binary Search](./binary-search)     | ✅ |
+| 33  | [Bowling](./bowling)                 | ✅ |
 
 ## Notes
 

@@ -32,7 +32,8 @@ members = [
   "allergies",
   "alphametics",
   "binary-search",
-  "bowling"
+  "bowling",
+  "dot-dsl"
 ]
 resolver = "3"
 
