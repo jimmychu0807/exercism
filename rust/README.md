@@ -37,6 +37,7 @@ https://exercism.org/tracks/rust
 | 33  | [Bowling](./bowling)                 | ✅ |
 | 34  | [DOT DSL](./dot-dsl)                 | ✅ |
 | 35  | [ETL](./etl)                         | ✅ |
+| 36  | [Grade School](./grade-school)       | ✅ |
 
 ## Notes
 
