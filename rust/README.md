@@ -39,6 +39,7 @@ https://exercism.org/tracks/rust
 | 35  | [ETL](./etl)                         | ✅ |
 | 36  | [Grade School](./grade-school)       | ✅ |
 | 37  | [Hamming](./hamming)                 | ✅ |
+| 38  | [ISBN Verifier](./isbn-verifier)     | ✅ |
 
 ## Notes
 
