@@ -141,6 +141,10 @@ name = "isbn_verifier"
 version = "0.1.0"
 
 [[package]]
+name = "isogram"
+version = "0.1.0"
+
+[[package]]
 name = "kindergarten_garden"
 version = "0.1.0"
 
@@ -158,6 +162,10 @@ version = "0.1.0"
 
 [[package]]
 name = "nth_prime"
+version = "0.1.0"
+
+[[package]]
+name = "nucleotide_count"
 version = "0.1.0"
 
 [[package]]

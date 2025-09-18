@@ -37,7 +37,9 @@ members = [
   "etl",
   "grade-school",
   "hamming",
-  "isbn-verifier"
+  "isbn-verifier",
+  "isogram",
+  "nucleotide-count"
 ]
 resolver = "3"
 
