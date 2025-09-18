@@ -41,6 +41,7 @@ https://exercism.org/tracks/rust
 | 37  | [Hamming](./hamming)                 | ✅ |
 | 38  | [ISBN Verifier](./isbn-verifier)     | ✅ |
 | 39  | [Isogram](./isogram)                 | ✅ |
+| 40  | [Nucleotide Count](./nucleotide-count) |✅ |
 
 ## Notes
 
