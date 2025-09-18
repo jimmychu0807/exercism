@@ -125,11 +125,19 @@ name = "grains"
 version = "0.1.0"
 
 [[package]]
+name = "hamming"
+version = "0.1.0"
+
+[[package]]
 name = "hello_world"
 version = "0.1.0"
 
 [[package]]
 name = "high_scores"
+version = "0.1.0"
+
+[[package]]
+name = "isbn_verifier"
 version = "0.1.0"
 
 [[package]]

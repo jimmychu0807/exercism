@@ -35,7 +35,9 @@ members = [
   "bowling",
   "dot-dsl",
   "etl",
-  "grade-school"
+  "grade-school",
+  "hamming",
+  "isbn-verifier"
 ]
 resolver = "3"
 
