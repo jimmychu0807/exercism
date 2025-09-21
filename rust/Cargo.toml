@@ -39,7 +39,8 @@ members = [
   "hamming",
   "isbn-verifier",
   "isogram",
-  "nucleotide-count"
+  "nucleotide-count",
+  "paasio",
 ]
 resolver = "3"
 

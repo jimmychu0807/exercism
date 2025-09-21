@@ -42,6 +42,7 @@ https://exercism.org/tracks/rust
 | 38  | [ISBN Verifier](./isbn-verifier)     | ✅ |
 | 39  | [Isogram](./isogram)                 | ✅ |
 | 40  | [Nucleotide Count](./nucleotide-count) |✅ |
+| 41  | [PaaS I/O](./paasio)                  |✅ |
 
 ## Notes
 
