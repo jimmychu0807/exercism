@@ -43,6 +43,7 @@ https://exercism.org/tracks/rust
 | 39  | [Isogram](./isogram)                 | ✅ |
 | 40  | [Nucleotide Count](./nucleotide-count) |✅ |
 | 41  | [PaaS I/O](./paasio)                  |✅ |
+| 42  | [Palindrome Products](./palindrome-products) |✅ |
 
 ## Notes
 
