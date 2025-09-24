@@ -44,6 +44,7 @@ https://exercism.org/tracks/rust
 | 40  | [Nucleotide Count](./nucleotide-count) |✅ |
 | 41  | [PaaS I/O](./paasio)                  |✅ |
 | 42  | [Palindrome Products](./palindrome-products) |✅ |
+| 43  | [Pangram](./pangram)                  |✅ |
 
 ## Notes
 

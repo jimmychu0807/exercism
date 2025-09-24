@@ -41,7 +41,8 @@ members = [
   "isogram",
   "nucleotide-count",
   "paasio",
-  "palindrome-products"
+  "palindrome-products",
+  "pangram"
 ]
 resolver = "3"
 
