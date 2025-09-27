@@ -191,6 +191,10 @@ name = "pascals_triangle"
 version = "0.1.0"
 
 [[package]]
+name = "perfect_numbers"
+version = "0.1.0"
+
+[[package]]
 name = "powerfmt"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

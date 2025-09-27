@@ -44,6 +44,7 @@ members = [
   "palindrome-products",
   "pangram",
   "pascals-triangle",
+  "perfect-numbers"
 ]
 resolver = "3"
 
