@@ -46,6 +46,7 @@ https://exercism.org/tracks/rust
 | 42  | [Palindrome Products](./palindrome-products) |✅ |
 | 43  | [Pangram](./pangram)                  |✅ |
 | 44  | [Pascal's Triangle](./pascals-triangle) |✅ |
+| 45  | [Perfect Numbers](./perfect-numbers)  |✅ |
 
 ## Notes
 
