@@ -48,6 +48,7 @@ members = [
   "pig-latin",
   "queen-attack",
   "rna-transcription",
+  "run-length-encoding",
 ]
 resolver = "3"
 
