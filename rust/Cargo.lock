@@ -255,6 +255,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "rna_transcription"
+version = "0.1.0"
+
+[[package]]
+name = "run_length_encoding"
+version = "0.1.0"
+dependencies = [
+ "regex-lite",
+]
+
+[[package]]
+name = "saddle_points"
+version = "0.1.0"
+
+[[package]]
 name = "serde"
 version = "1.0.219"
 source = "registry+https://github.com/rust-lang/crates.io-index"

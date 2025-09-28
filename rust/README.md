@@ -11,7 +11,7 @@ https://exercism.org/tracks/rust
 | 7   | [Sublist](./sublist)                |  ✅ |
 | 8   | [Flower Field](./flower-field)      |  ✅ |
 | 9   | [Luhn](./luhn)                      |  ✅ |
-| 10  | [Armstrong Numbers](./armstrong-number) | ✅ |
+| 10  | [Armstrong Numbers](./armstrong-number)       | ✅ |
 | 11  | [Beer Song](./beer-song)             | ✅ |
 | 12  | [Bottle Song](./bottle-song)         | ✅ |
 | 13  | [Difference of Squares](./differences-of-squares) | ✅ |
@@ -21,13 +21,13 @@ https://exercism.org/tracks/rust
 | 17  | [Prime Factors](./prime-factors)     | ✅ |
 | 18  | [Proverb](./proverb)                 | ✅ |
 | 19  | [Raindrops](./raindrops)             | ✅ |
-| 20  | [Sum of Multiples](./sum-of-multiples) | ✅ |
+| 20  | [Sum of Multiples](./sum-of-multiples)        | ✅ |
 | 21  | [Bob](./bob)                         | ✅ |
 | 22  | [High Scores](./high-scores)         | ✅ |
-| 23  | [Matching Brackets](./matching-brackets) | ✅ |
-| 24  | [Collatz Conjecture](./collatz-conjecture) | ✅ |
+| 23  | [Matching Brackets](./matching-brackets)      | ✅ |
+| 24  | [Collatz Conjecture](./collatz-conjecture)    | ✅ |
 | 25  | [Series](./series)                   | ✅ |
-| 26  | [Kindergarten Garden](./kindergarten-garden) | ✅ |
+| 26  | [Kindergarten Garden](./kindergarten-garden)  | ✅ |
 | 27  | [Eliuds Eggs](./eliuds-eggs)         | ✅ |
 | 28  | [Acronym](./acronym)                 | ✅ |
 | 29  | [All Your Base](./all-your-base)     | ✅ |
@@ -41,14 +41,17 @@ https://exercism.org/tracks/rust
 | 37  | [Hamming](./hamming)                 | ✅ |
 | 38  | [ISBN Verifier](./isbn-verifier)     | ✅ |
 | 39  | [Isogram](./isogram)                 | ✅ |
-| 40  | [Nucleotide Count](./nucleotide-count) |✅ |
+| 40  | [Nucleotide Count](./nucleotide-count)        |✅ |
 | 41  | [PaaS I/O](./paasio)                  |✅ |
-| 42  | [Palindrome Products](./palindrome-products) |✅ |
+| 42  | [Palindrome Products](./palindrome-products)  |✅ |
 | 43  | [Pangram](./pangram)                  |✅ |
-| 44  | [Pascal's Triangle](./pascals-triangle) |✅ |
+| 44  | [Pascal's Triangle](./pascals-triangle)       |✅ |
 | 45  | [Perfect Numbers](./perfect-numbers)  |✅ |
 | 46  | [Pig Latin](./pig-latin)              |✅ |
 | 47  | [Queen Attack](./queen-attack)        |✅ |
+| 48  | [RNA Transcription](./rna-transcription)      |✅ |
+| 49  | [Run-Length Encoding](./run-length-encoding)  |✅ |
+| 50  | [Saddle Points](./saddle-points)      |✅ |
 
 ## Notes
 
