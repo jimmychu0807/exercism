@@ -51,6 +51,7 @@ https://exercism.org/tracks/rust
 | 47  | [Queen Attack](./queen-attack)        |✅ |
 | 48  | [RNA Transcription](./rna-transcription)      |✅ |
 | 49  | [Run-Length Encoding](./run-length-encoding)  |✅ |
+| 50  | [Saddle Points](./saddle-points)      |✅ |
 
 ## Notes
 

@@ -49,6 +49,7 @@ members = [
   "queen-attack",
   "rna-transcription",
   "run-length-encoding",
+  "saddle-points",
 ]
 resolver = "3"
 
