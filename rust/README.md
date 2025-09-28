@@ -49,6 +49,7 @@ https://exercism.org/tracks/rust
 | 45  | [Perfect Numbers](./perfect-numbers)  |✅ |
 | 46  | [Pig Latin](./pig-latin)              |✅ |
 | 47  | [Queen Attack](./queen-attack)        |✅ |
+| 48  | [RNA Transcription](./rna-transcription) |✅ |
 
 ## Notes
 

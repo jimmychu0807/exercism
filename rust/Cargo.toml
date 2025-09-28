@@ -47,6 +47,7 @@ members = [
   "perfect-numbers",
   "pig-latin",
   "queen-attack",
+  "rna-transcription",
 ]
 resolver = "3"
 
