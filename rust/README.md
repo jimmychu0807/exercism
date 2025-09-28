@@ -47,6 +47,8 @@ https://exercism.org/tracks/rust
 | 43  | [Pangram](./pangram)                  |✅ |
 | 44  | [Pascal's Triangle](./pascals-triangle) |✅ |
 | 45  | [Perfect Numbers](./perfect-numbers)  |✅ |
+| 46  | [Pig Latin](./pig-latin)              |✅ |
+| 47  | [Queen Attack](./queen-attack)        |✅ |
 
 ## Notes
 
