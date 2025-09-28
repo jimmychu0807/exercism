@@ -45,7 +45,8 @@ members = [
   "pangram",
   "pascals-triangle",
   "perfect-numbers",
-  "pig-latin"
+  "pig-latin",
+  "queen-attack",
 ]
 resolver = "3"
 
