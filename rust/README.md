@@ -55,6 +55,7 @@ https://exercism.org/tracks/rust
 | 51  | [Say](./say)                          |✅ |
 | 52  | [Scrabble Score](./scrabble-score)    |✅ |
 | 53  | [Sieve](./sieve)                      |✅ |
+| 54  | [Simple Linked List](./simple-linked-list)    |✅ |
 
 ## Notes
 

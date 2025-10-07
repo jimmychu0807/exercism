@@ -53,6 +53,7 @@ members = [
   "say",
   "scrabble-score",
   "sieve",
+  "simple-linked-list",
 ]
 resolver = "3"
 
