@@ -1,110 +1,142 @@
 # Sieve
 
-Use the Sieve of Eratosthenes to find all the primes from 2 up to a given
-number.
+Welcome to Sieve on Exercism's Rust Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-The Sieve of Eratosthenes is a simple, ancient algorithm for finding all
-prime numbers up to any given limit. It does so by iteratively marking as
-composite (i.e. not prime) the multiples of each prime, starting with the
-multiples of 2. It does not use any division or remainder operation.
+## Introduction
 
-Create your range, starting at two and continuing up to and including the given limit. (i.e. [2, limit])
+You bought a big box of random computer parts at a garage sale.
+You've started putting the parts together to build custom computers.
 
-The algorithm consists of repeating the following over and over:
+You want to test the performance of different combinations of parts, and decide to create your own benchmarking program to see how your computers compare.
+You choose the famous "Sieve of Eratosthenes" algorithm, an ancient algorithm, but one that should push your computers to the limits.
 
-- take the next available unmarked number in your list (it is prime)
-- mark all the multiples of that number (they are not prime)
+## Instructions
 
-Repeat until you have processed each number in your range.
+Your task is to create a program that implements the Sieve of Eratosthenes algorithm to find all prime numbers less than or equal to a given number.
 
-When the algorithm terminates, all the numbers in the list that have not
-been marked are prime.
+A prime number is a number larger than 1 that is only divisible by 1 and itself.
+For example, 2, 3, 5, 7, 11, and 13 are prime numbers.
+By contrast, 6 is _not_ a prime number as it not only divisible by 1 and itself, but also by 2 and 3.
 
-The wikipedia article has a useful graphic that explains the algorithm:
-https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+To use the Sieve of Eratosthenes, first, write out all the numbers from 2 up to and including your given number.
+Then, follow these steps:
 
-Notice that this is a very specific algorithm, and the tests don't check
-that you've implemented the algorithm, only that you've come up with the
-correct list of primes. A good first test is to check that you do not use
-division or remainder operations (div, /, mod or % depending on the
-language).
+1. Find the next unmarked number (skipping over marked numbers).
+   This is a prime number.
+2. Mark all the multiples of that prime number as **not** prime.
 
-## Rust Installation
+Repeat the steps until you've gone through every number.
+At the end, all the unmarked numbers are prime.
 
-Refer to the [exercism help page][help-page] for Rust installation and learning
-resources.
+~~~~exercism/note
+The Sieve of Eratosthenes marks off multiples of each prime using addition (repeatedly adding the prime) or multiplication (directly computing its multiples), rather than checking each number for divisibility.
 
-## Writing the Code
+The tests don't check that you've implemented the algorithm, only that you've come up with the correct primes.
+~~~~
 
-Execute the tests with:
+## Example
 
-```bash
-$ cargo test
-```
+Let's say you're finding the primes less than or equal to 10.
 
-All but the first test have been ignored. After you get the first test to
-pass, open the tests source file which is located in the `tests` directory
-and remove the `#[ignore]` flag from the next test and get the tests to pass
-again. Each separate test is a function with `#[test]` flag above it.
-Continue, until you pass every test.
+- Write out 2, 3, 4, 5, 6, 7, 8, 9, 10, leaving them all unmarked.
 
-If you wish to run all ignored tests without editing the tests source file, use:
+  ```text
+  2 3 4 5 6 7 8 9 10
+  ```
 
-```bash
-$ cargo test -- --ignored
-```
+- 2 is unmarked and is therefore a prime.
+  Mark 4, 6, 8 and 10 as "not prime".
 
-To run a specific test, for example `some_test`, you can use:
+  ```text
+  2 3 [4] 5 [6] 7 [8] 9 [10]
+  ↑
+  ```
 
-```bash
-$ cargo test some_test
-```
+- 3 is unmarked and is therefore a prime.
+  Mark 6 and 9 as not prime _(marking 6 is optional - as it's already been marked)_.
 
-If the specific test is ignored use:
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+    ↑
+  ```
 
-```bash
-$ cargo test some_test -- --ignored
-```
+- 4 is marked as "not prime", so we skip over it.
 
-To learn more about Rust tests refer to the [online test documentation][rust-tests]
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+       ↑
+  ```
 
-Make sure to read the [Modules][modules] chapter if you
-haven't already, it will help you with organizing your files.
+- 5 is unmarked and is therefore a prime.
+  Mark 10 as not prime _(optional - as it's already been marked)_.
 
-## Further improvements
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+          ↑
+  ```
 
-After you have solved the exercise, please consider using the additional utilities, described in the [installation guide](https://exercism.io/tracks/rust/installation), to further refine your final solution.
+- 6 is marked as "not prime", so we skip over it.
 
-To format your solution, inside the solution directory use
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+             ↑
+  ```
 
-```bash
-cargo fmt
-```
+- 7 is unmarked and is therefore a prime.
 
-To see, if your solution contains some common ineffective use cases, inside the solution directory use
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+                ↑
+  ```
 
-```bash
-cargo clippy --all-targets
-```
+- 8 is marked as "not prime", so we skip over it.
 
-## Submitting the solution
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+                   ↑
+  ```
 
-Generally you should submit all files in which you implemented your solution (`src/lib.rs` in most cases). If you are using any external crates, please consider submitting the `Cargo.toml` file. This will make the review process faster and clearer.
+- 9 is marked as "not prime", so we skip over it.
 
-## Feedback, Issues, Pull Requests
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+                       ↑
+  ```
 
-The [exercism/rust](https://github.com/exercism/rust) repository on GitHub is the home for all of the Rust exercises. If you have feedback about an exercise, or want to help implement new exercises, head over there and create an issue. Members of the rust track team are happy to help!
+- 10 is marked as "not prime", so we stop as there are no more numbers to check.
 
-If you want to know more about Exercism, take a look at the [contribution guide](https://github.com/exercism/docs/blob/master/contributing-to-language-tracks/README.md).
+  ```text
+  2 3 [4] 5 [6] 7 [8] [9] [10]
+                           ↑
+  ```
 
-[help-page]: https://exercism.io/tracks/rust/learning
-[modules]: https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html
-[cargo]: https://doc.rust-lang.org/book/ch14-00-more-about-cargo.html
-[rust-tests]: https://doc.rust-lang.org/book/ch11-02-running-tests.html
+You've examined all the numbers and found that 2, 3, 5, and 7 are still unmarked, meaning they're the primes less than or equal to 10.
 
 ## Source
 
-Sieve of Eratosthenes at Wikipedia [http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes](http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes)
+### Created by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @IanWhitney
+
+### Contributed to by
+
+- @ashleygwilliams
+- @ClashTheBunny
+- @coriolinus
+- @cwhakes
+- @efx
+- @ErikSchierboom
+- @IanWhitney
+- @lutostag
+- @mkantor
+- @nfiles
+- @petertseng
+- @rofrol
+- @stringparser
+- @xakon
+- @ZapAnton
+
+### Based on
+
+Sieve of Eratosthenes at Wikipedia - https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes

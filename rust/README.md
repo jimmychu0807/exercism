@@ -54,6 +54,7 @@ https://exercism.org/tracks/rust
 | 50  | [Saddle Points](./saddle-points)      |✅ |
 | 51  | [Say](./say)                          |✅ |
 | 52  | [Scrabble Score](./scrabble-score)    |✅ |
+| 53  | [Sieve](./sieve)                      |✅ |
 
 ## Notes
 
