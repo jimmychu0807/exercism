@@ -53,6 +53,7 @@ https://exercism.org/tracks/rust
 | 49  | [Run-Length Encoding](./run-length-encoding)  |✅ |
 | 50  | [Saddle Points](./saddle-points)      |✅ |
 | 51  | [Say](./say)                          |✅ |
+| 52  | [Scrabble Score](./scrabble-score)    |✅ |
 
 ## Notes
 

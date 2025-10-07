@@ -51,6 +51,7 @@ members = [
   "run-length-encoding",
   "saddle-points",
   "say",
+  "scrabble-score"
 ]
 resolver = "3"
 
