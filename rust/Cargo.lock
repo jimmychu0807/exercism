@@ -270,6 +270,14 @@ name = "saddle_points"
 version = "0.1.0"
 
 [[package]]
+name = "say"
+version = "0.1.0"
+
+[[package]]
+name = "scrabble_score"
+version = "0.1.0"
+
+[[package]]
 name = "serde"
 version = "1.0.219"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -291,6 +299,10 @@ dependencies = [
 
 [[package]]
 name = "series"
+version = "0.1.0"
+
+[[package]]
+name = "sieve"
 version = "0.1.0"
 
 [[package]]

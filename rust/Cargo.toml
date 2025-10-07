@@ -50,6 +50,9 @@ members = [
   "rna-transcription",
   "run-length-encoding",
   "saddle-points",
+  "say",
+  "scrabble-score",
+  "sieve",
 ]
 resolver = "3"
 
