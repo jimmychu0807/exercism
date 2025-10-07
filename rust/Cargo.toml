@@ -50,6 +50,7 @@ members = [
   "rna-transcription",
   "run-length-encoding",
   "saddle-points",
+  "say",
 ]
 resolver = "3"
 
