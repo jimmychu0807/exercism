@@ -59,6 +59,7 @@ https://exercism.org/tracks/rust
 | 55  | [Spiral Matrix](./spiral-matrix)      |✅ |
 | 56  | [Tournament](./tournament)            |✅ |
 | 57  | [Triangle](./triangle)                |✅ |
+| 58  | [Two Bucket](./two-bucket)            |✅ |
 
 ## Notes
 

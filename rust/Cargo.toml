@@ -57,6 +57,7 @@ members = [
   "spiral-matrix",
   "tournament",
   "triangle",
+  "two-bucket",
 ]
 resolver = "3"
 
