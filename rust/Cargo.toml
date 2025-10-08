@@ -55,6 +55,7 @@ members = [
   "sieve",
   "simple-linked-list",
   "spiral-matrix",
+  "tournament",
 ]
 resolver = "3"
 
