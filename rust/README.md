@@ -56,6 +56,8 @@ https://exercism.org/tracks/rust
 | 52  | [Scrabble Score](./scrabble-score)    |✅ |
 | 53  | [Sieve](./sieve)                      |✅ |
 | 54  | [Simple Linked List](./simple-linked-list)    |✅ |
+| 55  | [Spiral Matrix](./spiral-matrix)      |✅ |
+| 56  | [Tournament](./tournament)            |✅ |
 
 ## Notes
 
