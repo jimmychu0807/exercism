@@ -314,6 +314,10 @@ name = "space_age"
 version = "0.1.0"
 
 [[package]]
+name = "spiral_matrix"
+version = "0.1.0"
+
+[[package]]
 name = "strfmt"
 version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"

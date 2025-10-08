@@ -54,6 +54,7 @@ members = [
   "scrabble-score",
   "sieve",
   "simple-linked-list",
+  "spiral-matrix",
 ]
 resolver = "3"
 
