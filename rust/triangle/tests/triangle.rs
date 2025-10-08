@@ -129,7 +129,6 @@ mod invalid {
 	use triangle::Triangle;
 
 	#[test]
-	#[ignore]
 	fn all_zero_sides_is_not_a_triangle() {
 		let input = [0, 0, 0];
 		let output = Triangle::build(input);

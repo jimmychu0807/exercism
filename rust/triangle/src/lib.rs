@@ -1,15 +1,17 @@
+use num_traits::Zero;
 use std::{
 	cmp::{PartialEq, PartialOrd},
+	marker::Copy,
 	ops::Add,
 };
 
 pub struct Triangle<T>(T, T, T);
 
-impl<T: PartialOrd + PartialEq + Add<Output = T>> Triangle<T> {
+impl<T: PartialOrd + PartialEq + Add<Output = T> + Zero + Copy> Triangle<T> {
 	pub fn build(sides: [T; 3]) -> Option<Triangle<T>> {
 		let [a, b, c] = sides;
 		// All sides must be > 0
-		if !(a > 0 && b > 0 && c > 0) {
+		if !(a > T::zero() && b > T::zero() && c > T::zero()) {
 			return None;
 		}
 
@@ -17,7 +19,7 @@ impl<T: PartialOrd + PartialEq + Add<Output = T>> Triangle<T> {
 			return None;
 		}
 
-		Some(Triangle(sides[0], sides[1], sides[2]))
+		Some(Triangle(a, b, c))
 	}
 
 	pub fn is_equilateral(&self) -> bool {

@@ -58,6 +58,7 @@ https://exercism.org/tracks/rust
 | 54  | [Simple Linked List](./simple-linked-list)    |✅ |
 | 55  | [Spiral Matrix](./spiral-matrix)      |✅ |
 | 56  | [Tournament](./tournament)            |✅ |
+| 57  | [Triangle](./triangle)                |✅ |
 
 ## Notes
 
