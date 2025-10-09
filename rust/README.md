@@ -60,6 +60,7 @@ https://exercism.org/tracks/rust
 | 56  | [Tournament](./tournament)            |✅ |
 | 57  | [Triangle](./triangle)                |✅ |
 | 58  | [Two Bucket](./two-bucket)            |✅ |
+| 59  | [Variable Length Quantity](./variable-length-quantity) |✅ |
 
 ## Notes
 

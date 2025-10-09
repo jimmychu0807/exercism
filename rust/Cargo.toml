@@ -58,6 +58,7 @@ members = [
   "tournament",
   "triangle",
   "two-bucket",
+  "variable-length-quantity",
 ]
 resolver = "3"
 
