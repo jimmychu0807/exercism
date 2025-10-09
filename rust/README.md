@@ -65,6 +65,7 @@ https://exercism.org/tracks/rust
 | 61  | [Robot Name](./robot-name)            |✅ |
 | 62  | [Protein Translation](./protein-translation) |✅ |
 | 63  | [Wordy](./wordy)                      |✅ |
+| 64  | [Custom Set](./custom-set)            |✅ |
 
 ## Notes
 
