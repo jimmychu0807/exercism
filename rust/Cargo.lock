@@ -269,6 +269,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "protein_translation"
+version = "0.1.0"
+
+[[package]]
 name = "proverb"
 version = "0.1.0"
 

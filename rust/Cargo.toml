@@ -61,6 +61,7 @@ members = [
   "variable-length-quantity",
   "robot-simulator",
   "robot-name",
+  "protein-translation",
 ]
 resolver = "3"
 
