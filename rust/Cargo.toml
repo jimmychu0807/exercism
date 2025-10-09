@@ -60,6 +60,7 @@ members = [
   "two-bucket",
   "variable-length-quantity",
   "robot-simulator",
+  "robot-name",
 ]
 resolver = "3"
 

@@ -62,6 +62,7 @@ https://exercism.org/tracks/rust
 | 58  | [Two Bucket](./two-bucket)            |✅ |
 | 59  | [Variable Length Quantity](./variable-length-quantity) |✅ |
 | 60  | [Robot Simulator](./robot-simulator)  |✅ |
+| 61  | [Robot Name](./robot-name)            |✅ |
 
 ## Notes
 
