@@ -64,6 +64,7 @@ https://exercism.org/tracks/rust
 | 60  | [Robot Simulator](./robot-simulator)  |✅ |
 | 61  | [Robot Name](./robot-name)            |✅ |
 | 62  | [Protein Translation](./protein-translation) |✅ |
+| 63  | [Wordy](./wordy)                      |✅ |
 
 ## Notes
 

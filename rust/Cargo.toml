@@ -62,6 +62,7 @@ members = [
   "robot-simulator",
   "robot-name",
   "protein-translation",
+  "wordy",
 ]
 resolver = "3"
 
