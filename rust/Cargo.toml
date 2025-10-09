@@ -63,6 +63,7 @@ members = [
   "robot-name",
   "protein-translation",
   "wordy",
+  "custom-set",
 ]
 resolver = "3"
 
