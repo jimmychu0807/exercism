@@ -1,37 +1,46 @@
 use std::collections::HashMap;
 
-const STOP_STR: &str = "stop codon";
+pub fn translate(dna: &str) -> Option<Vec<&str>> {
+	let mut sol: Vec<&str> = vec![];
+	let map: HashMap<&str, &str> = [
+		("AUG", "Methionine"),
+		("UUU", "Phenylalanine"),
+		("UUC", "Phenylalanine"),
+		("UUA", "Leucine"),
+		("UUG", "Leucine"),
+		("UCU", "Serine"),
+		("UCC", "Serine"),
+		("UCA", "Serine"),
+		("UCG", "Serine"),
+		("UAU", "Tyrosine"),
+		("UAC", "Tyrosine"),
+		("UGU", "Cysteine"),
+		("UGC", "Cysteine"),
+		("UGG", "Tryptophan"),
+	]
+	.into_iter()
+	.collect();
 
-pub struct CodonsInfo<'a> {
-  rna_map: HashMap<&'a str, &'a str>,
-}
+	let stop: Vec<&str> = ["UAA", "UAG", "UGA"].into_iter().collect();
 
-impl<'a> CodonsInfo<'a> {
-  pub fn name_for(&self, codon: &str) -> Option<&'a str> {
-    self.rna_map.get(codon).copied()
-  }
+	let mut start_offset = 0;
+	while start_offset < dna.len() {
+		let end_offset = dna.len().min(start_offset + 3);
+		let slice = &dna[start_offset..end_offset];
 
-  pub fn of_rna(&self, rna: &str) -> Option<Vec<&'a str>> {
-    let mut result: Vec<&'a str> = Vec::new();
-    let mut rna = rna;
+		if stop.contains(&slice) {
+			break;
+		}
 
-    while !rna.is_empty() {
-      let three_chars: &str = if rna.len() >= 3 { &rna[0..3] } else { &rna[0..] };
-      rna = &rna[three_chars.len()..];
-      if !self.rna_map.contains_key(three_chars) { return None }
-      let val = self.rna_map.get(three_chars).unwrap();
-      if *val == STOP_STR { return Some(result) }
-      result.push(*val);
-    }
-    Some(result)
-  }
-}
+		match map.get(slice) {
+			Some(data) => {
+				sol.push(data);
+			}
+			None => return None,
+		}
 
-pub fn parse<'a>(pairs: Vec<(&'a str, &'a str)>) -> CodonsInfo<'a> {
-  let mut info = CodonsInfo{ rna_map: HashMap::new() };
-  for (codon, name) in pairs {
-    info.rna_map.insert(codon, name);
-  }
+		start_offset = end_offset;
+	}
 
-  info
+	Some(sol)
 }
