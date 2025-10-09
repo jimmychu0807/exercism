@@ -274,6 +274,10 @@ name = "rna_transcription"
 version = "0.1.0"
 
 [[package]]
+name = "robot_simulator"
+version = "0.1.0"
+
+[[package]]
 name = "run_length_encoding"
 version = "0.1.0"
 dependencies = [

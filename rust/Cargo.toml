@@ -59,6 +59,7 @@ members = [
   "triangle",
   "two-bucket",
   "variable-length-quantity",
+  "robot-simulator",
 ]
 resolver = "3"
 
