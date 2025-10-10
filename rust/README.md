@@ -66,6 +66,9 @@ https://exercism.org/tracks/rust
 | 62  | [Protein Translation](./protein-translation) |✅ |
 | 63  | [Wordy](./wordy)                      |✅ |
 | 64  | [Custom Set](./custom-set)            |✅ |
+| 65  | [Accumulate](./accumulate)            |✅ |
+| 66  | [Affine Cipher](./affine-cipher)      |✅ |
+| 67  | [Atbash Cipher](./atbash-cipher)      |✅ |
 
 ## Notes
 
