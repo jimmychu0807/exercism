@@ -64,6 +64,7 @@ members = [
   "protein-translation",
   "wordy",
   "custom-set",
+  "accumulate",
 ]
 resolver = "3"
 
