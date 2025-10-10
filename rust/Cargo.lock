@@ -41,6 +41,10 @@ name = "armstrong_numbers"
 version = "0.1.0"
 
 [[package]]
+name = "atbash_cipher"
+version = "0.1.0"
+
+[[package]]
 name = "autocfg"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

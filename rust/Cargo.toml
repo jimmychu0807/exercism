@@ -66,6 +66,7 @@ members = [
   "custom-set",
   "accumulate",
   "affine-cipher",
+  "atbash-cipher",
 ]
 resolver = "3"
 
