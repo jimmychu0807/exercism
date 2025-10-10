@@ -67,6 +67,7 @@ https://exercism.org/tracks/rust
 | 63  | [Wordy](./wordy)                      |✅ |
 | 64  | [Custom Set](./custom-set)            |✅ |
 | 65  | [Accumulate](./accumulate)            |✅ |
+| 66  | [Affine Cipher](./affine-cipher)      |✅ |
 
 ## Notes
 

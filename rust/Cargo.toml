@@ -65,6 +65,7 @@ members = [
   "wordy",
   "custom-set",
   "accumulate",
+  "affine-cipher",
 ]
 resolver = "3"
 
