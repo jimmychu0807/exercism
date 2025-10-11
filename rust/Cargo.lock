@@ -200,6 +200,10 @@ name = "kindergarten_garden"
 version = "0.1.0"
 
 [[package]]
+name = "largest_series_product"
+version = "0.1.0"
+
+[[package]]
 name = "leap"
 version = "0.1.0"
 

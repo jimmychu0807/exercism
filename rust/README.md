@@ -71,6 +71,7 @@ https://exercism.org/tracks/rust
 | 67  | [Atbash Cipher](./atbash-cipher)      |✅ |
 | 68  | [Crypto Square](./crypto-square)      |✅ |
 | 69  | [Diamond](./diamond)                  |✅ |
+| 70  | [Largest Series Product](./largest-series-product) |✅ |
 
 ## Notes
 

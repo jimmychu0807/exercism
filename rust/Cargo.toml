@@ -69,6 +69,7 @@ members = [
   "atbash-cipher",
   "crypto-square",
   "diamond",
+  "largest-series-product",
 ]
 resolver = "3"
 
