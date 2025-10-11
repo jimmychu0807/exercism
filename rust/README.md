@@ -69,6 +69,9 @@ https://exercism.org/tracks/rust
 | 65  | [Accumulate](./accumulate)            |✅ |
 | 66  | [Affine Cipher](./affine-cipher)      |✅ |
 | 67  | [Atbash Cipher](./atbash-cipher)      |✅ |
+| 68  | [Crypto Square](./crypto-square)      |✅ |
+| 69  | [Diamond](./diamond)                  |✅ |
+| 70  | [Largest Series Product](./largest-series-product) |✅ |
 
 ## Notes
 

@@ -67,6 +67,9 @@ members = [
   "accumulate",
   "affine-cipher",
   "atbash-cipher",
+  "crypto-square",
+  "diamond",
+  "largest-series-product",
 ]
 resolver = "3"
 

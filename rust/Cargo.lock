@@ -88,6 +88,10 @@ name = "collatz_conjecture"
 version = "0.1.0"
 
 [[package]]
+name = "crypto_square"
+version = "0.1.0"
+
+[[package]]
 name = "custom_set"
 version = "0.1.0"
 
@@ -99,6 +103,10 @@ checksum = "9c9e6a11ca8224451684bc0d7d5a7adbf8f2fd6887261a1cfc3c0432f9d4068e"
 dependencies = [
  "powerfmt",
 ]
+
+[[package]]
+name = "diamond"
+version = "0.1.0"
 
 [[package]]
 name = "difference_of_squares"
@@ -189,6 +197,10 @@ version = "0.1.0"
 
 [[package]]
 name = "kindergarten_garden"
+version = "0.1.0"
+
+[[package]]
+name = "largest_series_product"
 version = "0.1.0"
 
 [[package]]
