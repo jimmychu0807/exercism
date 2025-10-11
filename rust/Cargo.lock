@@ -105,6 +105,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "diamond"
+version = "0.1.0"
+
+[[package]]
 name = "difference_of_squares"
 version = "0.1.0"
 

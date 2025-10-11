@@ -68,6 +68,7 @@ members = [
   "affine-cipher",
   "atbash-cipher",
   "crypto-square",
+  "diamond",
 ]
 resolver = "3"
 
