@@ -88,6 +88,10 @@ name = "collatz_conjecture"
 version = "0.1.0"
 
 [[package]]
+name = "crypto_square"
+version = "0.1.0"
+
+[[package]]
 name = "custom_set"
 version = "0.1.0"
 
