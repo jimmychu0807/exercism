@@ -74,6 +74,7 @@ https://exercism.org/tracks/rust
 | 70  | [Largest Series Product](./largest-series-product) |✅ |
 | 71  | [Luhn From](./luhn-from)              |✅ |
 | 72  | [Luhn Trait](./luhn-trait)            |✅ |
+| 73  | [List Ops](./list-ops)                |✅ |
 
 ## Notes
 
