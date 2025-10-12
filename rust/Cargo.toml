@@ -71,6 +71,7 @@ members = [
   "diamond",
   "largest-series-product",
   "luhn-from",
+  "luhn-trait",
 ]
 resolver = "3"
 
