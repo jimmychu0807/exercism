@@ -72,6 +72,10 @@ https://exercism.org/tracks/rust
 | 68  | [Crypto Square](./crypto-square)      |✅ |
 | 69  | [Diamond](./diamond)                  |✅ |
 | 70  | [Largest Series Product](./largest-series-product) |✅ |
+| 71  | [Luhn From](./luhn-from)              |✅ |
+| 72  | [Luhn Trait](./luhn-trait)            |✅ |
+| 73  | [List Ops](./list-ops)                |✅ |
+| 74  | [Phone Number](./phone-number)        |✅ |
 
 ## Notes
 

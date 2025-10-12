@@ -70,6 +70,10 @@ members = [
   "crypto-square",
   "diamond",
   "largest-series-product",
+  "luhn-from",
+  "luhn-trait",
+  "list-ops",
+  "phone-number",
 ]
 resolver = "3"
 

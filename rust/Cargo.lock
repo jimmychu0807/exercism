@@ -214,7 +214,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "58f929b4d672ea937a23a1ab494143d968337a5f47e56d0815df1e0890ddf174"
 
 [[package]]
+name = "list_ops"
+version = "0.1.0"
+
+[[package]]
 name = "luhn"
+version = "0.1.0"
+
+[[package]]
+name = "luhn_from"
+version = "0.1.0"
+
+[[package]]
+name = "luhn_trait"
 version = "0.1.0"
 
 [[package]]
@@ -280,6 +292,10 @@ version = "0.1.0"
 
 [[package]]
 name = "perfect_numbers"
+version = "0.1.0"
+
+[[package]]
+name = "phone_number"
 version = "0.1.0"
 
 [[package]]
