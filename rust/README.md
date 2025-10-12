@@ -75,6 +75,7 @@ https://exercism.org/tracks/rust
 | 71  | [Luhn From](./luhn-from)              |✅ |
 | 72  | [Luhn Trait](./luhn-trait)            |✅ |
 | 73  | [List Ops](./list-ops)                |✅ |
+| 74  | [Phone Number](./phone-number)        |✅ |
 
 ## Notes
 

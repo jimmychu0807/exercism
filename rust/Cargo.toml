@@ -73,6 +73,7 @@ members = [
   "luhn-from",
   "luhn-trait",
   "list-ops",
+  "phone-number",
 ]
 resolver = "3"
 

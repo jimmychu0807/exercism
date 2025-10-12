@@ -295,6 +295,10 @@ name = "perfect_numbers"
 version = "0.1.0"
 
 [[package]]
+name = "phone_number"
+version = "0.1.0"
+
+[[package]]
 name = "pig_latin"
 version = "0.1.0"
 dependencies = [
