@@ -63,7 +63,7 @@ https://exercism.org/tracks/rust
 | 59  | [Variable Length Quantity](./variable-length-quantity) |✅ |
 | 60  | [Robot Simulator](./robot-simulator)  |✅ |
 | 61  | [Robot Name](./robot-name)            |✅ |
-| 62  | [Protein Translation](./protein-translation) |✅ |
+| 62  | [Protein Translation](./protein-translation)  |✅ |
 | 63  | [Wordy](./wordy)                      |✅ |
 | 64  | [Custom Set](./custom-set)            |✅ |
 | 65  | [Accumulate](./accumulate)            |✅ |
@@ -76,6 +76,7 @@ https://exercism.org/tracks/rust
 | 72  | [Luhn Trait](./luhn-trait)            |✅ |
 | 73  | [List Ops](./list-ops)                |✅ |
 | 74  | [Phone Number](./phone-number)        |✅ |
+| 75  | [Rail Fence Cipher](./rail-fence-cipher)      |✅ |
 
 ## Notes
 

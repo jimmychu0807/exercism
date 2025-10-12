@@ -74,6 +74,7 @@ members = [
   "luhn-trait",
   "list-ops",
   "phone-number",
+  "rail-fence-cipher",
 ]
 resolver = "3"
 
