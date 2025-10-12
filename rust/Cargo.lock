@@ -218,6 +218,10 @@ name = "luhn"
 version = "0.1.0"
 
 [[package]]
+name = "luhn_from"
+version = "0.1.0"
+
+[[package]]
 name = "matching_brackets"
 version = "0.1.0"
 
