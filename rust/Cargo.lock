@@ -481,6 +481,13 @@ name = "sieve"
 version = "0.1.0"
 
 [[package]]
+name = "simple_cipher"
+version = "0.1.0"
+dependencies = [
+ "rand",
+]
+
+[[package]]
 name = "simple_linked_list"
 version = "0.1.0"
 
