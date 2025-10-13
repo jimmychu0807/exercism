@@ -78,6 +78,8 @@ members = [
   "roman-numerals",
   "rotational-cipher",
   "simple-cipher",
+  "word-count",
+  "secret-handshake",
 ]
 resolver = "3"
 

@@ -78,8 +78,10 @@ https://exercism.org/tracks/rust
 | 74  | [Phone Number](./phone-number)        |✅ |
 | 75  | [Rail Fence Cipher](./rail-fence-cipher)      |✅ |
 | 76  | [Roman Numerals](./roman-numerals)    |✅ |
-| 77  | [Rotational Cipher](./rotational-cipher) |✅ |
+| 77  | [Rotational Cipher](./rotational-cipher)      |✅ |
 | 78  | [Simple Cipher](./simple-cipher)      |✅ |
+| 79  | [Word Count](./word-count)            |✅ |
+| 80  | [Secret Handshake](./secret-handshake)        |✅ |
 
 ## Notes
 
