@@ -80,6 +80,7 @@ https://exercism.org/tracks/rust
 | 76  | [Roman Numerals](./roman-numerals)    |✅ |
 | 77  | [Rotational Cipher](./rotational-cipher) |✅ |
 | 78  | [Simple Cipher](./simple-cipher)      |✅ |
+| 79  | [Word Count](./word-count)            |✅ |
 
 ## Notes
 
