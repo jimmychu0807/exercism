@@ -453,6 +453,10 @@ name = "scrabble_score"
 version = "0.1.0"
 
 [[package]]
+name = "secret_handshake"
+version = "0.1.0"
+
+[[package]]
 name = "serde"
 version = "1.0.219"
 source = "registry+https://github.com/rust-lang/crates.io-index"
