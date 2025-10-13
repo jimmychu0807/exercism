@@ -430,6 +430,10 @@ name = "roman_numerals"
 version = "0.1.0"
 
 [[package]]
+name = "rotational_cipher"
+version = "0.1.0"
+
+[[package]]
 name = "run_length_encoding"
 version = "0.1.0"
 dependencies = [

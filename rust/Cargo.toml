@@ -76,6 +76,7 @@ members = [
   "phone-number",
   "rail-fence-cipher",
   "roman-numerals",
+  "rotational-cipher",
 ]
 resolver = "3"
 
