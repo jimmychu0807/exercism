@@ -77,6 +77,7 @@ https://exercism.org/tracks/rust
 | 73  | [List Ops](./list-ops)                |✅ |
 | 74  | [Phone Number](./phone-number)        |✅ |
 | 75  | [Rail Fence Cipher](./rail-fence-cipher)      |✅ |
+| 76  | [Roman Numerals](./roman-numerals)    |✅ |
 
 ## Notes
 
