@@ -238,6 +238,10 @@ name = "matching_brackets"
 version = "0.1.0"
 
 [[package]]
+name = "matrix"
+version = "0.1.0"
+
+[[package]]
 name = "modinverse"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"

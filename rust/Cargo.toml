@@ -82,6 +82,7 @@ members = [
   "secret-handshake",
   "knapsack",
   "yacht",
+  "matrix",
 ]
 resolver = "3"
 
