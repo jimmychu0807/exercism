@@ -22,11 +22,5 @@ pub fn is_valid(code: &str) -> bool {
 		return false;
 	}
 
-	stripped
-		.into_iter()
-		.rev()
-		.enumerate()
-		.map(|(i, c)| luhn_transform(i, c))
-		.sum::<u32>()
-		% 10 == 0
+	stripped.into_iter().rev().enumerate().map(|(i, c)| luhn_transform(i, c)).sum::<u32>() % 10 == 0
 }

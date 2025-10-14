@@ -82,6 +82,8 @@ https://exercism.org/tracks/rust
 | 78  | [Simple Cipher](./simple-cipher)      |✅ |
 | 79  | [Word Count](./word-count)            |✅ |
 | 80  | [Secret Handshake](./secret-handshake)        |✅ |
+| 81  | [Knapsack](./knapsack)                |✅ |
+| 82  | [Yacht](./yacht)                      |✅ |
 
 ## Notes
 

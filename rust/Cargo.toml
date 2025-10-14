@@ -80,6 +80,8 @@ members = [
   "simple-cipher",
   "word-count",
   "secret-handshake",
+  "knapsack",
+  "yacht",
 ]
 resolver = "3"
 

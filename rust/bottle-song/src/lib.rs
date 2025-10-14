@@ -2,7 +2,8 @@ use std::collections::HashMap;
 use strfmt::strfmt;
 
 pub fn recite(start_bottles: u32, take_down: u32) -> String {
-	let num_eng = ["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+	let num_eng =
+		["no", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 
 	let get_num_eng = |num: u32, up: bool| -> String {
 		match up {
