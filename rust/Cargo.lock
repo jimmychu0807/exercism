@@ -145,6 +145,10 @@ name = "etl"
 version = "0.1.0"
 
 [[package]]
+name = "fizzy"
+version = "0.1.0"
+
+[[package]]
 name = "flower_field"
 version = "0.1.0"
 
@@ -235,6 +239,10 @@ version = "0.1.0"
 
 [[package]]
 name = "matching_brackets"
+version = "0.1.0"
+
+[[package]]
+name = "matrix"
 version = "0.1.0"
 
 [[package]]
