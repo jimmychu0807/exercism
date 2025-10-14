@@ -85,6 +85,7 @@ https://exercism.org/tracks/rust
 | 81  | [Knapsack](./knapsack)                |✅ |
 | 82  | [Yacht](./yacht)                      |✅ |
 | 83  | [Matrix](./matrix)                    |✅ |
+| 84  | [Fizzy](./fizzy)                      |✅ |
 
 ## Notes
 
