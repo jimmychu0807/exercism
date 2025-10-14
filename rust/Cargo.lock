@@ -354,6 +354,10 @@ name = "proverb"
 version = "0.1.0"
 
 [[package]]
+name = "pythagorean_triplet"
+version = "0.1.0"
+
+[[package]]
 name = "queen_attack"
 version = "0.1.0"
 

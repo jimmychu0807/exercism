@@ -86,6 +86,7 @@ https://exercism.org/tracks/rust
 | 82  | [Yacht](./yacht)                      |✅ |
 | 83  | [Matrix](./matrix)                    |✅ |
 | 84  | [Fizzy](./fizzy)                      |✅ |
+| 85  | [Pythagorean Triplet](./pythagorean-triplet)  |✅ |
 
 ## Notes
 
