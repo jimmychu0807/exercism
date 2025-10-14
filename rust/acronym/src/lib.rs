@@ -6,8 +6,8 @@ pub fn abbreviate(phrase: &str) -> String {
 			.enumerate()
 			.filter_map(|(i, c)| {
 				if
-					// either the 1st char
-					i == 0 ||
+				// either the 1st char
+				i == 0 ||
 					// or an uppercase preceded by a lowercase char
 					(i > 0 && c.is_ascii_uppercase() && up_first.chars().nth(i-1)?.is_ascii_lowercase())
 				{

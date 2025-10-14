@@ -615,6 +615,10 @@ name = "wordy"
 version = "0.1.0"
 
 [[package]]
+name = "yacht"
+version = "0.1.0"
+
+[[package]]
 name = "zerocopy"
 version = "0.8.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"

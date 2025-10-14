@@ -22,7 +22,9 @@ pub fn solve(input: &str) -> Option<HashMap<char, u8>> {
 		if parse_expression(left_exp, &s) == parse_expression(right_exp, &s) {
 			solutions.push(s.clone());
 			// non-unique value return None in the algo
-			if solutions.len() > 1 { break; }
+			if solutions.len() > 1 {
+				break;
+			}
 		}
 	}
 
@@ -38,10 +40,7 @@ fn parse_expression(exp: &str, sol_map: &HashMap<char, u8>) -> u64 {
 	};
 
 	let entries = exp.split("+").map(str::trim).collect::<Vec<_>>();
-	entries
-		.into_iter()
-		.map(|en| substitute_value(en, sol_map))
-		.sum()
+	entries.into_iter().map(|en| substitute_value(en, sol_map)).sum()
 }
 
 fn build_search_map(input: &str) -> HashMap<char, Vec<u8>> {

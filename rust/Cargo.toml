@@ -81,6 +81,7 @@ members = [
   "word-count",
   "secret-handshake",
   "knapsack",
+  "yacht",
 ]
 resolver = "3"
 

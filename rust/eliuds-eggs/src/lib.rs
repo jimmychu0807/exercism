@@ -1,5 +1,5 @@
 pub fn egg_count(display_value: u32) -> usize {
-    // keep doing a right-shift on the number until it is 0
+	// keep doing a right-shift on the number until it is 0
 	let mut cnt = 0_usize;
 	let mut current = display_value;
 
