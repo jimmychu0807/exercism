@@ -238,6 +238,10 @@ name = "luhn_trait"
 version = "0.1.0"
 
 [[package]]
+name = "macros"
+version = "0.1.0"
+
+[[package]]
 name = "matching_brackets"
 version = "0.1.0"
 
@@ -296,6 +300,10 @@ version = "0.1.0"
 
 [[package]]
 name = "pangram"
+version = "0.1.0"
+
+[[package]]
+name = "parallel_letter_frequency"
 version = "0.1.0"
 
 [[package]]

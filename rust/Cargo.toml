@@ -85,6 +85,8 @@ members = [
   "matrix",
   "fizzy",
   "pythagorean-triplet",
+  "parallel-letter-frequency",
+  "macros",
 ]
 resolver = "3"
 
