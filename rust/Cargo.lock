@@ -299,6 +299,10 @@ name = "pangram"
 version = "0.1.0"
 
 [[package]]
+name = "parallel_letter_frequency"
+version = "0.1.0"
+
+[[package]]
 name = "pascals_triangle"
 version = "0.1.0"
 

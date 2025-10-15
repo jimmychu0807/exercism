@@ -1,3 +1,5 @@
+## Record
+
 https://exercism.org/tracks/rust
 
 | No. | Exercise | Completed |
@@ -87,7 +89,14 @@ https://exercism.org/tracks/rust
 | 83  | [Matrix](./matrix)                    |✅ |
 | 84  | [Fizzy](./fizzy)                      |✅ |
 | 85  | [Pythagorean Triplet](./pythagorean-triplet)  |✅ |
+| 86  | [Parallel Letter Frequency](./parallel-letter-frequency) |✅ |
 
 ## Notes
 
 - [Libraries](https://github.com/exercism/rust-test-runner/blob/main/local-registry/Cargo.toml) that exercism auto-tester support.
+
+- Notable exercises:
+  - [31. Alphametics](./alphametics) - good algo training, can further optimize
+  - [81. Knapsack](./knapsack) - re-learn on knapsack problem and the dynamic programming technique
+  - [84. Fizzy](./fizzy) - on trait and `impl Trait` on return type
+  - [86. Parallel Letter Frequency](./parallel-letter-frequency) - on thread and message passing
