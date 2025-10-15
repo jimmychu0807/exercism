@@ -90,6 +90,7 @@ https://exercism.org/tracks/rust
 | 84  | [Fizzy](./fizzy)                      |✅ |
 | 85  | [Pythagorean Triplet](./pythagorean-triplet)  |✅ |
 | 86  | [Parallel Letter Frequency](./parallel-letter-frequency) |✅ |
+| 87  | [Macros](./macros)                    |✅ |
 
 ## Notes
 
