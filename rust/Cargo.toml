@@ -87,6 +87,7 @@ members = [
   "pythagorean-triplet",
   "parallel-letter-frequency",
   "macros",
+  "pov",
 ]
 resolver = "3"
 
