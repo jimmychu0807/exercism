@@ -91,6 +91,7 @@ https://exercism.org/tracks/rust
 | 85  | [Pythagorean Triplet](./pythagorean-triplet)  |✅ |
 | 86  | [Parallel Letter Frequency](./parallel-letter-frequency) |✅ |
 | 87  | [Macros](./macros)                    |✅ |
+| 88  | [POV](./pov)                          |✅ |
 
 ## Notes
 
@@ -101,3 +102,4 @@ https://exercism.org/tracks/rust
   - [81. Knapsack](./knapsack) - re-learn on knapsack problem and the dynamic programming technique
   - [84. Fizzy](./fizzy) - on trait and `impl Trait` on return type
   - [86. Parallel Letter Frequency](./parallel-letter-frequency) - on thread and message passing
+  - [88. POV](./pov) - good one on learning tree traversal and manipulation
