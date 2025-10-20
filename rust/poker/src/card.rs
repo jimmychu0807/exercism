@@ -64,19 +64,19 @@ impl<'a> TryFrom<&'a str> for Card {
 
 		let rank_str = &upper_val[0..(upper_val.len() - 1)];
 		let rank: u8 = match rank_str {
-			"A" => 1,
-			"J" => 11,
-			"Q" => 12,
-			"K" => 13,
 			"1" => {
 				return Err(CardConversionError::UnknownRank(upper_val));
 			}
+			"J" => 11,
+			"Q" => 12,
+			"K" => 13,
+			"A" => 14,
 			_ => rank_str
 				.parse::<u8>()
 				.map_err(|_| CardConversionError::UnknownRank(upper_val.clone()))?,
 		};
 
-		if !(1..=13).contains(&rank) {
+		if !(2..=14).contains(&rank) {
 			return Err(CardConversionError::UnknownRank(upper_val));
 		}
 
@@ -87,11 +87,11 @@ impl<'a> TryFrom<&'a str> for Card {
 impl Display for Card {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		let rank_str = match self.rank {
-			1 => "A",
 			_ if self.rank >= 2 && self.rank <= 10 => &self.rank.to_string(),
 			11 => "J",
 			12 => "Q",
 			13 => "K",
+			14 => "A",
 			_ => {
 				return Err(fmt::Error);
 			}

@@ -92,6 +92,7 @@ https://exercism.org/tracks/rust
 | 86  | [Parallel Letter Frequency](./parallel-letter-frequency) |✅ |
 | 87  | [Macros](./macros)                    |✅ |
 | 88  | [POV](./pov)                          |✅ |
+| 89  | [Poker](./poker)                      |✅ |
 
 ## Notes
 
@@ -103,3 +104,4 @@ https://exercism.org/tracks/rust
   - [84. Fizzy](./fizzy) - on trait and `impl Trait` on return type
   - [86. Parallel Letter Frequency](./parallel-letter-frequency) - on thread and message passing
   - [88. POV](./pov) - good one on learning tree traversal and manipulation
+  - [89. Poker](./poker) - good one on sorting, **Ord**, **PartialOrd**, **Eq**, **PartialEq** traits, and learning on poker rules.

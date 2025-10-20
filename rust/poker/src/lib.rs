@@ -13,16 +13,12 @@ pub fn winning_hands<'a>(hands: &[&'a str]) -> Vec<&'a str> {
 		.collect::<Result<Vec<Hand>, _>>()
 		.unwrap();
 
-	println!("hands before sorted: {hands:?}");
-
 	hands.sort();
 	hands = hands.into_iter().rev().collect::<Vec<_>>();
 
 	if hands.is_empty() {
 		return vec![];
 	}
-
-	println!("hands sorted: {hands:?}");
 
 	// pick the largest one and put in the vector
 	let mut res = vec![hands.remove(0)];
