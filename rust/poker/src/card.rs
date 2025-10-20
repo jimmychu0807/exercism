@@ -1,10 +1,10 @@
 use std::{
+	cmp::{Eq, Ord, Ordering, PartialEq, PartialOrd},
 	convert::TryFrom,
-	cmp::{PartialOrd, Ord, Ordering, PartialEq, Eq},
 	fmt::{self, Display},
 };
 
-#[derive(Debug, Clone, Copy, PartialOrd, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Suit {
 	Spade,
 	Heart,
@@ -25,12 +25,20 @@ impl Ord for Suit {
 	}
 }
 
-#[derive(Debug, Clone, Copy, PartialOrd, PartialEq, Eq)]
-pub struct Card {
-	suit: Suit,
-	rank: u8,
+impl PartialOrd for Suit {
+	fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+		Some(self.cmp(other))
+	}
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Card {
+	pub suit: Suit,
+	pub rank: u8,
+}
+
+#[derive(Debug)]
+#[allow(dead_code)]
 pub enum CardConversionError {
 	UnknownSuit(String),
 	UnknownRank(String),
@@ -42,7 +50,8 @@ impl<'a> TryFrom<&'a str> for Card {
 	fn try_from(val: &'a str) -> Result<Self, Self::Error> {
 		let upper_val = val.to_uppercase();
 
-		let suit_str = upper_val.chars().last().ok_or(CardConversionError::UnknownSuit(upper_val.clone()))?;
+		let suit_str =
+			upper_val.chars().last().ok_or(CardConversionError::UnknownSuit(upper_val.clone()))?;
 		let suit = match suit_str {
 			'S' => Suit::Spade,
 			'H' => Suit::Heart,
@@ -53,7 +62,7 @@ impl<'a> TryFrom<&'a str> for Card {
 			}
 		};
 
-		let rank_str = &upper_val[0..(upper_val.len()-1)];
+		let rank_str = &upper_val[0..(upper_val.len() - 1)];
 		let rank: u8 = match rank_str {
 			"A" => 1,
 			"J" => 11,
@@ -61,11 +70,13 @@ impl<'a> TryFrom<&'a str> for Card {
 			"K" => 13,
 			"1" => {
 				return Err(CardConversionError::UnknownRank(upper_val));
-			},
-			_ => rank_str.parse::<u8>().map_err(|_| CardConversionError::UnknownRank(upper_val.clone()))?
+			}
+			_ => rank_str
+				.parse::<u8>()
+				.map_err(|_| CardConversionError::UnknownRank(upper_val.clone()))?,
 		};
 
-		if rank < 1 || rank > 13 {
+		if !(1..=13).contains(&rank) {
 			return Err(CardConversionError::UnknownRank(upper_val));
 		}
 
@@ -75,7 +86,6 @@ impl<'a> TryFrom<&'a str> for Card {
 
 impl Display for Card {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-
 		let rank_str = match self.rank {
 			1 => "A",
 			_ if self.rank >= 2 && self.rank <= 10 => &self.rank.to_string(),
@@ -105,5 +115,11 @@ impl Ord for Card {
 			Ordering::Greater => Ordering::Greater,
 			Ordering::Equal => self.suit.cmp(&other.suit),
 		}
+	}
+}
+
+impl PartialOrd for Card {
+	fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+		Some(self.cmp(other))
 	}
 }
