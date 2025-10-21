@@ -89,6 +89,7 @@ members = [
   "macros",
   "pov",
   "poker",
+  "forth",
 ]
 resolver = "3"
 

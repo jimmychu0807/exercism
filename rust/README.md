@@ -93,6 +93,7 @@ https://exercism.org/tracks/rust
 | 87  | [Macros](./macros)                    |✅ |
 | 88  | [POV](./pov)                          |✅ |
 | 89  | [Poker](./poker)                      |✅ |
+| 90  | [Forth](./forth)                      |✅ |
 
 ## Notes
 
