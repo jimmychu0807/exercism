@@ -91,6 +91,7 @@ members = [
   "poker",
   "forth",
   "ocr-numbers",
+  "react",
 ]
 resolver = "3"
 
