@@ -1,6 +1,9 @@
+use std::cmp::{Ord, PartialOrd};
+use std::collections::BTreeMap;
+
 /// `InputCellId` is a unique identifier for an input cell.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct InputCellId();
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct InputCellId(u64);
 
 /// `ComputeCellId` is a unique identifier for a compute cell.
 /// Values of type `InputCellId` and `ComputeCellId` should not be mutually assignable,
@@ -16,8 +19,8 @@ pub struct InputCellId();
 /// let input = r.create_input(111);
 /// let compute: react::InputCellId = r.create_compute(&[react::CellId::Input(input)], |_| 222).unwrap();
 /// ```
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct ComputeCellId();
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct ComputeCellId(u64);
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct CallbackId();
@@ -37,18 +40,30 @@ pub enum RemoveCallbackError {
 pub struct Reactor<T> {
 	// Just so that the compiler doesn't complain about an unused type parameter.
 	// You probably want to delete this field.
-	dummy: ::std::marker::PhantomData<T>,
+	next_id: u64,
+	input_cells: BTreeMap<InputCellId, T>,
+
+	#[allow(clippy::type_complexity)]
+	compute_cells: BTreeMap<ComputeCellId, (Vec<CellId>, Box<dyn Fn(&[T]) -> T>)>,
 }
 
 // You are guaranteed that Reactor will only be tested against types that are Copy + PartialEq.
 impl<T: Copy + PartialEq> Reactor<T> {
 	pub fn new() -> Self {
-		todo!()
+		Self { next_id: 0, input_cells: BTreeMap::new(), compute_cells: BTreeMap::new() }
+	}
+
+	fn get_next_id(&mut self) -> u64 {
+		let ret = self.next_id;
+		self.next_id += 1;
+		ret
 	}
 
 	// Creates an input cell with the specified initial value, returning its ID.
 	pub fn create_input(&mut self, _initial: T) -> InputCellId {
-		todo!()
+		let id = self.get_next_id();
+		self.input_cells.insert(InputCellId(id), _initial);
+		InputCellId(id)
 	}
 
 	// Creates a compute cell with the specified dependencies and compute function.
@@ -64,12 +79,31 @@ impl<T: Copy + PartialEq> Reactor<T> {
 	// Notice that there is no way to *remove* a cell.
 	// This means that you may assume, without checking, that if the dependencies exist at creation
 	// time they will continue to exist as long as the Reactor exists.
-	pub fn create_compute<F: Fn(&[T]) -> T>(
+	pub fn create_compute<F: Fn(&[T]) -> T + 'static>(
 		&mut self,
 		_dependencies: &[CellId],
 		_compute_func: F,
 	) -> Result<ComputeCellId, CellId> {
-		todo!()
+		//1. check that all dependent cells exist
+		for dep in _dependencies.iter() {
+			match dep {
+				CellId::Input(cell_id) if !self.input_cells.contains_key(cell_id) => {
+					return Err(*dep);
+				}
+				CellId::Compute(cell_id) if !self.compute_cells.contains_key(cell_id) => {
+					return Err(*dep);
+				}
+				_ => {}
+			}
+		}
+
+		//2. create the compute cell storing the dependencies ahd compute function
+		let id = ComputeCellId(self.get_next_id());
+
+		self.compute_cells.insert(id, (_dependencies.to_vec(), Box::new(_compute_func)));
+
+		//3. return the ComputeCellId
+		Ok(id)
 	}
 
 	// Retrieves the current value of the cell, or None if the cell does not exist.
@@ -80,7 +114,18 @@ impl<T: Copy + PartialEq> Reactor<T> {
 	// It turns out this introduces a significant amount of extra complexity to this exercise.
 	// We chose not to cover this here, since this exercise is probably enough work as-is.
 	pub fn value(&self, id: CellId) -> Option<T> {
-		todo!("Get the value of the cell whose id is {id:?}")
+		match id {
+			CellId::Input(id) => self.input_cells.get(&id).copied(),
+			CellId::Compute(id) => {
+				if let Some((dependencies, func)) = self.compute_cells.get(&id) {
+					let dep_vals: Vec<_> =
+						dependencies.iter().map(|cell_id| self.value(*cell_id).unwrap()).collect();
+					Some(func(&dep_vals))
+				} else {
+					None
+				}
+			}
+		}
 	}
 
 	// Sets the value of the specified input cell.
@@ -92,7 +137,12 @@ impl<T: Copy + PartialEq> Reactor<T> {
 	//
 	// As before, that turned out to add too much extra complexity.
 	pub fn set_value(&mut self, _id: InputCellId, _new_value: T) -> bool {
-		todo!()
+		if !self.input_cells.contains_key(&_id) {
+			return false;
+		}
+
+		self.input_cells.insert(_id, _new_value);
+		true
 	}
 
 	// Adds a callback to the specified compute cell.
