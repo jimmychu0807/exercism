@@ -27,43 +27,96 @@ impl Forth {
 		&self.stack
 	}
 
-	pub fn eval(&mut self, input: &str) -> Result {
+	pub fn new_with_functions(functions: &HashMap<String, String>) -> Self {
+		Self { stack: Vec::new(), functions: functions.clone() }
+	}
 
-		let input = input.to_lowercase();
+	// input will be mutated
+	fn override_substitution(
+		&self,
+		input: &str,
+		b_inner_eval: bool,
+	) -> std::result::Result<String, Error> {
+		let mut substituted;
+		let mut res = input.to_string();
+
+		// Keep subsituting until no more substition is performed
+		loop {
+			substituted = false;
+
+			res = res.split(" ").try_fold(String::new(), |mut acc, tok| {
+				if tok.parse::<Value>().is_ok() {
+					acc.push_str(&(String::from(" ") + tok));
+				} else if tok == "+"
+					|| tok == "-" || tok == "*"
+					|| tok == "/" || KEYWORDS.contains(&tok)
+				{
+					if self.functions.contains_key(tok) {
+						// overrided, read from functions map
+						acc.push_str(&(String::from(" ") + self.functions.get(tok).unwrap()));
+						substituted = true;
+					} else {
+						// default functionality
+						acc.push_str(&(String::from(" ") + tok));
+					}
+				} else if self.functions.contains_key(tok) {
+					// overrided, read from functions map
+					acc.push_str(&(String::from(" ") + self.functions.get(tok).unwrap()));
+					substituted = true;
+				} else {
+					return Err(Error::UnknownWord);
+				}
+
+				// remove the empty space before
+				Ok(acc.trim().to_string())
+			})?;
+
+			if !substituted || res.is_empty() {
+				break;
+			}
+		}
+
+		// evaluate the inner expression
+		if b_inner_eval && !res.is_empty() {
+			let mut mac = Forth::new_with_functions(&self.functions);
+			let res_copy = res.clone();
+
+			if mac.inner_eval(&res).is_ok() {
+				res = mac.stack().iter().map(|v| v.to_string()).collect::<Vec<_>>().join(" ");
+			} else {
+				res = res_copy;
+			}
+		}
+
+		Ok(res)
+	}
+
+	pub fn eval(&mut self, input: &str) -> Result {
+		let mut input = input.to_lowercase();
 
 		// Determined this is a line defining a function
 		if input.split(" ").next().unwrap() == ":" {
 			let tokens = input.split(" ").collect::<Vec<&str>>();
 			let key = tokens[1];
-			let content = tokens[2..(tokens.len() - 1)].join(" ");
+
+			// Do not allow overriding number
+			if key.parse::<Value>().is_ok() {
+				return Err(Error::InvalidWord);
+			}
+
+			let mut content = tokens[2..(tokens.len() - 1)].join(" ");
+			content = self.override_substitution(&content, true)?;
+
 			self.functions.insert(key.to_string(), content);
 
 			return Ok(());
 		}
 
-		// The 1st scan is to substitute unknown word as function, if existed.
-		let input = input.split(" ").try_fold(String::new(), |mut acc, tok| {
-			if let Ok(_) = tok.parse::<Value>() {
-				acc.push_str(&(String::from(" ") + tok));
-			} else if tok == "+" || tok == "-" || tok == "*" || tok == "/" || KEYWORDS.contains(&tok) {
-				if self.functions.contains_key(tok) {
-					acc.push_str(&(String::from(" ") + self.functions.get(tok).unwrap()));
-				} else {
-					acc.push_str(&(String::from(" ") + tok));
-				}
-			} else if self.functions.contains_key(tok) {
-				acc.push_str(&(String::from(" ") + self.functions.get(tok).unwrap()));
-			} else {
-				return Err(Error::UnknownWord);
-			}
-			Ok(acc)
-		})?;
+		input = self.override_substitution(&input, false)?;
+		self.inner_eval(&input)
+	}
 
-		let input = &input[1..];
-
-		println!("input: {input}");
-
-		// The 2nd scan is to process the token
+	pub fn inner_eval(&mut self, input: &str) -> Result {
 		for tok in input.split(" ") {
 			if let Ok(num) = tok.parse::<Value>() {
 				self.stack.push(num);

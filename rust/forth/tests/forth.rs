@@ -334,7 +334,6 @@ mod user_defined_words {
 	}
 
 	#[test]
-	#[ignore]
 	fn can_use_different_words_with_the_same_name() {
 		let mut f = Forth::new();
 		assert!(f.eval(": foo 5 ;").is_ok());
@@ -345,7 +344,6 @@ mod user_defined_words {
 	}
 
 	#[test]
-	#[ignore]
 	fn can_define_word_that_uses_word_with_the_same_name() {
 		let mut f = Forth::new();
 		assert!(f.eval(": foo 10 ;").is_ok());
@@ -355,14 +353,12 @@ mod user_defined_words {
 	}
 
 	#[test]
-	#[ignore]
 	fn cannot_redefine_non_negative_numbers() {
 		let mut f = Forth::new();
 		assert_eq!(f.eval(": 1 2 ;"), Err(Error::InvalidWord));
 	}
 
 	#[test]
-	#[ignore]
 	fn cannot_redefine_negative_numbers() {
 		let mut f = Forth::new();
 		assert_eq!(f.eval(": -1 2 ;"), Err(Error::InvalidWord));
@@ -426,7 +422,6 @@ mod case_insensitivity {
 	}
 
 	#[test]
-	#[ignore]
 	fn definitions_are_case_insensitive() {
 		let mut f = Forth::new();
 		assert!(f.eval(": SWAP DUP Dup dup ;").is_ok());
