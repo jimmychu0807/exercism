@@ -94,6 +94,7 @@ https://exercism.org/tracks/rust
 | 88  | [POV](./pov)                          |✅ |
 | 89  | [Poker](./poker)                      |✅ |
 | 90  | [Forth](./forth)                      |✅ |
+| 91  | [OCR Numbers](./ocr-numbers)          |✅ |
 
 ## Notes
 
