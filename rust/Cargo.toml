@@ -90,6 +90,7 @@ members = [
   "pov",
   "poker",
   "forth",
+  "ocr-numbers",
 ]
 resolver = "3"
 

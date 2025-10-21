@@ -301,6 +301,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "ocr_numbers"
+version = "0.1.0"
+
+[[package]]
 name = "paasio"
 version = "0.1.0"
 
