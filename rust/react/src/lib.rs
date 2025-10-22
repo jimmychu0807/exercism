@@ -1,5 +1,5 @@
 use std::cmp::{Ord, PartialOrd};
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fmt::Debug;
 
 /// `InputCellId` is a unique identifier for an input cell.
@@ -137,6 +137,19 @@ impl<'a, T: Copy + PartialEq + Debug> Reactor<'a, T> {
 		}
 	}
 
+	fn get_all_affected_cells(&self, cells: &[CellId]) -> BTreeSet<ComputeCellId> {
+		self.compute_cells
+			.iter()
+			.filter_map(|(compute_id, (deps, _))| {
+				if cells.iter().any(|cell_id| deps.contains(cell_id)) {
+					Some(*compute_id)
+				} else {
+					None
+				}
+			})
+			.collect()
+	}
+
 	// Sets the value of the specified input cell.
 	//
 	// Returns false if the cell does not exist.
@@ -153,66 +166,59 @@ impl<'a, T: Copy + PartialEq + Debug> Reactor<'a, T> {
 		// 1. Find the potentially affected cells
 		//   loop thru all compute_cells and see which one depends on input_cell
 		//   need to loop multiple time, when no more compute cells are added, goto the next stage
-		let mut affected_cells: Vec<&ComputeCellId> = Vec::new();
-
-		println!("loop begin");
+		let mut affected_cells: BTreeSet<ComputeCellId> =
+			self.get_all_affected_cells(&[CellId::Input(input_id)]);
 
 		loop {
-			let mut round_affected = self.compute_cells.keys()
-				.filter_map(|k| {
-					let cell = self.compute_cells.get(k).unwrap();
-					// TODO: moddify the following if to check the affected_cells
-					//   check intersection of cell.0 and affected_cells
-					if cell.0.contains(&CellId::Input(input_id)) { Some (k) } else { None }
-				})
-				.collect::<Vec<_>>();
+			let affected_cell_ids: Vec<_> =
+				affected_cells.iter().map(|compute_id| CellId::Compute(*compute_id)).collect();
+			let mut newly_affected_cells = self.get_all_affected_cells(&affected_cell_ids);
 
-			if round_affected.is_empty() { break; }
-			affected_cells.append(&mut round_affected);
-
-			break;
+			if newly_affected_cells.iter().all(|new_cell| affected_cells.contains(new_cell)) {
+				break;
+			}
+			affected_cells.append(&mut newly_affected_cells);
 		}
-
-		println!("affected_cells: {:?}", affected_cells);
-
-		let prev_result: Vec<_> = affected_cells.iter().filter_map(|compute_id| self.value(CellId::Compute(**compute_id))).collect();
+		let prev_result: Vec<_> = affected_cells
+			.iter()
+			.filter_map(|compute_id| self.value(CellId::Compute(*compute_id)))
+			.collect();
 
 		// 2. Set the value
 		self.input_cells.insert(input_id, _new_value);
 
-		let curr_result: Vec<_> = affected_cells.iter().filter_map(|compute_id| self.value(CellId::Compute(**compute_id))).collect();
+		let curr_result: Vec<_> = affected_cells
+			.iter()
+			.filter_map(|compute_id| self.value(CellId::Compute(*compute_id)))
+			.collect();
 
 		// 3. Filter out affected cells with no delta
-		let affected_cells_with_delta: Vec<_> = affected_cells.iter().enumerate()
+		let affected_cells_with_delta: Vec<_> = affected_cells
+			.iter()
+			.enumerate()
 			.filter(|(idx, _)| prev_result[*idx] != curr_result[*idx])
 			.map(|(_, compute_id)| compute_id)
 			.collect();
 
-		println!("prev_result: {:?}", prev_result);
-		println!("curr_result: {:?}", curr_result);
-		println!("affected_cells_with_delta: {:?}", affected_cells_with_delta);
-
 		// 4. for all compute_cells, see which one trigger any callback
-		let callbacks: Vec<(ComputeCellId, CallbackId)> = affected_cells_with_delta.into_iter()
-			.filter_map(|compute_id| self.dependencies.get(compute_id).map(|cb_vec| (compute_id, cb_vec)))
-			.inspect(|(compute_id, cb_vec)| {
-				println!("compute_id: {:?}, cb_vec: {:?}", compute_id, cb_vec);
+		let callbacks: Vec<(ComputeCellId, CallbackId)> = affected_cells_with_delta
+			.into_iter()
+			.filter_map(|compute_id| {
+				self.dependencies.get(compute_id).map(|cb_vec| (compute_id, cb_vec))
 			})
 			.fold(Vec::new(), |mut acc, (compute_id, cb_vec)| {
 				for cb_id in cb_vec {
 					// we always want to call the callback last and once only. So
 					//   remove it from the queue and push it to the back.
-					if let Some(pos) = acc.iter().position(|(_, inside_cb_id)| inside_cb_id == cb_id) {
+					if let Some(pos) =
+						acc.iter().position(|(_, inside_cb_id)| inside_cb_id == cb_id)
+					{
 						acc.remove(pos);
 					}
-
-					println!("compute_id: {:?}, cb_id: {:?}", compute_id, cb_id);
-					acc.push((**compute_id, *cb_id));
+					acc.push((*compute_id, *cb_id));
 				}
 				acc
 			});
-
-		println!("callbacks: {:?}", callbacks);
 
 		// 5. Perform the callback
 		callbacks.into_iter().for_each(|(compute_id, cb_id)| {
@@ -250,9 +256,7 @@ impl<'a, T: Copy + PartialEq + Debug> Reactor<'a, T> {
 
 		self.callbacks.insert(id, Box::new(_callback));
 
-		self.dependencies.entry(compute_cell_id)
-			.and_modify(|e| e.push(id))
-			.or_insert(vec![id]);
+		self.dependencies.entry(compute_cell_id).and_modify(|e| e.push(id)).or_insert(vec![id]);
 
 		Some(id)
 	}
