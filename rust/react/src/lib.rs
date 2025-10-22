@@ -1,5 +1,6 @@
 use std::cmp::{Ord, PartialOrd};
 use std::collections::BTreeMap;
+use std::fmt::Debug;
 
 /// `InputCellId` is a unique identifier for an input cell.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -22,8 +23,8 @@ pub struct InputCellId(u64);
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ComputeCellId(u64);
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct CallbackId();
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub struct CallbackId(u64);
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CellId {
@@ -37,20 +38,28 @@ pub enum RemoveCallbackError {
 	NonexistentCallback,
 }
 
-pub struct Reactor<T> {
+pub struct Reactor<'a, T> {
 	// Just so that the compiler doesn't complain about an unused type parameter.
 	// You probably want to delete this field.
 	next_id: u64,
 	input_cells: BTreeMap<InputCellId, T>,
 
 	#[allow(clippy::type_complexity)]
-	compute_cells: BTreeMap<ComputeCellId, (Vec<CellId>, Box<dyn Fn(&[T]) -> T>)>,
+	compute_cells: BTreeMap<ComputeCellId, (Vec<CellId>, Box<dyn Fn(&[T]) -> T + 'a>)>,
+	callbacks: BTreeMap<CallbackId, Box<dyn FnMut(T) + 'a>>,
+	dependencies: BTreeMap<ComputeCellId, Vec<CallbackId>>,
 }
 
 // You are guaranteed that Reactor will only be tested against types that are Copy + PartialEq.
-impl<T: Copy + PartialEq> Reactor<T> {
+impl<'a, T: Copy + PartialEq + Debug> Reactor<'a, T> {
 	pub fn new() -> Self {
-		Self { next_id: 0, input_cells: BTreeMap::new(), compute_cells: BTreeMap::new() }
+		Self {
+			next_id: 0,
+			input_cells: BTreeMap::new(),
+			compute_cells: BTreeMap::new(),
+			callbacks: BTreeMap::new(),
+			dependencies: BTreeMap::new(),
+		}
 	}
 
 	fn get_next_id(&mut self) -> u64 {
@@ -79,7 +88,7 @@ impl<T: Copy + PartialEq> Reactor<T> {
 	// Notice that there is no way to *remove* a cell.
 	// This means that you may assume, without checking, that if the dependencies exist at creation
 	// time they will continue to exist as long as the Reactor exists.
-	pub fn create_compute<F: Fn(&[T]) -> T + 'static>(
+	pub fn create_compute<F: Fn(&[T]) -> T + 'a>(
 		&mut self,
 		_dependencies: &[CellId],
 		_compute_func: F,
@@ -136,12 +145,83 @@ impl<T: Copy + PartialEq> Reactor<T> {
 	// a `set_value(&mut self, new_value: T)` method on `Cell`.
 	//
 	// As before, that turned out to add too much extra complexity.
-	pub fn set_value(&mut self, _id: InputCellId, _new_value: T) -> bool {
-		if !self.input_cells.contains_key(&_id) {
+	pub fn set_value(&mut self, input_id: InputCellId, _new_value: T) -> bool {
+		if !self.input_cells.contains_key(&input_id) {
 			return false;
 		}
 
-		self.input_cells.insert(_id, _new_value);
+		// 1. Find the potentially affected cells
+		//   loop thru all compute_cells and see which one depends on input_cell
+		//   need to loop multiple time, when no more compute cells are added, goto the next stage
+		let mut affected_cells: Vec<&ComputeCellId> = Vec::new();
+
+		println!("loop begin");
+
+		loop {
+			let mut round_affected = self.compute_cells.keys()
+				.filter_map(|k| {
+					let cell = self.compute_cells.get(k).unwrap();
+					// TODO: moddify the following if to check the affected_cells
+					//   check intersection of cell.0 and affected_cells
+					if cell.0.contains(&CellId::Input(input_id)) { Some (k) } else { None }
+				})
+				.collect::<Vec<_>>();
+
+			if round_affected.is_empty() { break; }
+			affected_cells.append(&mut round_affected);
+
+			break;
+		}
+
+		println!("affected_cells: {:?}", affected_cells);
+
+		let prev_result: Vec<_> = affected_cells.iter().filter_map(|compute_id| self.value(CellId::Compute(**compute_id))).collect();
+
+		// 2. Set the value
+		self.input_cells.insert(input_id, _new_value);
+
+		let curr_result: Vec<_> = affected_cells.iter().filter_map(|compute_id| self.value(CellId::Compute(**compute_id))).collect();
+
+		// 3. Filter out affected cells with no delta
+		let affected_cells_with_delta: Vec<_> = affected_cells.iter().enumerate()
+			.filter(|(idx, _)| prev_result[*idx] != curr_result[*idx])
+			.map(|(_, compute_id)| compute_id)
+			.collect();
+
+		println!("prev_result: {:?}", prev_result);
+		println!("curr_result: {:?}", curr_result);
+		println!("affected_cells_with_delta: {:?}", affected_cells_with_delta);
+
+		// 4. for all compute_cells, see which one trigger any callback
+		let callbacks: Vec<(ComputeCellId, CallbackId)> = affected_cells_with_delta.into_iter()
+			.filter_map(|compute_id| self.dependencies.get(compute_id).map(|cb_vec| (compute_id, cb_vec)))
+			.inspect(|(compute_id, cb_vec)| {
+				println!("compute_id: {:?}, cb_vec: {:?}", compute_id, cb_vec);
+			})
+			.fold(Vec::new(), |mut acc, (compute_id, cb_vec)| {
+				for cb_id in cb_vec {
+					// we always want to call the callback last and once only. So
+					//   remove it from the queue and push it to the back.
+					if let Some(pos) = acc.iter().position(|(_, inside_cb_id)| inside_cb_id == cb_id) {
+						acc.remove(pos);
+					}
+
+					println!("compute_id: {:?}, cb_id: {:?}", compute_id, cb_id);
+					acc.push((**compute_id, *cb_id));
+				}
+				acc
+			});
+
+		println!("callbacks: {:?}", callbacks);
+
+		// 5. Perform the callback
+		callbacks.into_iter().for_each(|(compute_id, cb_id)| {
+			let val = self.value(CellId::Compute(compute_id)).unwrap();
+			if let Some(func) = self.callbacks.get_mut(&cb_id) {
+				func(val);
+			}
+		});
+
 		true
 	}
 
@@ -157,12 +237,24 @@ impl<T: Copy + PartialEq> Reactor<T> {
 	// * Exactly once if the compute cell's value changed as a result of the set_value call.
 	//   The value passed to the callback should be the final value of the compute cell after the
 	//   set_value call.
-	pub fn add_callback<F: FnMut(T)>(
+	pub fn add_callback<F: FnMut(T) + 'a>(
 		&mut self,
-		_id: ComputeCellId,
+		compute_cell_id: ComputeCellId,
 		_callback: F,
 	) -> Option<CallbackId> {
-		todo!()
+		if !self.compute_cells.contains_key(&compute_cell_id) {
+			return None;
+		}
+
+		let id = CallbackId(self.get_next_id());
+
+		self.callbacks.insert(id, Box::new(_callback));
+
+		self.dependencies.entry(compute_cell_id)
+			.and_modify(|e| e.push(id))
+			.or_insert(vec![id]);
+
+		Some(id)
 	}
 
 	// Removes the specified callback, using an ID returned from add_callback.
@@ -175,8 +267,28 @@ impl<T: Copy + PartialEq> Reactor<T> {
 		cell: ComputeCellId,
 		callback: CallbackId,
 	) -> Result<(), RemoveCallbackError> {
-		todo!(
-			"Remove the callback identified by the CallbackId {callback:?} from the cell {cell:?}"
-		)
+		// compute_cell or callback doesn't exist.
+		if !self.compute_cells.contains_key(&cell) {
+			return Err(RemoveCallbackError::NonexistentCell);
+		}
+
+		if !self.callbacks.contains_key(&callback) {
+			return Err(RemoveCallbackError::NonexistentCallback);
+		}
+
+		if let Some(vec) = self.dependencies.get_mut(&cell) {
+			if let Some(pos) = vec.iter().position(|&cb_id| cb_id == callback) {
+				vec.remove(pos);
+			} else {
+				return Err(RemoveCallbackError::NonexistentCallback);
+			}
+		} else {
+			return Err(RemoveCallbackError::NonexistentCell);
+		}
+
+		// Can't remove from self.callbacks, you don't know if other compute cells are
+		// dependent to this callback.
+
+		Ok(())
 	}
 }

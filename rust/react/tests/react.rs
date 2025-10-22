@@ -80,7 +80,6 @@ fn compute_cells_update_value_when_dependencies_are_changed() {
 }
 
 #[test]
-#[ignore]
 fn compute_cells_can_depend_on_other_compute_cells() {
 	let mut reactor = Reactor::new();
 	let input = reactor.create_input(1);
@@ -132,7 +131,6 @@ impl CallbackRecorder {
 }
 
 #[test]
-#[ignore]
 fn compute_cells_fire_callbacks() {
 	let cb = CallbackRecorder::new();
 	let mut reactor = Reactor::new();
@@ -144,7 +142,6 @@ fn compute_cells_fire_callbacks() {
 }
 
 #[test]
-#[ignore]
 fn error_adding_callback_to_nonexistent_cell() {
 	let mut dummy_reactor = Reactor::new();
 	let input = dummy_reactor.create_input(1);
@@ -153,7 +150,6 @@ fn error_adding_callback_to_nonexistent_cell() {
 }
 
 #[test]
-#[ignore]
 fn error_removing_callback_from_nonexisting_cell() {
 	let mut dummy_reactor = Reactor::new();
 	let dummy_input = dummy_reactor.create_input(1);
@@ -171,7 +167,6 @@ fn error_removing_callback_from_nonexisting_cell() {
 }
 
 #[test]
-#[ignore]
 fn callbacks_only_fire_on_change() {
 	let cb = CallbackRecorder::new();
 	let mut reactor = Reactor::new();
@@ -188,7 +183,6 @@ fn callbacks_only_fire_on_change() {
 }
 
 #[test]
-#[ignore]
 fn callbacks_can_be_called_multiple_times() {
 	let cb = CallbackRecorder::new();
 	let mut reactor = Reactor::new();
@@ -203,7 +197,6 @@ fn callbacks_can_be_called_multiple_times() {
 }
 
 #[test]
-#[ignore]
 fn callbacks_can_be_called_from_multiple_cells() {
 	let cb1 = CallbackRecorder::new();
 	let cb2 = CallbackRecorder::new();
@@ -220,7 +213,6 @@ fn callbacks_can_be_called_from_multiple_cells() {
 }
 
 #[test]
-#[ignore]
 fn callbacks_can_be_added_and_removed() {
 	let cb1 = CallbackRecorder::new();
 	let cb2 = CallbackRecorder::new();
@@ -247,7 +239,6 @@ fn callbacks_can_be_added_and_removed() {
 }
 
 #[test]
-#[ignore]
 fn removing_a_callback_multiple_times_doesnt_interfere_with_other_callbacks() {
 	let cb1 = CallbackRecorder::new();
 	let cb2 = CallbackRecorder::new();
@@ -272,7 +263,6 @@ fn removing_a_callback_multiple_times_doesnt_interfere_with_other_callbacks() {
 }
 
 #[test]
-#[ignore]
 fn callbacks_should_only_be_called_once_even_if_multiple_dependencies_change() {
 	let cb = CallbackRecorder::new();
 	let mut reactor = Reactor::new();
