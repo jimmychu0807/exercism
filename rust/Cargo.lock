@@ -465,6 +465,10 @@ name = "react"
 version = "0.1.0"
 
 [[package]]
+name = "rectangles"
+version = "0.1.0"
+
+[[package]]
 name = "regex-lite"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
