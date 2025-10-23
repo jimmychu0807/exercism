@@ -97,6 +97,7 @@ https://exercism.org/tracks/rust
 | 91  | [OCR Numbers](./ocr-numbers)          |✅ |
 | 92  | [React](./react)                      |✅ |
 | 93  | [Circular Buffer](./circular-buffer)  |✅ |
+| 94  | [Rectangles](./rectangles)            |✅ |
 
 ## Notes
 
