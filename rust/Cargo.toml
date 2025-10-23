@@ -92,6 +92,7 @@ members = [
   "forth",
   "ocr-numbers",
   "react",
+  "circular-buffer",
 ]
 resolver = "3"
 
