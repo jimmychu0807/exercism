@@ -93,6 +93,7 @@ members = [
   "ocr-numbers",
   "react",
   "circular-buffer",
+  "rectangles",
 ]
 resolver = "3"
 
