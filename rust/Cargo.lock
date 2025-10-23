@@ -127,6 +127,10 @@ name = "dot_dsl"
 version = "0.1.0"
 
 [[package]]
+name = "doubly_linked_list"
+version = "0.1.0"
+
+[[package]]
 name = "eliuds_eggs"
 version = "0.1.0"
 
