@@ -96,6 +96,7 @@ https://exercism.org/tracks/rust
 | 90  | [Forth](./forth)                      |✅ |
 | 91  | [OCR Numbers](./ocr-numbers)          |✅ |
 | 92  | [React](./react)                      |✅ |
+| 93  | [Circular Buffer](./circular-buffer)  |✅ |
 
 ## Notes
 
