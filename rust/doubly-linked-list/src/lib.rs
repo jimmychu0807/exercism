@@ -1,8 +1,4 @@
-use std::{
-	marker::PhantomData,
-	ptr::NonNull,
-	ops::Drop,
-};
+use std::{marker::PhantomData, ops::Drop, ptr::NonNull};
 
 // this module adds some functionality based on the required implementations
 // here like: `LinkedList::pop_back` or `Clone for LinkedList<T>`
@@ -32,6 +28,10 @@ pub struct Iter<'a, T: 'a> {
 	head: Link<T>,
 	marker: PhantomData<&'a Node<T>>,
 }
+
+// Explicitly implement Send and Sync trait
+unsafe impl<T: Send> Send for LinkedList<T> {}
+unsafe impl<T: Sync> Sync for LinkedList<T> {}
 
 impl<T> LinkedList<T> {
 	pub fn new() -> Self {

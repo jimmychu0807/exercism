@@ -290,6 +290,7 @@ fn drop_large_list() {
 // pre_implemented.rs for technical reasons.
 
 #[cfg(feature = "advanced")]
+#[allow(dead_code)]
 #[test]
 fn advanced_linked_list_is_send_sync() {
 	trait AssertSend: Send {}
@@ -302,7 +303,6 @@ fn advanced_linked_list_is_send_sync() {
 #[cfg(feature = "advanced")]
 #[allow(dead_code)]
 #[test]
-#[ignore]
 fn advanced_is_covariant() {
 	fn a<'a>(x: LinkedList<&'static str>) -> LinkedList<&'a str> {
 		x

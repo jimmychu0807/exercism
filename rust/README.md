@@ -98,6 +98,7 @@ https://exercism.org/tracks/rust
 | 92  | [React](./react)                      |✅ |
 | 93  | [Circular Buffer](./circular-buffer)  |✅ |
 | 94  | [Rectangles](./rectangles)            |✅ |
+|100  | [Doubly Linked List](./doubly-linked-list)    |✅ |
 
 ## Notes
 
