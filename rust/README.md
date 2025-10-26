@@ -118,3 +118,4 @@ https://exercism.org/tracks/rust
     - **PhantomData** can act as a type and also for initialization.
     - About **Drop** trait.
     - About **Send** and **Sync** traits to mark a data type as thread-safe.
+    - Learn not just from implementing the solution, but also how the test cases are constructed, what "scaffold" is used to build up the test cases.
