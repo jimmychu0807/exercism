@@ -111,3 +111,10 @@ https://exercism.org/tracks/rust
   - [86. Parallel Letter Frequency](./parallel-letter-frequency) - on thread and message passing
   - [88. POV](./pov) - good one on learning tree traversal and manipulation
   - [89. Poker](./poker) - good one on sorting, **Ord**, **PartialOrd**, **Eq**, **PartialEq** traits, and learning on poker rules.
+  - [92. React](./react) - this exercise illustrates well why the front-end framework [React](https://react.dev/) is called **React**. React only renders elements when there is a change and propagate it up all parent elements and those that listen to it.
+  - [100. Doubly Linked List](./doubly-linked-list)
+    - Use **Box::new(...)** to allocate object in the heap
+    - Then you can use **NonNull()** to handle raw pointer. This makes it like C++ pointer. In fact, this is how Rust implement [linked list](https://doc.rust-lang.org/src/alloc/collections/linked_list.rs.html#50-53).
+    - **PhantomData** can act as a type and also for initialization.
+    - About **Drop** trait.
+    - About **Send** and **Sync** traits to mark a data type as thread-safe.
