@@ -1,8 +1,7 @@
 use std::{
-	// cell::RefCell,
-	ptr::NonNull,
 	marker::PhantomData,
-	// rc::Rc
+	ptr::NonNull,
+	ops::Drop,
 };
 
 // this module adds some functionality based on the required implementations
@@ -24,16 +23,9 @@ struct Node<T> {
 	prev: Link<T>,
 }
 
-#[derive(PartialEq, Eq)]
-enum CursorType {
-	Front,
-	Back,
-}
-
 pub struct Cursor<'a, T> {
 	list: &'a mut LinkedList<T>,
 	current: Link<T>,
-	t: CursorType,
 }
 
 pub struct Iter<'a, T: 'a> {
@@ -62,20 +54,26 @@ impl<T> LinkedList<T> {
 	/// Return a cursor positioned on the front element
 	pub fn cursor_front(&mut self) -> Cursor<'_, T> {
 		let head = self.head;
-		Cursor { list: self, current: head, t: CursorType::Front }
+		Cursor { list: self, current: head }
 	}
 
 	/// Return a cursor positioned on the back element
 	pub fn cursor_back(&mut self) -> Cursor<'_, T> {
 		let tail = self.tail;
-		Cursor { list: self, current: tail, t: CursorType::Back }
+		Cursor { list: self, current: tail }
 	}
 
 	/// Return an iterator that moves from front to back
 	pub fn iter(&self) -> Iter<'_, T> {
-		Iter {
-			head: self.head,
-			marker: PhantomData,
+		Iter { head: self.head, marker: PhantomData }
+	}
+}
+
+impl<T> Drop for LinkedList<T> {
+	fn drop(&mut self) {
+		let mut cursor = self.cursor_front();
+		while let Some(item) = cursor.take() {
+			drop(item);
 		}
 	}
 }
@@ -85,20 +83,50 @@ impl<T> LinkedList<T> {
 impl<T> Cursor<'_, T> {
 	/// Take a mutable reference to the current element
 	pub fn peek_mut(&mut self) -> Option<&mut T> {
-		todo!()
+		let mut cur_ptr = self.current?;
+
+		let item;
+		unsafe {
+			item = &mut cur_ptr.as_mut().data;
+		}
+		Some(item)
 	}
 
 	/// Move one position forward (towards the back) and
 	/// return a reference to the new position
 	#[allow(clippy::should_implement_trait)]
 	pub fn next(&mut self) -> Option<&mut T> {
-		todo!()
+		// move one step forward
+		let cur_ptr = self.current?;
+		unsafe {
+			self.current = cur_ptr.as_ref().next;
+		}
+
+		// self.current is not pointing to null, return a reference to the pointed item.
+		let mut cur_ptr = self.current?;
+		let item;
+		unsafe {
+			item = &mut cur_ptr.as_mut().data;
+		}
+		Some(item)
 	}
 
 	/// Move one position backward (towards the front) and
 	/// return a reference to the new position
 	pub fn prev(&mut self) -> Option<&mut T> {
-		todo!()
+		// move one step backward
+		let cur_ptr = self.current?;
+		unsafe {
+			self.current = cur_ptr.as_ref().prev;
+		}
+
+		// self.current is not pointing to null, return a reference to the pointed item.
+		let mut cur_ptr = self.current?;
+		let item;
+		unsafe {
+			item = &mut cur_ptr.as_mut().data;
+		}
+		Some(item)
 	}
 
 	/// Remove and return the element at the current position and move the cursor
@@ -123,10 +151,10 @@ impl<T> Cursor<'_, T> {
 			if self.list.count == 1 {
 				self.list.head = None;
 				self.list.tail = None;
-			} else if self.t == CursorType::Back && self.current == self.list.tail {
+			} else if self.current == self.list.tail {
 				// Need to adjust the list.tail ptr
 				self.list.tail = cur_ptr.as_ref().prev;
-			} else if self.t == CursorType::Front && self.current == self.list.head {
+			} else if self.current == self.list.head {
 				// Need to adjust the list.head ptr
 				self.list.head = cur_ptr.as_ref().next;
 			}
@@ -135,10 +163,10 @@ impl<T> Cursor<'_, T> {
 			let boxed = Box::from_raw(cur_ptr.as_ptr());
 			item = boxed.data;
 
-			// then update self.current to prev_node
-			self.current = match self.t {
-				CursorType::Back => cur_ptr.as_ref().prev,
-				CursorType::Front => cur_ptr.as_ref().next,
+			// then update self.current
+			self.current = match cur_ptr.as_ref().next {
+				Some(_) => cur_ptr.as_ref().next,
+				None => self.list.tail,
 			};
 		}
 
@@ -174,8 +202,6 @@ impl<T> Cursor<'_, T> {
 					// This is the last node, update self.list tail
 					self.list.tail = Some(new_ptr);
 				}
-
-				self.current = Some(new_ptr);
 			},
 		}
 		self.list.count += 1;
@@ -208,8 +234,6 @@ impl<T> Cursor<'_, T> {
 					// This is the head node, update self.list head
 					self.list.head = Some(new_ptr);
 				}
-
-				self.current = Some(new_ptr);
 			},
 		}
 		self.list.count += 1;
