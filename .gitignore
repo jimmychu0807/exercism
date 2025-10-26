@@ -1,4 +1,5 @@
 rust/**/target
+typescript
 
 # vscode related
 *.code-workspace

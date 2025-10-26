@@ -94,6 +94,7 @@ members = [
   "react",
   "circular-buffer",
   "rectangles",
+  "doubly-linked-list",
 ]
 resolver = "3"
 

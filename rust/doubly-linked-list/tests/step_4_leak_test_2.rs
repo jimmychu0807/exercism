@@ -7,20 +7,15 @@ static ALLOCATED: AtomicUsize = AtomicUsize::new(0);
 // test that all memory is deallocated
 // does not check if the destructor is run
 #[test]
-#[ignore]
 fn drop_no_leaks() {
-    let allocated_before = ALLOCATED.load(SeqCst);
-    let list = (0..10).collect::<LinkedList<_>>();
-    let list_allocation_size = ALLOCATED.load(SeqCst) - allocated_before;
-    assert!(
-        list_allocation_size != 0,
-        "no bytes were allocated for a nonempty list"
-    );
-    drop(list);
+	let allocated_before = ALLOCATED.load(SeqCst);
+	let list = (0..10).collect::<LinkedList<_>>();
+	let list_allocation_size = ALLOCATED.load(SeqCst) - allocated_before;
+	assert!(list_allocation_size != 0, "no bytes were allocated for a nonempty list");
+	drop(list);
 
-    let allocated_after = ALLOCATED.load(SeqCst);
-    let leaked_bytes = allocated_before - allocated_after;
-    assert!(leaked_bytes == 0);
+	let allocated_after = ALLOCATED.load(SeqCst);
+	assert_eq!(allocated_before, allocated_after);
 }
 
 // Defines a wrapper around the global allocator that counts allocations
@@ -33,18 +28,18 @@ use std::sync::atomic::{AtomicUsize, Ordering::SeqCst};
 struct Counter;
 
 unsafe impl GlobalAlloc for Counter {
-    unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
-        let ret = System.alloc(layout);
-        if !ret.is_null() {
-            ALLOCATED.fetch_add(layout.size(), SeqCst);
-        }
-        ret
-    }
+	unsafe fn alloc(&self, layout: Layout) -> *mut u8 {
+		let ret = unsafe { System.alloc(layout) };
+		if !ret.is_null() {
+			ALLOCATED.fetch_add(layout.size(), SeqCst);
+		}
+		ret
+	}
 
-    unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
-        System.dealloc(ptr, layout);
-        ALLOCATED.fetch_sub(layout.size(), SeqCst);
-    }
+	unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout) {
+		unsafe { System.dealloc(ptr, layout) };
+		ALLOCATED.fetch_sub(layout.size(), SeqCst);
+	}
 }
 
 #[global_allocator]
