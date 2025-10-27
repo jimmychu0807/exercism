@@ -94,6 +94,7 @@ members = [
   "react",
   "circular-buffer",
   "rectangles",
+  "xorcism",
   "doubly-linked-list",
 ]
 resolver = "3"
