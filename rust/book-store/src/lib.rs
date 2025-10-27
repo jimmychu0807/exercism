@@ -1,30 +1,58 @@
-use std::collections::HashSet;
+use std::collections::HashMap;
 
 const BK_PRICE: u32 = 800;
-const DISCOUNTS: &[f32] = &[1.0, 1.0, 0.95, 0.9, 0.8, 0.75];
+const DISCOUNTS_PCT: [u32; 6] = [100, 100, 95, 90, 80, 75];
 
 pub fn lowest_price(books: &[u32]) -> u32 {
-	let mut book_sets: Vec<HashSet<u32>> = Vec::new();
+	let mut counts = [0u8; 5];
+	for &b in books.iter() {
+		if (1..=5).contains(&b) {
+			counts[(b - 1) as usize] += 1;
+		}
+	}
 
-	'outer: for book in books.iter() {
-		for book_set in book_sets.iter_mut() {
-			if !book_set.contains(book) {
-				book_set.insert(*book);
-				continue 'outer;
+	let mut memo: HashMap<[u8; 5], u32> = HashMap::new();
+	rec_counts(counts, &mut memo)
+}
+
+fn rec_counts(counts: [u8; 5], memo: &mut HashMap<[u8; 5], u32>) -> u32 {
+	// base
+	if counts.iter().all(|&c| c == 0) {
+		return 0;
+	}
+	if let Some(&v) = memo.get(&counts) {
+		return v;
+	}
+
+	let mut best = u32::MAX;
+
+	for mask in 1..(1 << 5) {
+		let mut ok = true;
+		let mut next = counts;
+		let mut set_size = 0_usize;
+
+		for (i, count) in next.iter_mut().enumerate() {
+			if (mask >> i) & 1 == 1 {
+				if *count == 0 {
+					ok = false;
+					break;
+				}
+				*count -= 1;
+				set_size += 1;
 			}
 		}
 
-		// doesn't break from the above, so we create a new hashset
-		let mut set = HashSet::new();
-		set.insert(*book);
-		book_sets.push(set);
+		if !ok {
+			continue;
+		}
+
+		let price = BK_PRICE * set_size as u32 * DISCOUNTS_PCT[set_size] / 100;
+		let total = price + rec_counts(next, memo);
+		if total < best {
+			best = total;
+		}
 	}
 
-	calc_book_sets_price(&book_sets)
-}
-
-fn calc_book_sets_price(book_sets: &[HashSet<u32>]) -> u32 {
-	let discount = |val: u32, len: usize| -> u32 { (val as f32 * DISCOUNTS[len]) as u32 };
-
-	book_sets.iter().fold(0, |acc, set| acc + discount(BK_PRICE * set.len() as u32, set.len()))
+	memo.insert(counts, best);
+	best
 }
