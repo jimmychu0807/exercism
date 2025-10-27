@@ -63,6 +63,10 @@ name = "bob"
 version = "0.1.0"
 
 [[package]]
+name = "book_store"
+version = "0.1.0"
+
+[[package]]
 name = "bottle_song"
 version = "0.1.0"
 dependencies = [
