@@ -265,427 +265,401 @@ mod key_shorter_than_data {
 	}
 }
 
-// mod key_len_equal_to_data {
+mod key_len_equal_to_data {
 
-// 	use super::*;
+	use super::*;
 
-// 	const KEY: &str = "The quick brown fox jumped over the lazy dog.";
-// 	const INPUT: &str = "Wait, oops, this is not the pangram exercise!";
-// 	const EXPECT: &[u8] = &[
-// 		3, 9, 12, 84, 93, 85, 6, 12, 27, 83, 78, 82, 27, 31, 7, 83, 70, 6, 11, 0, 4, 26, 25, 80,
-// 		17, 12, 69, 79, 6, 4, 28, 71, 6, 9, 8, 0, 9, 25, 31, 11, 67, 13, 28, 2, 15,
-// 	];
+	const KEY: &str = "The quick brown fox jumped over the lazy dog.";
+	const INPUT: &str = "Wait, oops, this is not the pangram exercise!";
+	const EXPECT: &[u8] = &[
+		3, 9, 12, 84, 93, 85, 6, 12, 27, 83, 78, 82, 27, 31, 7, 83, 70, 6, 11, 0, 4, 26, 25, 80,
+		17, 12, 69, 79, 6, 4, 28, 71, 6, 9, 8, 0, 9, 25, 31, 11, 67, 13, 28, 2, 15,
+	];
 
-// 	/// tests where the key is expressed as `&str`, and input is expressed as `&[u8]`
-// 	mod str_slice {
-// 		use super::*;
+	/// tests where the key is expressed as `&str`, and input is expressed as `&[u8]`
+	mod str_slice {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munge_in_place() {
-// 			// we transform the input into a `Vec<u8>` despite its presence in this
-// 			// module because of the more restricted syntax that this function accepts
-// 			let mut input = INPUT.as_bytes().to_vec();
-// 			let original = input.clone();
+		#[test]
+		fn munge_in_place() {
+			// we transform the input into a `Vec<u8>` despite its presence in this
+			// module because of the more restricted syntax that this function accepts
+			let mut input = INPUT.as_bytes().to_vec();
+			let original = input.clone();
 
-// 			// in-place munging is stateful on Xorcism, so clone it
-// 			// to ensure the keys positions stay synchronized
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
+			// in-place munging is stateful on Xorcism, so clone it
+			// to ensure the keys positions stay synchronized
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
 
-// 			xorcism1.munge_in_place(&mut input);
-// 			assert_eq!(input.len(), original.len());
-// 			assert_ne!(input, original);
-// 			assert_eq!(input, EXPECT);
-// 			xorcism2.munge_in_place(&mut input);
-// 			assert_eq!(input, original);
-// 		}
+			xorcism1.munge_in_place(&mut input);
+			assert_eq!(input.len(), original.len());
+			assert_ne!(input, original);
+			assert_eq!(input, EXPECT);
+			xorcism2.munge_in_place(&mut input);
+			assert_eq!(input, original);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munges() {
-// 			let mut xorcism = Xorcism::new(KEY);
-// 			let result: Vec<u8> = xorcism.munge(INPUT.as_bytes()).collect();
-// 			assert_eq!(INPUT.len(), result.len());
-// 			assert_ne!(INPUT.as_bytes(), result);
-// 			assert_eq!(result, EXPECT);
-// 		}
+		#[test]
+		fn munges() {
+			let mut xorcism = Xorcism::new(KEY);
+			let result: Vec<u8> = xorcism.munge(INPUT.as_bytes()).collect();
+			assert_eq!(INPUT.len(), result.len());
+			assert_ne!(INPUT.as_bytes(), result);
+			assert_eq!(result, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn round_trip() {
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
-// 			let munge_iter = xorcism1.munge(INPUT.as_bytes());
-// 			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
-// 			assert_eq!(INPUT.as_bytes(), result);
-// 		}
-// 	}
+		#[test]
+		fn round_trip() {
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
+			let munge_iter = xorcism1.munge(INPUT.as_bytes());
+			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
+			assert_eq!(INPUT.as_bytes(), result);
+		}
+	}
 
-// 	/// tests where the key and input are both expressed as `&[u8]`
-// 	mod slice_slice {
-// 		use super::*;
+	/// tests where the key and input are both expressed as `&[u8]`
+	mod slice_slice {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munge_in_place() {
-// 			let key = KEY.as_bytes();
+		#[test]
+		fn munge_in_place() {
+			let key = KEY.as_bytes();
 
-// 			// we transform the input into a `Vec<u8>` despite its presence in this
-// 			// module because of the more restricted syntax that this function accepts
-// 			let mut input = INPUT.as_bytes().to_vec();
-// 			let original = input.clone();
+			// we transform the input into a `Vec<u8>` despite its presence in this
+			// module because of the more restricted syntax that this function accepts
+			let mut input = INPUT.as_bytes().to_vec();
+			let original = input.clone();
 
-// 			// in-place munging is stateful on Xorcism, so clone it
-// 			// to ensure the keys positions stay synchronized
-// 			let mut xorcism1 = Xorcism::new(key);
-// 			let mut xorcism2 = xorcism1.clone();
+			// in-place munging is stateful on Xorcism, so clone it
+			// to ensure the keys positions stay synchronized
+			let mut xorcism1 = Xorcism::new(key);
+			let mut xorcism2 = xorcism1.clone();
 
-// 			xorcism1.munge_in_place(&mut input);
-// 			assert_eq!(input.len(), original.len());
-// 			assert_ne!(input, original);
-// 			assert_eq!(input, EXPECT);
-// 			xorcism2.munge_in_place(&mut input);
-// 			assert_eq!(input, original);
-// 		}
+			xorcism1.munge_in_place(&mut input);
+			assert_eq!(input.len(), original.len());
+			assert_ne!(input, original);
+			assert_eq!(input, EXPECT);
+			xorcism2.munge_in_place(&mut input);
+			assert_eq!(input, original);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munges() {
-// 			let key = KEY.as_bytes();
-// 			let input = INPUT.as_bytes();
+		#[test]
+		fn munges() {
+			let key = KEY.as_bytes();
+			let input = INPUT.as_bytes();
 
-// 			let mut xorcism = Xorcism::new(key);
-// 			let result: Vec<u8> = xorcism.munge(input).collect();
-// 			assert_eq!(input.len(), result.len());
-// 			assert_ne!(input, result);
-// 			assert_eq!(result, EXPECT);
-// 		}
+			let mut xorcism = Xorcism::new(key);
+			let result: Vec<u8> = xorcism.munge(input).collect();
+			assert_eq!(input.len(), result.len());
+			assert_ne!(input, result);
+			assert_eq!(result, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn round_trip() {
-// 			let key = KEY.as_bytes();
-// 			let input = INPUT.as_bytes();
+		#[test]
+		fn round_trip() {
+			let key = KEY.as_bytes();
+			let input = INPUT.as_bytes();
 
-// 			let mut xorcism1 = Xorcism::new(key);
-// 			let mut xorcism2 = xorcism1.clone();
-// 			let munge_iter = xorcism1.munge(input);
-// 			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
-// 			assert_eq!(input, result);
-// 		}
-// 	}
+			let mut xorcism1 = Xorcism::new(key);
+			let mut xorcism2 = xorcism1.clone();
+			let munge_iter = xorcism1.munge(input);
+			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
+			assert_eq!(input, result);
+		}
+	}
 
-// 	/// tests where the key is expressed as `&str` and input is expressed as `Vec<u8>`
-// 	mod vec_vec {
-// 		use super::*;
+	/// tests where the key is expressed as `&str` and input is expressed as `Vec<u8>`
+	mod vec_vec {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munge_in_place() {
-// 			let mut input = INPUT.as_bytes().to_vec();
-// 			let original = input.clone();
+		#[test]
+		fn munge_in_place() {
+			let mut input = INPUT.as_bytes().to_vec();
+			let original = input.clone();
 
-// 			// in-place munging is stateful on Xorcism, so clone it
-// 			// to ensure the keys positions stay synchronized
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
+			// in-place munging is stateful on Xorcism, so clone it
+			// to ensure the keys positions stay synchronized
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
 
-// 			xorcism1.munge_in_place(&mut input);
-// 			assert_eq!(input.len(), original.len());
-// 			assert_ne!(input, original);
-// 			assert_eq!(input, EXPECT);
-// 			xorcism2.munge_in_place(&mut input);
-// 			assert_eq!(input, original);
-// 		}
+			xorcism1.munge_in_place(&mut input);
+			assert_eq!(input.len(), original.len());
+			assert_ne!(input, original);
+			assert_eq!(input, EXPECT);
+			xorcism2.munge_in_place(&mut input);
+			assert_eq!(input, original);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munges() {
-// 			let owned_input = INPUT.as_bytes().to_vec();
+		#[test]
+		fn munges() {
+			let owned_input = INPUT.as_bytes().to_vec();
 
-// 			let mut xorcism = Xorcism::new(KEY);
-// 			let result: Vec<u8> = xorcism.munge(owned_input).collect();
-// 			assert_eq!(INPUT.len(), result.len());
-// 			assert_ne!(INPUT.as_bytes(), result);
-// 			assert_eq!(result, EXPECT);
-// 		}
+			let mut xorcism = Xorcism::new(KEY);
+			let result: Vec<u8> = xorcism.munge(owned_input).collect();
+			assert_eq!(INPUT.len(), result.len());
+			assert_ne!(INPUT.as_bytes(), result);
+			assert_eq!(result, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn round_trip() {
-// 			let owned_input = INPUT.as_bytes().to_vec();
+		#[test]
+		fn round_trip() {
+			let owned_input = INPUT.as_bytes().to_vec();
 
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
-// 			let munge_iter = xorcism1.munge(owned_input);
-// 			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
-// 			assert_eq!(INPUT.as_bytes(), result);
-// 		}
-// 	}
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
+			let munge_iter = xorcism1.munge(owned_input);
+			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
+			assert_eq!(INPUT.as_bytes(), result);
+		}
+	}
 
-// 	#[cfg(feature = "io")]
-// 	mod io {
-// 		use super::*;
+	#[cfg(feature = "io")]
+	mod io {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn reader_munges() {
-// 			let mut reader = Xorcism::new(KEY).reader(INPUT.as_bytes());
-// 			let mut buf = Vec::with_capacity(INPUT.len());
-// 			let bytes_read = reader.read_to_end(&mut buf).unwrap();
-// 			assert_eq!(bytes_read, INPUT.len());
-// 			assert_eq!(buf, EXPECT);
-// 		}
+		#[test]
+		fn reader_munges() {
+			let mut reader = Xorcism::new(KEY).reader(INPUT.as_bytes());
+			let mut buf = Vec::with_capacity(INPUT.len());
+			let bytes_read = reader.read_to_end(&mut buf).unwrap();
+			assert_eq!(bytes_read, INPUT.len());
+			assert_eq!(buf, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn reader_roundtrip() {
-// 			let xs = Xorcism::new(KEY);
-// 			let reader1 = xs.clone().reader(INPUT.as_bytes());
-// 			let mut reader2 = xs.clone().reader(reader1);
-// 			let mut buf = Vec::with_capacity(INPUT.len());
-// 			let bytes_read = reader2.read_to_end(&mut buf).unwrap();
-// 			assert_eq!(bytes_read, INPUT.len());
-// 			assert_eq!(buf, INPUT.as_bytes());
-// 		}
+		#[test]
+		fn reader_roundtrip() {
+			let xs = Xorcism::new(KEY);
+			let reader1 = xs.clone().reader(INPUT.as_bytes());
+			let mut reader2 = xs.clone().reader(reader1);
+			let mut buf = Vec::with_capacity(INPUT.len());
+			let bytes_read = reader2.read_to_end(&mut buf).unwrap();
+			assert_eq!(bytes_read, INPUT.len());
+			assert_eq!(buf, INPUT.as_bytes());
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn writer_munges() {
-// 			let mut writer_dest = Vec::new();
-// 			{
-// 				let mut writer = Xorcism::new(KEY).writer(&mut writer_dest);
-// 				assert!(writer.write_all(INPUT.as_bytes()).is_ok());
-// 			}
-// 			assert_eq!(writer_dest, EXPECT);
-// 		}
+		#[test]
+		fn writer_munges() {
+			let mut writer_dest = Vec::new();
+			{
+				let mut writer = Xorcism::new(KEY).writer(&mut writer_dest);
+				assert!(writer.write_all(INPUT.as_bytes()).is_ok());
+			}
+			assert_eq!(writer_dest, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn writer_roundtrip() {
-// 			let mut writer_dest = Vec::new();
-// 			let xs = Xorcism::new(KEY);
-// 			{
-// 				let writer1 = xs.clone().writer(&mut writer_dest);
-// 				let mut writer2 = xs.writer(writer1);
-// 				assert!(writer2.write_all(INPUT.as_bytes()).is_ok());
-// 			}
-// 			assert_eq!(writer_dest, INPUT.as_bytes());
-// 		}
-// 	}
-// }
+		#[test]
+		fn writer_roundtrip() {
+			let mut writer_dest = Vec::new();
+			let xs = Xorcism::new(KEY);
+			{
+				let writer1 = xs.clone().writer(&mut writer_dest);
+				let mut writer2 = xs.writer(writer1);
+				assert!(writer2.write_all(INPUT.as_bytes()).is_ok());
+			}
+			assert_eq!(writer_dest, INPUT.as_bytes());
+		}
+	}
+}
 
-// mod key_longer_than_data {
+mod key_longer_than_data {
 
-// 	use super::*;
+	use super::*;
 
-// 	const KEY: &str = "A properly cryptographically random key longer than the data can actually be fairly secure.";
-// 	const INPUT: &str = "Text is not cryptographically random.";
-// 	const EXPECT: &[u8] = &[
-// 		21, 69, 8, 6, 79, 25, 22, 82, 2, 22, 84, 67, 17, 11, 9, 4, 27, 8, 21, 19, 17, 24, 1, 10, 2,
-// 		13, 0, 21, 89, 82, 19, 15, 10, 11, 2, 77, 69,
-// 	];
+	const KEY: &str = "A properly cryptographically random key longer than the data can actually be fairly secure.";
+	const INPUT: &str = "Text is not cryptographically random.";
+	const EXPECT: &[u8] = &[
+		21, 69, 8, 6, 79, 25, 22, 82, 2, 22, 84, 67, 17, 11, 9, 4, 27, 8, 21, 19, 17, 24, 1, 10, 2,
+		13, 0, 21, 89, 82, 19, 15, 10, 11, 2, 77, 69,
+	];
 
-// 	/// tests where the key is expressed as `&str`, and input is expressed as `&[u8]`
-// 	mod str_slice {
-// 		use super::*;
+	/// tests where the key is expressed as `&str`, and input is expressed as `&[u8]`
+	mod str_slice {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munge_in_place() {
-// 			// we transform the input into a `Vec<u8>` despite its presence in this
-// 			// module because of the more restricted syntax that this function accepts
-// 			let mut input = INPUT.as_bytes().to_vec();
-// 			let original = input.clone();
+		#[test]
+		fn munge_in_place() {
+			// we transform the input into a `Vec<u8>` despite its presence in this
+			// module because of the more restricted syntax that this function accepts
+			let mut input = INPUT.as_bytes().to_vec();
+			let original = input.clone();
 
-// 			// in-place munging is stateful on Xorcism, so clone it
-// 			// to ensure the keys positions stay synchronized
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
+			// in-place munging is stateful on Xorcism, so clone it
+			// to ensure the keys positions stay synchronized
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
 
-// 			xorcism1.munge_in_place(&mut input);
-// 			assert_eq!(input.len(), original.len());
-// 			assert_ne!(input, original);
-// 			assert_eq!(input, EXPECT);
-// 			xorcism2.munge_in_place(&mut input);
-// 			assert_eq!(input, original);
-// 		}
+			xorcism1.munge_in_place(&mut input);
+			assert_eq!(input.len(), original.len());
+			assert_ne!(input, original);
+			assert_eq!(input, EXPECT);
+			xorcism2.munge_in_place(&mut input);
+			assert_eq!(input, original);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munges() {
-// 			let mut xorcism = Xorcism::new(KEY);
-// 			let result: Vec<u8> = xorcism.munge(INPUT.as_bytes()).collect();
-// 			assert_eq!(INPUT.len(), result.len());
-// 			assert_ne!(INPUT.as_bytes(), result);
-// 			assert_eq!(result, EXPECT);
-// 		}
+		#[test]
+		fn munges() {
+			let mut xorcism = Xorcism::new(KEY);
+			let result: Vec<u8> = xorcism.munge(INPUT.as_bytes()).collect();
+			assert_eq!(INPUT.len(), result.len());
+			assert_ne!(INPUT.as_bytes(), result);
+			assert_eq!(result, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn round_trip() {
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
-// 			let munge_iter = xorcism1.munge(INPUT.as_bytes());
-// 			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
-// 			assert_eq!(INPUT.as_bytes(), result);
-// 		}
-// 	}
+		#[test]
+		fn round_trip() {
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
+			let munge_iter = xorcism1.munge(INPUT.as_bytes());
+			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
+			assert_eq!(INPUT.as_bytes(), result);
+		}
+	}
 
-// 	/// tests where the key and input are both expressed as `&[u8]`
-// 	mod slice_slice {
-// 		use super::*;
+	/// tests where the key and input are both expressed as `&[u8]`
+	mod slice_slice {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munge_in_place() {
-// 			let key = KEY.as_bytes();
+		#[test]
+		fn munge_in_place() {
+			let key = KEY.as_bytes();
 
-// 			// we transform the input into a `Vec<u8>` despite its presence in this
-// 			// module because of the more restricted syntax that this function accepts
-// 			let mut input = INPUT.as_bytes().to_vec();
-// 			let original = input.clone();
+			// we transform the input into a `Vec<u8>` despite its presence in this
+			// module because of the more restricted syntax that this function accepts
+			let mut input = INPUT.as_bytes().to_vec();
+			let original = input.clone();
 
-// 			// in-place munging is stateful on Xorcism, so clone it
-// 			// to ensure the keys positions stay synchronized
-// 			let mut xorcism1 = Xorcism::new(key);
-// 			let mut xorcism2 = xorcism1.clone();
+			// in-place munging is stateful on Xorcism, so clone it
+			// to ensure the keys positions stay synchronized
+			let mut xorcism1 = Xorcism::new(key);
+			let mut xorcism2 = xorcism1.clone();
 
-// 			xorcism1.munge_in_place(&mut input);
-// 			assert_eq!(input.len(), original.len());
-// 			assert_ne!(input, original);
-// 			assert_eq!(input, EXPECT);
-// 			xorcism2.munge_in_place(&mut input);
-// 			assert_eq!(input, original);
-// 		}
+			xorcism1.munge_in_place(&mut input);
+			assert_eq!(input.len(), original.len());
+			assert_ne!(input, original);
+			assert_eq!(input, EXPECT);
+			xorcism2.munge_in_place(&mut input);
+			assert_eq!(input, original);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munges() {
-// 			let key = KEY.as_bytes();
-// 			let input = INPUT.as_bytes();
+		#[test]
+		fn munges() {
+			let key = KEY.as_bytes();
+			let input = INPUT.as_bytes();
 
-// 			let mut xorcism = Xorcism::new(key);
-// 			let result: Vec<u8> = xorcism.munge(input).collect();
-// 			assert_eq!(input.len(), result.len());
-// 			assert_ne!(input, result);
-// 			assert_eq!(result, EXPECT);
-// 		}
+			let mut xorcism = Xorcism::new(key);
+			let result: Vec<u8> = xorcism.munge(input).collect();
+			assert_eq!(input.len(), result.len());
+			assert_ne!(input, result);
+			assert_eq!(result, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn round_trip() {
-// 			let key = KEY.as_bytes();
-// 			let input = INPUT.as_bytes();
+		#[test]
+		fn round_trip() {
+			let key = KEY.as_bytes();
+			let input = INPUT.as_bytes();
 
-// 			let mut xorcism1 = Xorcism::new(key);
-// 			let mut xorcism2 = xorcism1.clone();
-// 			let munge_iter = xorcism1.munge(input);
-// 			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
-// 			assert_eq!(input, result);
-// 		}
-// 	}
+			let mut xorcism1 = Xorcism::new(key);
+			let mut xorcism2 = xorcism1.clone();
+			let munge_iter = xorcism1.munge(input);
+			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
+			assert_eq!(input, result);
+		}
+	}
 
-// 	/// tests where the key is expressed as `&str` and input is expressed as `Vec<u8>`
-// 	mod vec_vec {
-// 		use super::*;
+	/// tests where the key is expressed as `&str` and input is expressed as `Vec<u8>`
+	mod vec_vec {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munge_in_place() {
-// 			let mut input = INPUT.as_bytes().to_vec();
-// 			let original = input.clone();
+		#[test]
+		fn munge_in_place() {
+			let mut input = INPUT.as_bytes().to_vec();
+			let original = input.clone();
 
-// 			// in-place munging is stateful on Xorcism, so clone it
-// 			// to ensure the keys positions stay synchronized
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
+			// in-place munging is stateful on Xorcism, so clone it
+			// to ensure the keys positions stay synchronized
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
 
-// 			xorcism1.munge_in_place(&mut input);
-// 			assert_eq!(input.len(), original.len());
-// 			assert_ne!(input, original);
-// 			assert_eq!(input, EXPECT);
-// 			xorcism2.munge_in_place(&mut input);
-// 			assert_eq!(input, original);
-// 		}
+			xorcism1.munge_in_place(&mut input);
+			assert_eq!(input.len(), original.len());
+			assert_ne!(input, original);
+			assert_eq!(input, EXPECT);
+			xorcism2.munge_in_place(&mut input);
+			assert_eq!(input, original);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn munges() {
-// 			let owned_input = INPUT.as_bytes().to_vec();
+		#[test]
+		fn munges() {
+			let owned_input = INPUT.as_bytes().to_vec();
 
-// 			let mut xorcism = Xorcism::new(KEY);
-// 			let result: Vec<u8> = xorcism.munge(owned_input).collect();
-// 			assert_eq!(INPUT.len(), result.len());
-// 			assert_ne!(INPUT.as_bytes(), result);
-// 			assert_eq!(result, EXPECT);
-// 		}
+			let mut xorcism = Xorcism::new(KEY);
+			let result: Vec<u8> = xorcism.munge(owned_input).collect();
+			assert_eq!(INPUT.len(), result.len());
+			assert_ne!(INPUT.as_bytes(), result);
+			assert_eq!(result, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn round_trip() {
-// 			let owned_input = INPUT.as_bytes().to_vec();
+		#[test]
+		fn round_trip() {
+			let owned_input = INPUT.as_bytes().to_vec();
 
-// 			let mut xorcism1 = Xorcism::new(KEY);
-// 			let mut xorcism2 = xorcism1.clone();
-// 			let munge_iter = xorcism1.munge(owned_input);
-// 			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
-// 			assert_eq!(INPUT.as_bytes(), result);
-// 		}
-// 	}
+			let mut xorcism1 = Xorcism::new(KEY);
+			let mut xorcism2 = xorcism1.clone();
+			let munge_iter = xorcism1.munge(owned_input);
+			let result: Vec<u8> = xorcism2.munge(munge_iter).collect();
+			assert_eq!(INPUT.as_bytes(), result);
+		}
+	}
 
-// 	#[cfg(feature = "io")]
-// 	mod io {
-// 		use super::*;
+	#[cfg(feature = "io")]
+	mod io {
+		use super::*;
 
-// 		#[test]
-// 		#[ignore]
-// 		fn reader_munges() {
-// 			let mut reader = Xorcism::new(KEY).reader(INPUT.as_bytes());
-// 			let mut buf = Vec::with_capacity(INPUT.len());
-// 			let bytes_read = reader.read_to_end(&mut buf).unwrap();
-// 			assert_eq!(bytes_read, INPUT.len());
-// 			assert_eq!(buf, EXPECT);
-// 		}
+		#[test]
+		fn reader_munges() {
+			let mut reader = Xorcism::new(KEY).reader(INPUT.as_bytes());
+			let mut buf = Vec::with_capacity(INPUT.len());
+			let bytes_read = reader.read_to_end(&mut buf).unwrap();
+			assert_eq!(bytes_read, INPUT.len());
+			assert_eq!(buf, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn reader_roundtrip() {
-// 			let xs = Xorcism::new(KEY);
-// 			let reader1 = xs.clone().reader(INPUT.as_bytes());
-// 			let mut reader2 = xs.clone().reader(reader1);
-// 			let mut buf = Vec::with_capacity(INPUT.len());
-// 			let bytes_read = reader2.read_to_end(&mut buf).unwrap();
-// 			assert_eq!(bytes_read, INPUT.len());
-// 			assert_eq!(buf, INPUT.as_bytes());
-// 		}
+		#[test]
+		fn reader_roundtrip() {
+			let xs = Xorcism::new(KEY);
+			let reader1 = xs.clone().reader(INPUT.as_bytes());
+			let mut reader2 = xs.clone().reader(reader1);
+			let mut buf = Vec::with_capacity(INPUT.len());
+			let bytes_read = reader2.read_to_end(&mut buf).unwrap();
+			assert_eq!(bytes_read, INPUT.len());
+			assert_eq!(buf, INPUT.as_bytes());
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn writer_munges() {
-// 			let mut writer_dest = Vec::new();
-// 			{
-// 				let mut writer = Xorcism::new(KEY).writer(&mut writer_dest);
-// 				assert!(writer.write_all(INPUT.as_bytes()).is_ok());
-// 			}
-// 			assert_eq!(writer_dest, EXPECT);
-// 		}
+		#[test]
+		fn writer_munges() {
+			let mut writer_dest = Vec::new();
+			{
+				let mut writer = Xorcism::new(KEY).writer(&mut writer_dest);
+				assert!(writer.write_all(INPUT.as_bytes()).is_ok());
+			}
+			assert_eq!(writer_dest, EXPECT);
+		}
 
-// 		#[test]
-// 		#[ignore]
-// 		fn writer_roundtrip() {
-// 			let mut writer_dest = Vec::new();
-// 			let xs = Xorcism::new(KEY);
-// 			{
-// 				let writer1 = xs.clone().writer(&mut writer_dest);
-// 				let mut writer2 = xs.writer(writer1);
-// 				assert!(writer2.write_all(INPUT.as_bytes()).is_ok());
-// 			}
-// 			assert_eq!(writer_dest, INPUT.as_bytes());
-// 		}
-// 	}
-// }
+		#[test]
+		fn writer_roundtrip() {
+			let mut writer_dest = Vec::new();
+			let xs = Xorcism::new(KEY);
+			{
+				let writer1 = xs.clone().writer(&mut writer_dest);
+				let mut writer2 = xs.writer(writer1);
+				assert!(writer2.write_all(INPUT.as_bytes()).is_ok());
+			}
+			assert_eq!(writer_dest, INPUT.as_bytes());
+		}
+	}
+}
 
 // mod shakespearean {
 
