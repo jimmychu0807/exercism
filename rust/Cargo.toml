@@ -95,6 +95,7 @@ members = [
   "circular-buffer",
   "rectangles",
   "xorcism",
+  "book-store",
   "doubly-linked-list",
 ]
 resolver = "3"

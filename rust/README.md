@@ -99,6 +99,7 @@ https://exercism.org/tracks/rust
 | 93  | [Circular Buffer](./circular-buffer)  |✅ |
 | 94  | [Rectangles](./rectangles)            |✅ |
 | 95  | [Xorcism](./xorcism)                  |✅ |
+| 96  | [Book Store](./book-store)            |✅ |
 |100  | [Doubly Linked List](./doubly-linked-list)    |✅ |
 
 ## Notes
@@ -113,6 +114,7 @@ https://exercism.org/tracks/rust
   - [88. POV](./pov) - good one on learning tree traversal and manipulation
   - [89. Poker](./poker) - good one on sorting, **Ord**, **PartialOrd**, **Eq**, **PartialEq** traits, and learning on poker rules.
   - [92. React](./react) - this exercise illustrates well why the front-end framework [React](https://react.dev/) is called **React**. React only renders elements when there is a change and propagate it up all parent elements and those that listen to it.
+  - [96. Book Store](./book-store) - dynamic programming
   - [100. Doubly Linked List](./doubly-linked-list)
     - Use **Box::new(...)** to allocate object in the heap
     - Then you can use **NonNull()** to handle raw pointer. This makes it like C++ pointer. In fact, this is how Rust implement [linked list](https://doc.rust-lang.org/src/alloc/collections/linked_list.rs.html#50-53).
