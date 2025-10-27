@@ -9,7 +9,6 @@ fn only_a_single_book() {
 }
 
 #[test]
-#[ignore]
 fn two_of_the_same_book() {
 	let input = &[2, 2];
 	let output = lowest_price(input);
@@ -18,7 +17,6 @@ fn two_of_the_same_book() {
 }
 
 #[test]
-#[ignore]
 fn empty_basket() {
 	let input = &[];
 	let output = lowest_price(input);
@@ -27,7 +25,6 @@ fn empty_basket() {
 }
 
 #[test]
-#[ignore]
 fn two_different_books() {
 	let input = &[1, 2];
 	let output = lowest_price(input);
@@ -36,7 +33,6 @@ fn two_different_books() {
 }
 
 #[test]
-#[ignore]
 fn three_different_books() {
 	let input = &[1, 2, 3];
 	let output = lowest_price(input);
@@ -45,7 +41,6 @@ fn three_different_books() {
 }
 
 #[test]
-#[ignore]
 fn four_different_books() {
 	let input = &[1, 2, 3, 4];
 	let output = lowest_price(input);
@@ -54,7 +49,6 @@ fn four_different_books() {
 }
 
 #[test]
-#[ignore]
 fn five_different_books() {
 	let input = &[1, 2, 3, 4, 5];
 	let output = lowest_price(input);
