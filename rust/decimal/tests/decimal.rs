@@ -42,21 +42,19 @@ fn ne() {
 	assert!(decimal(BIGS[0]) != decimal(BIGS[1]));
 }
 
-// #[test]
-// #[ignore]
-// fn gt() {
-// 	for slice_2 in BIGS.windows(2) {
-// 		assert!(decimal(slice_2[1]) > decimal(slice_2[0]));
-// 	}
-// }
+#[test]
+fn gt() {
+	for slice_2 in BIGS.windows(2) {
+		assert!(decimal(slice_2[1]) > decimal(slice_2[0]));
+	}
+}
 
-// #[test]
-// #[ignore]
-// fn lt() {
-// 	for slice_2 in BIGS.windows(2) {
-// 		assert!(decimal(slice_2[0]) < decimal(slice_2[1]));
-// 	}
-// }
+#[test]
+fn lt() {
+	for slice_2 in BIGS.windows(2) {
+		assert!(decimal(slice_2[0]) < decimal(slice_2[1]));
+	}
+}
 
 // #[test]
 // #[ignore]
