@@ -1,12 +1,5 @@
 use decimal::Decimal;
 
-/// Create a Decimal from a string literal
-///
-/// Use only when you _know_ that your value is valid.
-fn decimal(input: &str) -> Decimal {
-	Decimal::try_from(input).expect("That was supposed to be a valid value")
-}
-
 /// Some big and precise values we can use for testing. [0] + [1] == [2]
 const BIGS: [&str; 3] = [
 	"100000000000000000000000000000000000000000000.00000000000000000000000000000000000000001",
@@ -14,11 +7,8 @@ const BIGS: [&str; 3] = [
 	"200000000000000000000000000000000000000000000.00000000000000000000000000000000000000003",
 ];
 
-// test simple properties of required operations
-#[test]
-fn basic_1() {
-	let res = Decimal::try_from("10.015");
-	println!("res: {:?}", res);
+fn decimal(input: &str) -> Decimal {
+	Decimal::try_from(input).expect("That was supposed to be a valid value")
 }
 
 #[test]
@@ -103,30 +93,27 @@ fn lt() {
 // 	assert_eq!(decimal("1.0") * decimal("2.1"), decimal("2.1"));
 // }
 
-// #[test]
-// #[ignore]
-// fn gt_positive_and_zero() {
-// 	assert!(decimal("1.0") > decimal("0.0"));
-// 	assert!(decimal("0.1") > decimal("0.0"));
-// }
+#[test]
+fn gt_positive_and_zero() {
+	assert!(decimal("1.0") > decimal("0.0"));
+	assert!(decimal("0.1") > decimal("0.0"));
+}
 
-// #[test]
-// #[ignore]
-// fn gt_negative_and_zero() {
-// 	assert!(decimal("0.0") > decimal("-0.1"));
-// 	assert!(decimal("0.0") > decimal("-1.0"));
-// }
+#[test]
+fn gt_negative_and_zero() {
+	assert!(decimal("0.0") > decimal("-0.1"));
+	assert!(decimal("0.0") > decimal("-1.0"));
+}
 
-// #[test]
-// #[ignore]
-// fn unequal_number_of_decimal_places() {
-// 	assert!(decimal("3.14") > decimal("3.13"));
-// 	assert!(decimal("3.14") > decimal("3.131"));
-// 	assert!(decimal("3.14") > decimal("3.1"));
-// 	assert!(decimal("3.13") < decimal("3.14"));
-// 	assert!(decimal("3.131") < decimal("3.14"));
-// 	assert!(decimal("3.1") < decimal("3.14"));
-// }
+#[test]
+fn unequal_number_of_decimal_places() {
+	assert!(decimal("3.14") > decimal("3.13"));
+	assert!(decimal("3.14") > decimal("3.131"));
+	assert!(decimal("3.14") > decimal("3.1"));
+	assert!(decimal("3.13") < decimal("3.14"));
+	assert!(decimal("3.131") < decimal("3.14"));
+	assert!(decimal("3.1") < decimal("3.14"));
+}
 
 // // tests of arbitrary precision behavior
 // #[test]
@@ -135,12 +122,11 @@ fn lt() {
 // 	assert_eq!(decimal("0.1") + decimal("0.02"), decimal("0.12"));
 // }
 
-// #[test]
-// #[ignore]
-// fn eq_vary_sig_digits() {
-// 	assert!(decimal("0") == decimal("0000000000000.0000000000000000000000"));
-// 	assert!(decimal("1") == decimal("00000000000000001.000000000000000000"));
-// }
+#[test]
+fn eq_vary_sig_digits() {
+	assert!(decimal("0") == decimal("0000000000000.0000000000000000000000"));
+	assert!(decimal("1") == decimal("00000000000000001.000000000000000000"));
+}
 
 // #[test]
 // #[ignore]
@@ -164,31 +150,28 @@ fn lt() {
 // 	)
 // }
 
-// #[test]
-// #[ignore]
-// fn gt_varying_positive_precisions() {
-// 	assert!(decimal("1.1") > decimal("1.01"));
-// 	assert!(decimal("1.01") > decimal("1.0"));
-// 	assert!(decimal("1.0") > decimal("0.1"));
-// 	assert!(decimal("0.1") > decimal("0.01"));
-// }
+#[test]
+fn gt_varying_positive_precisions() {
+	assert!(decimal("1.1") > decimal("1.01"));
+	assert!(decimal("1.01") > decimal("1.0"));
+	assert!(decimal("1.0") > decimal("0.1"));
+	assert!(decimal("0.1") > decimal("0.01"));
+}
 
-// #[test]
-// #[ignore]
-// fn gt_positive_and_negative() {
-// 	assert!(decimal("1.0") > decimal("-1.0"));
-// 	assert!(decimal("1.1") > decimal("-1.1"));
-// 	assert!(decimal("0.1") > decimal("-0.1"));
-// }
+#[test]
+fn gt_positive_and_negative() {
+	assert!(decimal("1.0") > decimal("-1.0"));
+	assert!(decimal("1.1") > decimal("-1.1"));
+	assert!(decimal("0.1") > decimal("-0.1"));
+}
 
-// #[test]
-// #[ignore]
-// fn gt_varying_negative_precisions() {
-// 	assert!(decimal("-0.01") > decimal("-0.1"));
-// 	assert!(decimal("-0.1") > decimal("-1.0"));
-// 	assert!(decimal("-1.0") > decimal("-1.01"));
-// 	assert!(decimal("-1.01") > decimal("-1.1"));
-// }
+#[test]
+fn gt_varying_negative_precisions() {
+	assert!(decimal("-0.01") > decimal("-0.1"));
+	assert!(decimal("-0.1") > decimal("-1.0"));
+	assert!(decimal("-1.0") > decimal("-1.01"));
+	assert!(decimal("-1.01") > decimal("-1.1"));
+}
 
 // // test signed properties
 // #[test]
@@ -213,12 +196,11 @@ fn lt() {
 // 	assert_eq!(decimal("-20") * decimal("-0.2"), decimal("4"));
 // }
 
-// #[test]
-// #[ignore]
-// fn simple_partial_cmp() {
-// 	assert!(decimal("1.0") < decimal("1.1"));
-// 	assert!(decimal("0.00000000000000000000001") > decimal("-20000000000000000000000000000"));
-// }
+#[test]
+fn simple_partial_cmp() {
+	assert!(decimal("1.0") < decimal("1.1"));
+	assert!(decimal("0.00000000000000000000001") > decimal("-20000000000000000000000000000"));
+}
 
 // // test carrying rules
 // // these tests are designed to ensure correctness of implementations for which the

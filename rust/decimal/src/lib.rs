@@ -1,14 +1,18 @@
-use std::cmp::{Ordering, PartialEq, PartialOrd};
+use std::{
+	cmp::{Ordering, PartialEq, PartialOrd},
+	iter,
+	ops::Add,
+};
 
 /// Type implementing arbitrary-precision decimal arithmetic
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Decimal {
 	positive: bool,
 	digits: Vec<u8>,
-	decimal: usize,
+	decimal: Option<usize>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub enum Error {
 	IntegralLenTooShort,
 	FractionalLenTooShort,
@@ -19,10 +23,15 @@ impl Decimal {
 		let mut digits = Vec::new();
 		let mut decimal: Option<usize> = None;
 		let mut positive = true;
+		let mut offset = 0;
 
 		for (idx, chr) in input.chars().enumerate() {
 			if idx == 0 && chr == '-' {
 				positive = false;
+				offset = 1;
+				continue;
+			} else if idx == 0 && chr == '+' {
+				offset = 1;
 				continue;
 			}
 
@@ -31,7 +40,7 @@ impl Decimal {
 					digits.push(chr as u8 - b'0');
 				}
 				'.' => {
-					decimal = Some(idx);
+					decimal = Some(idx - offset);
 				}
 				_ => {
 					return None;
@@ -39,35 +48,50 @@ impl Decimal {
 			}
 		}
 
-		Some(Decimal { positive, digits, decimal: decimal.unwrap_or(input.len() - 1) })
+		Some(Decimal { positive, digits, decimal })
 	}
 
-	pub fn integral(&self, expand_to: Option<usize>) -> Result<Vec<u8>, Error> {
-		let mut res = self.digits[0..self.decimal].to_vec();
+	fn integral_len(&self) -> usize {
+		let Some(decimal) = self.decimal else {
+			return self.digits.len();
+		};
+
+		decimal
+	}
+
+	fn integral(&self, expand_to: Option<usize>) -> Result<Vec<u8>, Error> {
+		let decimal_or_digit_len = self.decimal.unwrap_or(self.digits.len());
+		let mut res = self.digits[0..decimal_or_digit_len].to_vec();
 
 		if let Some(expand_len) = expand_to {
 			if expand_len < res.len() {
 				return Err(Error::IntegralLenTooShort);
 			}
 
-			for _ in 0..expand_len - res.len() {
-				res.insert(0, 0);
-			}
+			res = iter::repeat_n(0, expand_len - res.len()).chain(res).collect();
 		}
 
 		Ok(res)
 	}
 
-	pub fn fractional_digits(&self) -> usize {
-		if self.decimal < self.digits.len() - 1 { self.digits.len() - self.decimal } else { 0 }
+	fn fractional_len(&self) -> usize {
+		let Some(decimal) = self.decimal else {
+			return 0;
+		};
+
+		self.digits.len() - decimal
 	}
 
-	pub fn fractional(&self, expand_to: Option<usize>) -> Result<Vec<u8>, Error> {
-		let mut fractional = if self.decimal < self.digits.len() - 1 {
-			self.digits[self.decimal + 1..].to_vec()
-		} else {
-			Vec::new()
+	fn fractional(&self, expand_to: Option<usize>) -> Result<Vec<u8>, Error> {
+		let Some(decimal) = self.decimal else {
+			return Ok(Vec::new());
 		};
+
+		if decimal >= self.digits.len() {
+			return Ok(Vec::new());
+		}
+
+		let mut fractional = self.digits[decimal..].to_vec();
 
 		if let Some(expand_len) = expand_to {
 			if expand_len < fractional.len() {
@@ -79,6 +103,19 @@ impl Decimal {
 
 		Ok(fractional)
 	}
+
+	// Helper functions
+	fn reverse_ordering(ordering: Ordering, b_reverse: bool) -> Ordering {
+		if !b_reverse {
+			return ordering;
+		}
+
+		match ordering {
+			Ordering::Less => Ordering::Greater,
+			Ordering::Equal => Ordering::Equal,
+			Ordering::Greater => Ordering::Less,
+		}
+	}
 }
 
 impl PartialEq for Decimal {
@@ -89,14 +126,15 @@ impl PartialEq for Decimal {
 		}
 
 		// check the integer part
-		let max_integral_len = self.decimal.max(other.decimal);
-		if self.integral(Some(max_integral_len)).unwrap()
-			!= other.integral(Some(max_integral_len)).unwrap()
-		{
+		let max_int_len = self.integral_len().max(other.integral_len());
+		let self_int = self.integral(Some(max_int_len)).unwrap();
+		let other_int = other.integral(Some(max_int_len)).unwrap();
+
+		if self_int != other_int {
 			return false;
 		}
 
-		let max_frac_len = self.fractional_digits().max(other.fractional_digits());
+		let max_frac_len = self.fractional_len().max(other.fractional_len());
 		let self_frac = self.fractional(Some(max_frac_len)).unwrap();
 		let other_frac = other.fractional(Some(max_frac_len)).unwrap();
 
@@ -117,43 +155,134 @@ impl PartialOrd for Decimal {
 		};
 
 		// check the integral part
-		let max_integral_len = self.decimal.max(other.decimal);
+		let max_integral_len = self.integral_len().max(other.integral_len());
 		let self_integral = self.integral(Some(max_integral_len)).unwrap();
 		let other_integral = other.integral(Some(max_integral_len)).unwrap();
+
 		for (s_v, o_v) in self_integral.iter().zip(other_integral.iter()) {
 			if s_v != o_v {
-				if self.positive {
-					return s_v.partial_cmp(o_v);
-				} else {
-					// this is a negative value, revert the partial_cmp result
-					if s_v > o_v {
-						return Some(Ordering::Less);
-					} else {
-						return Some(Ordering::Greater);
-					}
-				}
+				return s_v.partial_cmp(o_v).map(|o| Decimal::reverse_ordering(o, !self.positive));
 			}
 		}
 
 		// check the fractional part
-		let max_frac_len = self.fractional_digits().max(other.fractional_digits());
+		let max_frac_len = self.fractional_len().max(other.fractional_len());
 		let self_frac = self.fractional(Some(max_frac_len)).unwrap();
 		let other_frac = other.fractional(Some(max_frac_len)).unwrap();
+
 		for (s_v, o_v) in self_frac.iter().zip(other_frac.iter()) {
 			if s_v != o_v {
-				if self.positive {
-					return s_v.partial_cmp(o_v);
-				} else {
-					// this is a negative value, revert the partial_cmp result
-					if s_v > o_v {
-						return Some(Ordering::Less);
-					} else {
-						return Some(Ordering::Greater);
-					}
-				}
+				return s_v.partial_cmp(o_v).map(|o| Decimal::reverse_ordering(o, !self.positive));
 			}
 		}
 
 		Some(Ordering::Equal)
+	}
+}
+
+impl Add for Decimal {
+	type Output = Self;
+
+	fn add(self, rhs: Self) -> Self::Output {
+		self
+	}
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	/// Create a Decimal from a string literal
+	///
+	/// Use only when you _know_ that your value is valid.
+	fn decimal(input: &str) -> Decimal {
+		Decimal::try_from(input).expect("That was supposed to be a valid value")
+	}
+
+	#[test]
+	fn basic1() {
+		let res = decimal("10.015");
+		assert_eq!(res.integral_len(), 2);
+		assert_eq!(res.integral(None).unwrap(), vec![1, 0]);
+		assert_eq!(res.integral(Some(4)).unwrap(), vec![0, 0, 1, 0]);
+
+		assert_eq!(res.fractional_len(), 3);
+		assert_eq!(res.fractional(None).unwrap(), vec![0, 1, 5]);
+		assert_eq!(res.fractional(Some(5)).unwrap(), vec![0, 1, 5, 0, 0]);
+
+		assert!(res.fractional(Some(2)).is_err());
+	}
+
+	#[test]
+	fn basic2() {
+		let res = decimal("1.0");
+		assert_eq!(res.digits, vec![1, 0]);
+		assert_eq!(res.decimal.unwrap(), 1);
+
+		assert_eq!(res.integral_len(), 1);
+		assert_eq!(res.integral(None).unwrap(), vec![1]);
+		assert_eq!(res.fractional_len(), 1);
+		assert_eq!(res.fractional(None).unwrap(), vec![0]);
+	}
+
+	#[test]
+	fn basic3() {
+		let res = decimal("1");
+		assert_eq!(res.digits, vec![1]);
+		assert!(res.decimal.is_none());
+
+		assert_eq!(res.integral_len(), 1);
+		assert_eq!(res.integral(None).unwrap(), vec![1]);
+		assert_eq!(res.fractional_len(), 0);
+		assert_eq!(res.fractional(None).unwrap(), vec![]);
+	}
+
+	#[test]
+	fn basic4() {
+		let res = decimal("1.");
+		assert_eq!(res.digits, vec![1]);
+		assert_eq!(res.decimal.unwrap(), 1);
+
+		assert_eq!(res.integral_len(), 1);
+		assert_eq!(res.integral(None).unwrap(), vec![1]);
+		assert_eq!(res.fractional_len(), 0);
+		assert_eq!(res.fractional(None).unwrap(), vec![]);
+	}
+
+	#[test]
+	fn basic5() {
+		let res = decimal(".1");
+		assert_eq!(res.digits, vec![1]);
+		assert_eq!(res.decimal.unwrap(), 0);
+
+		assert_eq!(res.integral_len(), 0);
+		assert_eq!(res.integral(None).unwrap(), vec![]);
+		assert_eq!(res.fractional_len(), 1);
+		assert_eq!(res.fractional(None).unwrap(), vec![1]);
+	}
+
+	#[test]
+	fn basic6() {
+		let res = decimal("0.1");
+		assert_eq!(res.digits, vec![0, 1]);
+		assert_eq!(res.decimal.unwrap(), 1);
+
+		assert_eq!(res.integral_len(), 1);
+		assert_eq!(res.integral(None).unwrap(), vec![0]);
+		assert_eq!(res.fractional_len(), 1);
+		assert_eq!(res.fractional(None).unwrap(), vec![1]);
+	}
+
+	#[test]
+	fn basic7() {
+		let res = decimal("-0.1");
+		assert_eq!(res.digits, vec![0, 1]);
+		assert_eq!(res.decimal.unwrap(), 1);
+		assert_eq!(res.positive, false);
+
+		assert_eq!(res.integral_len(), 1);
+		assert_eq!(res.integral(None).unwrap(), vec![0]);
+		assert_eq!(res.fractional_len(), 1);
+		assert_eq!(res.fractional(None).unwrap(), vec![1]);
 	}
 }
