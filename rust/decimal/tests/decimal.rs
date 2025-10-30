@@ -46,13 +46,12 @@ fn lt() {
 	}
 }
 
-// #[test]
-// #[ignore]
-// fn add() {
-// 	assert_eq!(decimal("0.1") + decimal("0.2"), decimal("0.3"));
-// 	assert_eq!(decimal(BIGS[0]) + decimal(BIGS[1]), decimal(BIGS[2]));
-// 	assert_eq!(decimal(BIGS[1]) + decimal(BIGS[0]), decimal(BIGS[2]));
-// }
+#[test]
+fn add() {
+	assert_eq!(decimal("0.1") + decimal("0.2"), decimal("0.3"));
+	assert_eq!(decimal(BIGS[0]) + decimal(BIGS[1]), decimal(BIGS[2]));
+	assert_eq!(decimal(BIGS[1]) + decimal(BIGS[0]), decimal(BIGS[2]));
+}
 
 // #[test]
 // #[ignore]
@@ -69,15 +68,14 @@ fn lt() {
 // 	}
 // }
 
-// // test identities
-// #[test]
-// #[ignore]
-// fn add_id() {
-// 	assert_eq!(decimal("1.0") + decimal("0.0"), decimal("1.0"));
-// 	assert_eq!(decimal("0.1") + decimal("0.0"), decimal("0.1"));
-// 	assert_eq!(decimal("0.0") + decimal("1.0"), decimal("1.0"));
-// 	assert_eq!(decimal("0.0") + decimal("0.1"), decimal("0.1"));
-// }
+// test identities
+#[test]
+fn add_id() {
+	assert_eq!(decimal("1.0") + decimal("0.0"), decimal("1.0"));
+	assert_eq!(decimal("0.1") + decimal("0.0"), decimal("0.1"));
+	assert_eq!(decimal("0.0") + decimal("1.0"), decimal("1.0"));
+	assert_eq!(decimal("0.0") + decimal("0.1"), decimal("0.1"));
+}
 
 // #[test]
 // #[ignore]
@@ -115,12 +113,11 @@ fn unequal_number_of_decimal_places() {
 	assert!(decimal("3.1") < decimal("3.14"));
 }
 
-// // tests of arbitrary precision behavior
-// #[test]
-// #[ignore]
-// fn add_uneven_position() {
-// 	assert_eq!(decimal("0.1") + decimal("0.02"), decimal("0.12"));
-// }
+// tests of arbitrary precision behavior
+#[test]
+fn add_uneven_position() {
+	assert_eq!(decimal("0.1") + decimal("0.02"), decimal("0.12"));
+}
 
 #[test]
 fn eq_vary_sig_digits() {

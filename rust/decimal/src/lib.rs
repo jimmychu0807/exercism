@@ -184,7 +184,52 @@ impl Add for Decimal {
 	type Output = Self;
 
 	fn add(self, rhs: Self) -> Self::Output {
-		self
+		// get the fractional part
+		let max_frac_len = self.fractional_len().max(rhs.fractional_len());
+		let self_frac = self.fractional(Some(max_frac_len)).unwrap();
+		let rhs_frac = rhs.fractional(Some(max_frac_len)).unwrap();
+		let mut sum_frac = Vec::new();
+
+		let mut carry = 0;
+		for i in (0..max_frac_len).rev() {
+			let mut res = self_frac[i] + rhs_frac[i] + carry;
+			if res >= 10 {
+				carry = 1;
+				res -= 10;
+			} else {
+				carry = 0;
+			}
+			sum_frac.insert(0, res);
+		}
+
+		// get the integral part
+		let max_integral_len = self.integral_len().max(rhs.integral_len());
+		let self_integral = self.integral(Some(max_integral_len)).unwrap();
+		let rhs_integral = rhs.integral(Some(max_integral_len)).unwrap();
+		let mut sum_integral = Vec::new();
+
+		// The last carry from fractional part is carried over
+		for i in (0..max_integral_len).rev() {
+			let mut res = self_integral[i] + rhs_integral[i] + carry;
+			if res >= 10 {
+				carry = 1;
+				res -= 10;
+			} else {
+				carry = 0;
+			}
+			sum_integral.insert(0, res);
+		}
+
+		if carry == 1 {
+			sum_integral.insert(0, 1);
+		}
+
+		Self {
+			positive: self.positive,
+			digits: sum_integral.iter().chain(sum_frac.iter()).cloned().collect::<Vec<_>>(),
+			decimal: if sum_frac.is_empty() { None } else { Some(sum_integral.len()) },
+		}
+
 	}
 }
 
