@@ -1,7 +1,7 @@
 use std::{
 	cmp::{Ordering, PartialEq, PartialOrd},
 	iter,
-	ops::Add,
+	ops::{Add, Neg, Sub},
 };
 
 /// Type implementing arbitrary-precision decimal arithmetic
@@ -83,15 +83,11 @@ impl Decimal {
 	}
 
 	fn fractional(&self, expand_to: Option<usize>) -> Result<Vec<u8>, Error> {
-		let Some(decimal) = self.decimal else {
-			return Ok(Vec::new());
+		let mut fractional = match self.decimal {
+			Some(decimal) if decimal >= self.digits.len() => Vec::new(),
+			Some(decimal) => self.digits[decimal..].to_vec(),
+			None => Vec::new(),
 		};
-
-		if decimal >= self.digits.len() {
-			return Ok(Vec::new());
-		}
-
-		let mut fractional = self.digits[decimal..].to_vec();
 
 		if let Some(expand_len) = expand_to {
 			if expand_len < fractional.len() {
@@ -114,6 +110,114 @@ impl Decimal {
 			Ordering::Less => Ordering::Greater,
 			Ordering::Equal => Ordering::Equal,
 			Ordering::Greater => Ordering::Less,
+		}
+	}
+
+	fn inner_add_same_sign(&self, other: Self) -> Self {
+		// get the fractional part
+		let max_frac_len = self.fractional_len().max(other.fractional_len());
+		let self_frac = self.fractional(Some(max_frac_len)).unwrap();
+		let other_frac = other.fractional(Some(max_frac_len)).unwrap();
+		let mut sum_frac = Vec::new();
+
+		let mut carry = 0;
+		for i in (0..max_frac_len).rev() {
+			let mut res = self_frac[i] + other_frac[i] + carry;
+			if res >= 10 {
+				carry = 1;
+				res -= 10;
+			} else {
+				carry = 0;
+			}
+			sum_frac.insert(0, res);
+		}
+
+		// get the integral part
+		let max_integral_len = self.integral_len().max(other.integral_len());
+		let self_integral = self.integral(Some(max_integral_len)).unwrap();
+		let other_integral = other.integral(Some(max_integral_len)).unwrap();
+		let mut sum_integral = Vec::new();
+
+		// The last carry from fractional part is carried over
+		for i in (0..max_integral_len).rev() {
+			let mut res = self_integral[i] + other_integral[i] + carry;
+			if res >= 10 {
+				carry = 1;
+				res -= 10;
+			} else {
+				carry = 0;
+			}
+			sum_integral.insert(0, res);
+		}
+
+		// handling the last carry, increase 1 digit value
+		if carry == 1 {
+			sum_integral.insert(0, 1);
+		}
+
+		Self {
+			positive: self.positive,
+			digits: sum_integral.iter().chain(sum_frac.iter()).cloned().collect::<Vec<_>>(),
+			decimal: if sum_frac.is_empty() { None } else { Some(sum_integral.len()) },
+		}
+	}
+
+	fn abs(&self) -> Self {
+		let Decimal { positive: _, digits, decimal } = self;
+		Self { positive: true, digits: digits.clone(), decimal: *decimal }
+	}
+
+	fn inner_sub(self, other: Self) -> Self {
+		// invariant:
+		// self is always greater than `other` in its magnitude, so the sign is always following
+		//   the sign of self value. We are just substracting the magnitude of other from self.
+
+		// get the fractional part
+		let max_frac_len = self.fractional_len().max(other.fractional_len());
+		let self_frac = self.fractional(Some(max_frac_len)).unwrap();
+		let other_frac = other.fractional(Some(max_frac_len)).unwrap();
+		let mut sum_frac = Vec::new();
+
+		let mut carry: i8 = 0;
+		for i in (0..max_frac_len).rev() {
+			let mut res = self_frac[i] as i8 - other_frac[i] as i8 - carry;
+			if res < 0 {
+				carry = 1;
+				res += 10;
+			} else {
+				carry = 0;
+			}
+			sum_frac.insert(0, res as u8);
+		}
+
+		// get the integral part
+		let max_integral_len = self.integral_len().max(other.integral_len());
+		let self_integral = self.integral(Some(max_integral_len)).unwrap();
+		let other_integral = other.integral(Some(max_integral_len)).unwrap();
+		let mut sum_integral = Vec::new();
+
+		// The last carry from fractional part is carried over
+		for i in (0..max_integral_len).rev() {
+			let mut res = self_integral[i] as i8 - other_integral[i] as i8 - carry;
+			if res < 0 {
+				carry = 1;
+				res += 10;
+			} else {
+				carry = 0;
+			}
+			sum_integral.insert(0, res as u8);
+		}
+
+		// note: there is no way there is a last carry because of the invariant
+		//   that self should be >= others
+		if carry > 0 {
+			panic!("there should be no carry at the end of inner_sub");
+		}
+
+		Self {
+			positive: self.positive,
+			digits: sum_integral.iter().chain(sum_frac.iter()).cloned().collect::<Vec<_>>(),
+			decimal: if sum_frac.is_empty() { None } else { Some(sum_integral.len()) },
 		}
 	}
 }
@@ -184,52 +288,32 @@ impl Add for Decimal {
 	type Output = Self;
 
 	fn add(self, rhs: Self) -> Self::Output {
-		// get the fractional part
-		let max_frac_len = self.fractional_len().max(rhs.fractional_len());
-		let self_frac = self.fractional(Some(max_frac_len)).unwrap();
-		let rhs_frac = rhs.fractional(Some(max_frac_len)).unwrap();
-		let mut sum_frac = Vec::new();
+		let sign_equal = self.positive == rhs.positive;
 
-		let mut carry = 0;
-		for i in (0..max_frac_len).rev() {
-			let mut res = self_frac[i] + rhs_frac[i] + carry;
-			if res >= 10 {
-				carry = 1;
-				res -= 10;
-			} else {
-				carry = 0;
-			}
-			sum_frac.insert(0, res);
+		if sign_equal {
+			self.inner_add_same_sign(rhs)
+		} else {
+			let self_abs = self.abs();
+			let rhs_abs = rhs.abs();
+
+			if self_abs >= rhs_abs { self.inner_sub(rhs_abs) } else { rhs.inner_sub(self_abs) }
 		}
+	}
+}
 
-		// get the integral part
-		let max_integral_len = self.integral_len().max(rhs.integral_len());
-		let self_integral = self.integral(Some(max_integral_len)).unwrap();
-		let rhs_integral = rhs.integral(Some(max_integral_len)).unwrap();
-		let mut sum_integral = Vec::new();
+impl Sub for Decimal {
+	type Output = Self;
 
-		// The last carry from fractional part is carried over
-		for i in (0..max_integral_len).rev() {
-			let mut res = self_integral[i] + rhs_integral[i] + carry;
-			if res >= 10 {
-				carry = 1;
-				res -= 10;
-			} else {
-				carry = 0;
-			}
-			sum_integral.insert(0, res);
-		}
+	fn sub(self, rhs: Self) -> Self::Output {
+		self.add(rhs.neg())
+	}
+}
 
-		if carry == 1 {
-			sum_integral.insert(0, 1);
-		}
+impl Neg for Decimal {
+	type Output = Self;
 
-		Self {
-			positive: self.positive,
-			digits: sum_integral.iter().chain(sum_frac.iter()).cloned().collect::<Vec<_>>(),
-			decimal: if sum_frac.is_empty() { None } else { Some(sum_integral.len()) },
-		}
-
+	fn neg(self) -> Self::Output {
+		Self { positive: !self.positive, digits: self.digits, decimal: self.decimal }
 	}
 }
 
