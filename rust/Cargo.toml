@@ -96,6 +96,7 @@ members = [
   "rectangles",
   "xorcism",
   "book-store",
+  "decimal",
   "doubly-linked-list",
 ]
 resolver = "3"

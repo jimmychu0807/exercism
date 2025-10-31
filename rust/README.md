@@ -100,6 +100,7 @@ https://exercism.org/tracks/rust
 | 94  | [Rectangles](./rectangles)            |✅ |
 | 95  | [Xorcism](./xorcism)                  |✅ |
 | 96  | [Book Store](./book-store)            |✅ |
+| 97  | [Decimal](./decimal)                  |✅ |
 |100  | [Doubly Linked List](./doubly-linked-list)    |✅ |
 
 ## Notes
