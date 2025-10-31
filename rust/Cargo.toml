@@ -97,6 +97,7 @@ members = [
   "xorcism",
   "book-store",
   "decimal",
+  "grep",
   "doubly-linked-list",
 ]
 resolver = "3"
