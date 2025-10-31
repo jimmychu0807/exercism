@@ -59,13 +59,17 @@ fn sub() {
 	assert_eq!(decimal(BIGS[2]) - decimal(BIGS[0]), decimal(BIGS[1]));
 }
 
-// #[test]
-// #[ignore]
-// fn mul() {
-// 	for big in BIGS.iter() {
-// 		assert_eq!(decimal(big) * decimal("2"), decimal(big) + decimal(big));
-// 	}
-// }
+#[test]
+fn mul_basic1() {
+	assert_eq!(decimal("1.015") * decimal("1.27"), decimal("1.28905"));
+}
+
+#[test]
+fn mul() {
+	for big in BIGS.iter() {
+		assert_eq!(decimal(big) * decimal("2"), decimal(big) + decimal(big));
+	}
+}
 
 // test identities
 #[test]
@@ -82,12 +86,11 @@ fn sub_id() {
 	assert_eq!(decimal("0.1") - decimal("0.0"), decimal("0.1"));
 }
 
-// #[test]
-// #[ignore]
-// fn mul_id() {
-// 	assert_eq!(decimal("2.1") * decimal("1.0"), decimal("2.1"));
-// 	assert_eq!(decimal("1.0") * decimal("2.1"), decimal("2.1"));
-// }
+#[test]
+fn mul_id() {
+	assert_eq!(decimal("2.1") * decimal("1.0"), decimal("2.1"));
+	assert_eq!(decimal("1.0") * decimal("2.1"), decimal("2.1"));
+}
 
 #[test]
 fn gt_positive_and_zero() {
@@ -180,12 +183,11 @@ fn explicit_positive() {
 	assert_eq!(decimal("+2.0") - decimal("-0002.0"), decimal("4"));
 }
 
-// #[test]
-// #[ignore]
-// fn multiply_by_negative() {
-// 	assert_eq!(decimal("5") * decimal("-0.2"), decimal("-1"));
-// 	assert_eq!(decimal("-20") * decimal("-0.2"), decimal("4"));
-// }
+#[test]
+fn multiply_by_negative() {
+	assert_eq!(decimal("5") * decimal("-0.2"), decimal("-1"));
+	assert_eq!(decimal("-20") * decimal("-0.2"), decimal("4"));
+}
 
 #[test]
 fn simple_partial_cmp() {

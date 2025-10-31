@@ -1,7 +1,7 @@
 use std::{
 	cmp::{Ordering, PartialEq, PartialOrd},
 	iter,
-	ops::{Add, Neg, Sub},
+	ops::{Add, Mul, Neg, Sub},
 };
 
 /// Type implementing arbitrary-precision decimal arithmetic
@@ -220,6 +220,47 @@ impl Decimal {
 			decimal: if sum_frac.is_empty() { None } else { Some(sum_integral.len()) },
 		}
 	}
+
+	fn inner_digits_add(one: &[u8], another: &[u8]) -> Vec<u8> {
+		// Ensure both value have the same number of digits
+		let max_len = one.len().max(another.len());
+		let one: Vec<_> = iter::repeat_n(0, max_len - one.len()).chain(one.to_vec()).collect();
+		let another: Vec<_> =
+			iter::repeat_n(0, max_len - another.len()).chain(another.to_vec()).collect();
+		let mut res = Vec::new();
+
+		let mut carry = 0;
+		for digit_idx in (0..one.len()).rev() {
+			let mut val = one[digit_idx] + another[digit_idx] + carry;
+			if val >= 10 {
+				carry = 1;
+				val -= 10;
+			} else {
+				carry = 0;
+			}
+			res.insert(0, val);
+		}
+
+		if carry == 1 {
+			res.insert(0, 1);
+		}
+
+		res
+	}
+
+	fn inner_single_digit_mul(digits: &[u8], single: &u8) -> Vec<u8> {
+		if *single == 0 {
+			return Vec::new();
+		}
+		let digits = digits.to_vec();
+		let mut res = digits.clone();
+
+		for _ in 1..*single {
+			res = Self::inner_digits_add(&res, &digits);
+		}
+
+		res
+	}
 }
 
 impl PartialEq for Decimal {
@@ -314,6 +355,26 @@ impl Neg for Decimal {
 
 	fn neg(self) -> Self::Output {
 		Self { positive: !self.positive, digits: self.digits, decimal: self.decimal }
+	}
+}
+
+impl Mul for Decimal {
+	type Output = Self;
+
+	fn mul(self, rhs: Self) -> Self::Output {
+		let positive = self.positive == rhs.positive;
+
+		let mut res: Vec<_> = vec![];
+		for (idx, digit) in self.digits.iter().enumerate() {
+			let mut inter = Self::inner_single_digit_mul(&rhs.digits, digit);
+			inter.resize(inter.len() + self.digits.len() - idx - 1, 0);
+			res = Self::inner_digits_add(&res, &inter);
+		}
+
+		// decimal
+		let decimal = res.len() - self.fractional_len() - rhs.fractional_len();
+
+		Self { positive, digits: res, decimal: Some(decimal) }
 	}
 }
 
