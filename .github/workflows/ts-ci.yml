@@ -1,0 +1,42 @@
+name: Typescript CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-test-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js with Yarn v4.5.1
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable Corepack & Yarn v4.5.1
+        run: |
+          cd typescript
+          corepack enable
+          corepack prepare yarn@4.5.1 --activate
+
+      - name: Install dependencies
+        run: |
+          cd typescript
+          yarn install --immutable
+
+      - name: Run tests
+        run: |
+          cd typescript
+          yarn test
+
+      - name: Run lint checks
+        run: |
+          cd typescript
+          yarn lint
