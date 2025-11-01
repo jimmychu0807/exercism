@@ -66,7 +66,12 @@ pub fn grep(pattern: &str, flags: &Flags, files: &[&str]) -> Result<Vec<String>,
 		let mut contents = String::new();
 		let _ = handle.read_to_string(&mut contents)?;
 
-		for (line_idx, line) in contents.lines().enumerate() {
+		let haystack_iter: Box<dyn Iterator<Item = (usize, &str)>> = match flags.b_filename {
+			true => Box::new(std::iter::once(contents.as_str()).enumerate()),
+			false => Box::new(contents.lines().enumerate()),
+		};
+
+		for (line_idx, line) in haystack_iter {
 			if filter_line(line, pattern, &flags) {
 				res.push(output_line(file_name, line_idx, line, &flags));
 			}

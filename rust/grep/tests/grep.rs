@@ -220,7 +220,6 @@ fn multiple_files_several_matches_print_line_numbers_flag() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_one_match_print_file_names_flag() {
 	let pattern = "who";
 	let flags = Flags::new(&["-l"]);
@@ -296,7 +295,6 @@ fn multiple_files_no_matches_various_flags() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_several_matches_file_flag_takes_precedence_over_line_number_flag() {
 	let pattern = "who";
 	let flags = Flags::new(&["-n", "-l"]);
