@@ -70,16 +70,22 @@ pub fn grep(pattern: &str, flags: &Flags, files: &[&str]) -> Result<Vec<String>,
 }
 
 fn filter_line(line: &str, pattern: &str, flags: &Flags) -> bool {
+	let mut line = line.to_string();
+	let mut pattern = pattern.to_string();
+
 	if flags.b_case_insensitive {
-		line.to_uppercase().contains(&pattern.to_uppercase())
-	} else {
-		line.contains(pattern)
+		line = line.to_uppercase();
+		pattern = pattern.to_uppercase();
 	}
+
+	if flags.b_entire { line == pattern } else { line.contains(&pattern) }
 }
 
 fn output_line(res: &mut Vec<String>, file_name: &str, line_idx: usize, line: &str, flags: &Flags) {
 	if flags.b_linenum {
 		res.push(format!("{}:{}", line_idx + 1, line));
+	} else if flags.b_filename {
+		res.push(file_name.to_string());
 	} else {
 		res.push(line.to_string());
 	}

@@ -47,7 +47,6 @@ fn one_file_one_match_case_insensitive_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_one_match_print_file_names_flag() {
 	let pattern = "Forbidden";
 	let flags = Flags::new(&["-l"]);
@@ -58,7 +57,6 @@ fn one_file_one_match_print_file_names_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_one_match_match_entire_lines_flag() {
 	let pattern = "With loss of Eden, till one greater Man";
 	let flags = Flags::new(&["-x"]);
@@ -69,7 +67,6 @@ fn one_file_one_match_match_entire_lines_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_one_match_multiple_flags() {
 	let pattern = "OF ATREUS, Agamemnon, KIng of MEN.";
 	let flags = Flags::new(&["-n", "-i", "-x"]);
@@ -80,7 +77,6 @@ fn one_file_one_match_multiple_flags() {
 }
 
 #[test]
-#[ignore]
 fn one_file_several_matches_no_flags() {
 	let pattern = "may";
 	let flags = Flags::new(&[]);
@@ -95,7 +91,6 @@ fn one_file_several_matches_no_flags() {
 }
 
 #[test]
-#[ignore]
 fn one_file_several_matches_print_line_numbers_flag() {
 	let pattern = "may";
 	let flags = Flags::new(&["-n"]);
