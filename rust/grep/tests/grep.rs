@@ -9,7 +9,6 @@ fn nonexistent_file_returns_error() {
 }
 
 #[test]
-#[ignore]
 fn grep_returns_result() {
 	let pattern = "Agamemnon";
 	let flags = Flags::new(&[]);
@@ -18,7 +17,6 @@ fn grep_returns_result() {
 }
 
 #[test]
-#[ignore]
 fn one_file_one_match_no_flags() {
 	let pattern = "Agamemnon";
 	let flags = Flags::new(&[]);
@@ -29,7 +27,6 @@ fn one_file_one_match_no_flags() {
 }
 
 #[test]
-#[ignore]
 fn one_file_one_match_print_line_numbers_flag() {
 	let pattern = "Forbidden";
 	let flags = Flags::new(&["-n"]);
@@ -40,7 +37,6 @@ fn one_file_one_match_print_line_numbers_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_one_match_case_insensitive_flag() {
 	let pattern = "FORBIDDEN";
 	let flags = Flags::new(&["-i"]);
