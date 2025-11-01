@@ -105,7 +105,6 @@ fn one_file_several_matches_print_line_numbers_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_several_matches_match_entire_lines_flag() {
 	let pattern = "may";
 	let flags = Flags::new(&["-x"]);
@@ -116,7 +115,6 @@ fn one_file_several_matches_match_entire_lines_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_several_matches_case_insensitive_flag() {
 	let pattern = "ACHILLES";
 	let flags = Flags::new(&["-i"]);
@@ -128,7 +126,6 @@ fn one_file_several_matches_case_insensitive_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_several_matches_inverted_flag() {
 	let pattern = "Of";
 	let flags = Flags::new(&["-v"]);
@@ -145,7 +142,6 @@ fn one_file_several_matches_inverted_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_no_matches_various_flags() {
 	let pattern = "Gandalf";
 	let flags = Flags::new(&["-n", "-l", "-x", "-i"]);
@@ -156,7 +152,6 @@ fn one_file_no_matches_various_flags() {
 }
 
 #[test]
-#[ignore]
 fn one_file_one_match_file_flag_takes_precedence_over_line_flag() {
 	let pattern = "ten";
 	let flags = Flags::new(&["-n", "-l"]);
@@ -167,7 +162,6 @@ fn one_file_one_match_file_flag_takes_precedence_over_line_flag() {
 }
 
 #[test]
-#[ignore]
 fn one_file_several_matches_inverted_and_match_entire_lines_flags() {
 	let pattern = "Illustrious into Ades premature,";
 	let flags = Flags::new(&["-x", "-v"]);
@@ -187,7 +181,6 @@ fn one_file_several_matches_inverted_and_match_entire_lines_flags() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_one_match_no_flags() {
 	let pattern = "Agamemnon";
 	let flags = Flags::new(&[]);
@@ -198,7 +191,6 @@ fn multiple_files_one_match_no_flags() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_several_matches_no_flags() {
 	let pattern = "may";
 	let flags = Flags::new(&[]);
@@ -213,7 +205,6 @@ fn multiple_files_several_matches_no_flags() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_several_matches_print_line_numbers_flag() {
 	let pattern = "that";
 	let flags = Flags::new(&["-n"]);
@@ -240,7 +231,6 @@ fn multiple_files_one_match_print_file_names_flag() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_several_matches_case_insensitive_flag() {
 	let pattern = "TO";
 	let flags = Flags::new(&["-i"]);
@@ -262,7 +252,6 @@ fn multiple_files_several_matches_case_insensitive_flag() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_several_matches_inverted_flag() {
 	let pattern = "a";
 	let flags = Flags::new(&["-v"]);
@@ -277,7 +266,6 @@ fn multiple_files_several_matches_inverted_flag() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_one_match_match_entire_lines_flag() {
 	let pattern = "But I beseech your grace that I may know";
 	let flags = Flags::new(&["-x"]);
@@ -288,7 +276,6 @@ fn multiple_files_one_match_match_entire_lines_flag() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_one_match_multiple_flags() {
 	let pattern = "WITH LOSS OF EDEN, TILL ONE GREATER MAN";
 	let flags = Flags::new(&["-n", "-i", "-x"]);
@@ -299,7 +286,6 @@ fn multiple_files_one_match_multiple_flags() {
 }
 
 #[test]
-#[ignore]
 fn multiple_files_no_matches_various_flags() {
 	let pattern = "Frodo";
 	let flags = Flags::new(&["-n", "-l", "-x", "-i"]);
@@ -322,7 +308,6 @@ fn multiple_files_several_matches_file_flag_takes_precedence_over_line_number_fl
 }
 
 #[test]
-#[ignore]
 fn multiple_files_several_matches_inverted_and_match_entire_lines_flags() {
 	let pattern = "Illustrious into Ades premature,";
 	let flags = Flags::new(&["-x", "-v"]);
