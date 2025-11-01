@@ -3,7 +3,8 @@
   "private": true,
   "packageManager": "yarn@4.5.1",
   "workspaces": [
-    "hello-world"
+    "hello-world",
+    "two-fer"
   ],
   "scripts": {
     "lint": "yarn workspaces foreach -Ap run lint",
