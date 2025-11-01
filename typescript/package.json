@@ -1,0 +1,15 @@
+{
+  "name": "typescript-monorepo",
+  "private": true,
+  "packageManager": "yarn@4.5.1",
+  "workspaces": [
+    "hello-world"
+  ],
+  "scripts": {
+    "lint": "yarn workspaces foreach -Ap run lint",
+    "test": "yarn workspaces foreach -Ap run test"
+  },
+  "devDependencies": {
+    "typescript": "~5.6.3"
+  }
+}
