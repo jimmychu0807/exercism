@@ -125,3 +125,11 @@ https://exercism.org/tracks/rust
     - About **Drop** trait.
     - About **Send** and **Sync** traits to mark a data type as thread-safe.
     - Learn not just from implementing the solution, but also how the test cases are constructed, what "scaffold" is used to build up the test cases.
+
+## Some "Show-off"
+
+![Rust 01](../assets/rust-01.png)
+
+![Rust 02](../assets/rust-02.png)
+
+![Rust 03](../assets/rust-03.png)
