@@ -126,7 +126,7 @@ https://exercism.org/tracks/rust
     - About **Send** and **Sync** traits to mark a data type as thread-safe.
     - Learn not just from implementing the solution, but also how the test cases are constructed, what "scaffold" is used to build up the test cases.
 
-## Some "Show-off"
+## Some "show-off" 🙂
 
 ![Rust 01](../assets/rust-01.png)
 
