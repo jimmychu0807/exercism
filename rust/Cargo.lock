@@ -137,6 +137,10 @@ name = "difference_of_squares"
 version = "0.1.0"
 
 [[package]]
+name = "dominoes"
+version = "0.1.0"
+
+[[package]]
 name = "dot_dsl"
 version = "0.1.0"
 
