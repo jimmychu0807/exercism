@@ -7,7 +7,6 @@ fn empty_input_empty_output() {
 }
 
 #[test]
-#[ignore]
 fn singleton_input_singleton_output() {
 	let input = &[(1, 1)];
 	let output = dominoes::chain(input);
@@ -16,7 +15,6 @@ fn singleton_input_singleton_output() {
 }
 
 #[test]
-#[ignore]
 fn singleton_that_can_t_be_chained() {
 	let input = &[(1, 2)];
 	assert!(dominoes::chain(input).is_none());
