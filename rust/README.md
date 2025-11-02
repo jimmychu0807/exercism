@@ -102,6 +102,7 @@ https://exercism.org/tracks/rust
 | 96  | [Book Store](./book-store)            |✅ |
 | 97  | [Decimal](./decimal)                  |✅ |
 | 98  | [Grep](./grep)                        |✅ |
+| 99  | [Dominoes](./dominoes)                |✅ |
 |100  | [Doubly Linked List](./doubly-linked-list)    |✅ |
 
 ## Notes

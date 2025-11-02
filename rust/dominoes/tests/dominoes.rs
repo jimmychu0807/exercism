@@ -21,7 +21,12 @@ fn singleton_that_can_t_be_chained() {
 }
 
 #[test]
-#[ignore]
+fn basic_test1() {
+	let input = &[(1, 2), (1, 2)];
+	assert!(dominoes::chain(input).is_some());
+}
+
+#[test]
 fn three_elements() {
 	let input = &[(1, 2), (3, 1), (2, 3)];
 	let output = dominoes::chain(input);
@@ -30,7 +35,6 @@ fn three_elements() {
 }
 
 #[test]
-#[ignore]
 fn can_reverse_dominoes() {
 	let input = &[(1, 2), (1, 3), (2, 3)];
 	let output = dominoes::chain(input);
@@ -39,35 +43,30 @@ fn can_reverse_dominoes() {
 }
 
 #[test]
-#[ignore]
 fn can_t_be_chained() {
 	let input = &[(1, 2), (4, 1), (2, 3)];
 	assert!(dominoes::chain(input).is_none());
 }
 
 #[test]
-#[ignore]
 fn disconnected_simple() {
 	let input = &[(1, 1), (2, 2)];
 	assert!(dominoes::chain(input).is_none());
 }
 
 #[test]
-#[ignore]
 fn disconnected_double_loop() {
 	let input = &[(1, 2), (2, 1), (3, 4), (4, 3)];
 	assert!(dominoes::chain(input).is_none());
 }
 
 #[test]
-#[ignore]
 fn disconnected_single_isolated() {
 	let input = &[(1, 2), (2, 3), (3, 1), (4, 4)];
 	assert!(dominoes::chain(input).is_none());
 }
 
 #[test]
-#[ignore]
 fn need_backtrack() {
 	let input = &[(1, 2), (2, 3), (3, 1), (2, 4), (2, 4)];
 	let output = dominoes::chain(input);
@@ -76,7 +75,6 @@ fn need_backtrack() {
 }
 
 #[test]
-#[ignore]
 fn separate_loops() {
 	let input = &[(1, 2), (2, 3), (3, 1), (1, 1), (2, 2), (3, 3)];
 	let output = dominoes::chain(input);
@@ -85,7 +83,6 @@ fn separate_loops() {
 }
 
 #[test]
-#[ignore]
 fn nine_elements() {
 	let input = &[(1, 2), (5, 3), (3, 1), (1, 2), (2, 4), (1, 6), (2, 3), (3, 4), (5, 6)];
 	let output = dominoes::chain(input);
@@ -94,7 +91,6 @@ fn nine_elements() {
 }
 
 #[test]
-#[ignore]
 fn separate_three_domino_loops() {
 	let input = &[(1, 2), (2, 3), (3, 1), (4, 5), (5, 6), (6, 4)];
 	assert!(dominoes::chain(input).is_none());
