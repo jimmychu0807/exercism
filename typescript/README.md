@@ -8,3 +8,4 @@
 8. [space-age](./space-age)
 9. [dnd-character](./dnd-character)
 10. [darts](./darts)
+11. [pangram](./pangram)
