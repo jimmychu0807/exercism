@@ -1467,9 +1467,189 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@exercism/typescript-darts@workspace:darts":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-darts@workspace:darts"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-dnd-character@workspace:dnd-character":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-dnd-character@workspace:dnd-character"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
 "@exercism/typescript-hello-world@workspace:hello-world":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-hello-world@workspace:hello-world"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-leap@workspace:leap":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-leap@workspace:leap"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-pangram@workspace:pangram":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-pangram@workspace:pangram"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-resistor-color-duo@workspace:resistor-color-duo":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-resistor-color-duo@workspace:resistor-color-duo"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-resistor-color-trio@workspace:resistor-color-trio":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-resistor-color-trio@workspace:resistor-color-trio"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-resistor-color@workspace:resistor-color":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-resistor-color@workspace:resistor-color"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-rna-transcription@workspace:rna-transcription":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-rna-transcription@workspace:rna-transcription"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-space-age@workspace:space-age":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-space-age@workspace:space-age"
   dependencies:
     "@exercism/babel-preset-typescript": "npm:^0.6.0"
     "@exercism/eslint-config-typescript": "npm:^0.8.0"
