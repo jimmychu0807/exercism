@@ -2,9 +2,13 @@ name: Typescript CI
 
 on:
   push:
+    paths:
+      - 'typescript/**'
     branches:
       - master
   pull_request:
+    paths:
+      - 'typescript/**'
     types: [opened, synchronize, reopened]
 
 jobs:

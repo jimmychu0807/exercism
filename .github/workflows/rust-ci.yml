@@ -2,9 +2,13 @@ name: Rust CI
 
 on:
   push:
+    paths:
+      - 'rust/**'
     branches:
       - master
   pull_request:
+    paths:
+      - 'rust/**'
     types: [opened, synchronize, reopened]
 
 jobs:
