@@ -3,7 +3,16 @@
   "private": true,
   "packageManager": "yarn@4.5.1",
   "workspaces": [
+    "darts",
+    "dnd-character",
     "hello-world",
+    "leap",
+    "pangram",
+    "resistor-color",
+    "resistor-color-duo",
+    "resistor-color-trio",
+    "rna-transcription",
+    "space-age",
     "two-fer"
   ],
   "scripts": {
