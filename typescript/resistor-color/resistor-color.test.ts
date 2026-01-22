@@ -1,4 +1,4 @@
-import { describe, xdescribe, it, expect, xit } from '@jest/globals'
+import { describe, it, expect } from '@jest/globals'
 import { colorCode, COLORS } from './resistor-color.ts'
 
 describe('color code', () => {

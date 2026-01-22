@@ -1,4 +1,4 @@
-export function isPangram(text: string) {
+export function isPangram(text: string): boolean {
   if(text === ''){
     return false;
   }
@@ -11,6 +11,5 @@ export function isPangram(text: string) {
       return false;
     }
   }
-  return true;  
-
+  return true;
 }

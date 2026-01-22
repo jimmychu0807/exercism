@@ -11,7 +11,7 @@ export const COLORS = [
   'white',
 ]
 
-export const colorCode = (color:string) => {
+export const colorCode = (color:string): number => {
   // throw new Error('Remove this line and implement the function')
   return COLORS.indexOf(color.toLowerCase());
 }
