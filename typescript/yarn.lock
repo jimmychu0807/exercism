@@ -1467,9 +1467,49 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@exercism/typescript-binary-search@workspace:binary-search":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-binary-search@workspace:binary-search"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
 "@exercism/typescript-bob@workspace:bob":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-bob@workspace:bob"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-clock@workspace:clock":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-clock@workspace:clock"
   dependencies:
     "@exercism/babel-preset-typescript": "npm:^0.6.0"
     "@exercism/eslint-config-typescript": "npm:^0.8.0"
@@ -1527,6 +1567,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@exercism/typescript-grade-school@workspace:grade-school":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-grade-school@workspace:grade-school"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
 "@exercism/typescript-hello-world@workspace:hello-world":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-hello-world@workspace:hello-world"
@@ -1550,6 +1610,66 @@ __metadata:
 "@exercism/typescript-leap@workspace:leap":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-leap@workspace:leap"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-line-up@workspace:line-up":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-line-up@workspace:line-up"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-linked-list@workspace:linked-list":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-linked-list@workspace:linked-list"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-matrix@workspace:matrix":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-matrix@workspace:matrix"
   dependencies:
     "@exercism/babel-preset-typescript": "npm:^0.6.0"
     "@exercism/eslint-config-typescript": "npm:^0.8.0"
@@ -1650,6 +1770,46 @@ __metadata:
 "@exercism/typescript-rna-transcription@workspace:rna-transcription":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-rna-transcription@workspace:rna-transcription"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-robot-name@workspace:robot-name":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-robot-name@workspace:robot-name"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-secret-handshake@workspace:secret-handshake":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-secret-handshake@workspace:secret-handshake"
   dependencies:
     "@exercism/babel-preset-typescript": "npm:^0.6.0"
     "@exercism/eslint-config-typescript": "npm:^0.8.0"
