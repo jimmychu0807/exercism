@@ -27,7 +27,8 @@
     "atbash-cipher",
     "wordy",
     "word-count",
-    "difference-of-squares"
+    "difference-of-squares",
+    "gigasecond"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
