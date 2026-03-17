@@ -1501,6 +1501,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@exercism/typescript-atbash-cipher@workspace:atbash-cipher":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-atbash-cipher@workspace:atbash-cipher"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
 "@exercism/typescript-binary-search@workspace:binary-search":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-binary-search@workspace:binary-search"
@@ -1761,6 +1781,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@exercism/typescript-rational-numbers@workspace:rational-numbers":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-rational-numbers@workspace:rational-numbers"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
 "@exercism/typescript-resistor-color-duo@workspace:resistor-color-duo":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-resistor-color-duo@workspace:resistor-color-duo"
@@ -1904,6 +1944,26 @@ __metadata:
 "@exercism/typescript-two-fer@workspace:two-fer":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-two-fer@workspace:two-fer"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-wordy@workspace:wordy":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-wordy@workspace:wordy"
   dependencies:
     "@exercism/babel-preset-typescript": "npm:^0.6.0"
     "@exercism/eslint-config-typescript": "npm:^0.8.0"

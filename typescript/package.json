@@ -22,7 +22,10 @@
     "secret-handshake",
     "binary-search",
     "linked-list",
-    "prism"
+    "prism",
+    "rational-numbers",
+    "atbash-cipher",
+    "wordy"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {

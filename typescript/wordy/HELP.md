@@ -21,8 +21,8 @@ some exercises may have optional tests `it.skip`. Remove `.skip` to execute the 
 
 ## Submitting your solution
 
-You can submit your solution using the `exercism submit rational-numbers.ts` command. This command
-will upload your solution to the Exercism website and print the solution page's URL.
+You can submit your solution using the `exercism submit wordy.ts` command. This command will upload
+your solution to the Exercism website and print the solution page's URL.
 
 It's possible to submit an incomplete solution which allows you to:
 
