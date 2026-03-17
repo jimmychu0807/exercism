@@ -25,7 +25,8 @@
     "prism",
     "rational-numbers",
     "atbash-cipher",
-    "wordy"
+    "wordy",
+    "word-count"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
