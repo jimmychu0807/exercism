@@ -26,7 +26,8 @@
     "rational-numbers",
     "atbash-cipher",
     "wordy",
-    "word-count"
+    "word-count",
+    "difference-of-squares"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
