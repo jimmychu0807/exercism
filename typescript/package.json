@@ -22,13 +22,19 @@
     "clock",
     "secret-handshake",
     "binary-search",
-    "linked-list"
+    "linked-list",
+    "prism"
   ],
   "scripts": {
     "lint": "yarn workspaces foreach -Ap run lint",
-    "test": "yarn workspaces foreach -Ap run test"
+    "test": "yarn workspaces foreach -Ap run test",
+    "prettier:write": "yarn exec prettier . --write",
+    "prettier:check": "yarn exec prettier . --check"
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
     "typescript": "~5.6.3"
   }
 }
