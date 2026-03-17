@@ -2,6 +2,7 @@
 
 import tsEslint from 'typescript-eslint'
 import config from '@exercism/eslint-config-typescript'
+import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import maintainersConfig from '@exercism/eslint-config-typescript/maintainers.mjs'
 
 export default [
@@ -9,6 +10,7 @@ export default [
     files: ['.meta/proof.ci.ts', '.meta/exemplar.ts', '*.test.ts'],
     extends: maintainersConfig,
   }),
+  eslintPluginPrettierRecommended,
   {
     ignores: [
       // # Protected or generated

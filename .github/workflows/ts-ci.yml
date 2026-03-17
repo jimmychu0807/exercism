@@ -44,3 +44,4 @@ jobs:
         run: |
           cd typescript
           yarn lint
+          yarn prettier:check
