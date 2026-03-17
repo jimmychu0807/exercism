@@ -1,21 +1,10 @@
 {
-  "authors": [
-    "msomji"
-  ],
-  "contributors": [
-    "EduardoBautista",
-    "SleeplessByte"
-  ],
+  "authors": ["msomji"],
+  "contributors": ["EduardoBautista", "SleeplessByte"],
   "files": {
-    "solution": [
-      "resistor-color-duo.ts"
-    ],
-    "test": [
-      "resistor-color-duo.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["resistor-color-duo.ts"],
+    "test": ["resistor-color-duo.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Convert color codes, as used on resistors, to a numeric value.",
   "custom": {

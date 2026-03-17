@@ -1,20 +1,10 @@
 {
-  "authors": [
-    "angelikatyborska"
-  ],
-  "contributors": [
-    "SleeplessByte"
-  ],
+  "authors": ["angelikatyborska"],
+  "contributors": ["SleeplessByte"],
   "files": {
-    "solution": [
-      "darts.ts"
-    ],
-    "test": [
-      "darts.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["darts.ts"],
+    "test": ["darts.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Calculate the points scored in a single toss of a Darts game.",
   "custom": {

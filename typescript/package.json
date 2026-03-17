@@ -1,7 +1,6 @@
 {
-  "name": "typescript-monorepo",
+  "name": "exercism-ts-monorepo",
   "private": true,
-  "packageManager": "yarn@4.5.1",
   "workspaces": [
     "hello-world",
     "two-fer",
@@ -22,13 +21,26 @@
     "clock",
     "secret-handshake",
     "binary-search",
-    "linked-list"
+    "linked-list",
+    "prism",
+    "rational-numbers",
+    "atbash-cipher",
+    "wordy",
+    "word-count",
+    "difference-of-squares",
+    "gigasecond"
   ],
+  "packageManager": "yarn@4.5.1",
   "scripts": {
-    "lint": "yarn workspaces foreach -Ap run lint",
-    "test": "yarn workspaces foreach -Ap run test"
+    "lint": "yarn workspaces foreach -Ap --exclude exercism-ts-monorepo run lint",
+    "test": "yarn workspaces foreach -Ap --exclude exercism-ts-monorepo run test",
+    "prettier:write": "yarn workspaces foreach -Ap --exclude exercism-ts-monorepo exec prettier --write .",
+    "prettier:check": "yarn workspaces foreach -Ap --exclude exercism-ts-monorepo exec prettier --check ."
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
     "typescript": "~5.6.3"
   }
 }

@@ -1,24 +1,10 @@
 {
-  "authors": [
-    "masters3d"
-  ],
-  "contributors": [
-    "amscotti",
-    "DFXLuna",
-    "kytrinyx",
-    "lukaszklis",
-    "SleeplessByte"
-  ],
+  "authors": ["masters3d"],
+  "contributors": ["amscotti", "DFXLuna", "kytrinyx", "lukaszklis", "SleeplessByte"],
   "files": {
-    "solution": [
-      "bob.ts"
-    ],
-    "test": [
-      "bob.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["bob.ts"],
+    "test": ["bob.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Bob is a lackadaisical teenager. In conversation, his responses are very limited.",
   "custom": {

@@ -1,21 +1,10 @@
 {
-  "authors": [
-    "CRivasGomez"
-  ],
-  "contributors": [
-    "masters3d",
-    "SleeplessByte"
-  ],
+  "authors": ["CRivasGomez"],
+  "contributors": ["masters3d", "SleeplessByte"],
   "files": {
-    "solution": [
-      "matrix.ts"
-    ],
-    "test": [
-      "matrix.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["matrix.ts"],
+    "test": ["matrix.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Given a string representing a matrix of numbers, return the rows and columns of that matrix.",
   "custom": {

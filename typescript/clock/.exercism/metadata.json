@@ -1,1 +1,9 @@
-{"track":"typescript","exercise":"clock","id":"bdc9263fcc3544b18e0afa3484410686","url":"https://exercism.org/tracks/typescript/exercises/clock","handle":"jimmychu0807","is_requester":true,"auto_approve":false}
+{
+  "track": "typescript",
+  "exercise": "clock",
+  "id": "bdc9263fcc3544b18e0afa3484410686",
+  "url": "https://exercism.org/tracks/typescript/exercises/clock",
+  "handle": "jimmychu0807",
+  "is_requester": true,
+  "auto_approve": false
+}

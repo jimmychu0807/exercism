@@ -5,13 +5,12 @@ export class Matrix {
   }
 
   get rows(): number[][] {
+    const lines = this.text.split("\n"); // 将字符串风格成行
 
-    const lines = this.text.split('\n'); // 将字符串风格成行
-  
     const result: number[][] = []; // 定义保存下来的 matrix 格式
 
-    for (const line of lines) { 
-      const stringNumbers = line.split(' '); // 把每行的字符串内容进行分割
+    for (const line of lines) {
+      const stringNumbers = line.split(" "); // 把每行的字符串内容进行分割
       const rowOfNumbers: number[] = []; // 定义每一行的数组
       for (const s of stringNumbers) {
         const num = parseInt(s, 10); // 把每行数组里的字符串改为数字
@@ -24,7 +23,6 @@ export class Matrix {
   }
 
   get columns(): number[][] {
-
     const allRows = this.rows;
     const result: number[][] = [];
 
@@ -33,7 +31,8 @@ export class Matrix {
     const rowCount = allRows.length; // 行数
     const columnCount = allRows[0].length; // 用第一行的字数确定列数
 
-    for (let i = 0; i < columnCount; i++) { // 循环每一列
+    for (let i = 0; i < columnCount; i++) {
+      // 循环每一列
       const currentColumn: number[] = [];
 
       for (let j = 0; j < rowCount; j++) {

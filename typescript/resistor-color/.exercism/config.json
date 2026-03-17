@@ -1,20 +1,10 @@
 {
-  "authors": [
-    "Roshanjossey"
-  ],
-  "contributors": [
-    "SleeplessByte"
-  ],
+  "authors": ["Roshanjossey"],
+  "contributors": ["SleeplessByte"],
   "files": {
-    "solution": [
-      "resistor-color.ts"
-    ],
-    "test": [
-      "resistor-color.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["resistor-color.ts"],
+    "test": ["resistor-color.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Convert a resistor band's color to its numeric representation.",
   "custom": {
