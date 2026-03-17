@@ -1,23 +1,10 @@
 {
-  "authors": [
-    "masters3d"
-  ],
-  "contributors": [
-    "CRivasGomez",
-    "DFXLuna",
-    "lukaszklis",
-    "SleeplessByte"
-  ],
+  "authors": ["masters3d"],
+  "contributors": ["CRivasGomez", "DFXLuna", "lukaszklis", "SleeplessByte"],
   "files": {
-    "solution": [
-      "pangram.ts"
-    ],
-    "test": [
-      "pangram.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["pangram.ts"],
+    "test": ["pangram.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Determine if a sentence is a pangram.",
   "custom": {

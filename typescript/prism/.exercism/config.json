@@ -1,17 +1,9 @@
 {
-  "authors": [
-    "BNAndras"
-  ],
+  "authors": ["BNAndras"],
   "files": {
-    "solution": [
-      "prism.ts"
-    ],
-    "test": [
-      "prism.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["prism.ts"],
+    "test": ["prism.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Calculate the path of a laser through reflective prisms.",
   "custom": {

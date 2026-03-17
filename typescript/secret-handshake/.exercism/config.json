@@ -1,21 +1,10 @@
 {
-  "authors": [
-    "CRivasGomez"
-  ],
-  "contributors": [
-    "masters3d",
-    "SleeplessByte"
-  ],
+  "authors": ["CRivasGomez"],
+  "contributors": ["masters3d", "SleeplessByte"],
   "files": {
-    "solution": [
-      "secret-handshake.ts"
-    ],
-    "test": [
-      "secret-handshake.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["secret-handshake.ts"],
+    "test": ["secret-handshake.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Given a decimal number, convert it to the appropriate sequence of events for a secret handshake.",
   "custom": {

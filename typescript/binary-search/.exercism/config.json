@@ -1,21 +1,10 @@
 {
-  "authors": [
-    "anuragsoni"
-  ],
-  "contributors": [
-    "masters3d",
-    "SleeplessByte"
-  ],
+  "authors": ["anuragsoni"],
+  "contributors": ["masters3d", "SleeplessByte"],
   "files": {
-    "solution": [
-      "binary-search.ts"
-    ],
-    "test": [
-      "binary-search.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["binary-search.ts"],
+    "test": ["binary-search.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Implement a binary search algorithm.",
   "custom": {

@@ -1,18 +1,9 @@
 {
-  "authors": [
-    "JoshiRaez",
-    "SleeplessByte"
-  ],
+  "authors": ["JoshiRaez", "SleeplessByte"],
   "files": {
-    "solution": [
-      "dnd-character.ts"
-    ],
-    "test": [
-      "dnd-character.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["dnd-character.ts"],
+    "test": ["dnd-character.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Randomly generate Dungeons & Dragons characters.",
   "custom": {

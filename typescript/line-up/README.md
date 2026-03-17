@@ -1,20 +1,21 @@
 # Line Up
 
-Welcome to Line Up on Exercism's TypeScript Track.
-If you need help running the tests or submitting your code, check out `HELP.md`.
+Welcome to Line Up on Exercism's TypeScript Track. If you need help running the tests or submitting
+your code, check out `HELP.md`.
 
 ## Introduction
 
-Your friend Yaʻqūb works the counter at a deli in town, slicing, weighing, and wrapping orders for a line of hungry customers that gets longer every day.
-Waiting customers are starting to lose track of who is next, so he wants numbered tickets they can use to track the order in which they arrive.
+Your friend Yaʻqūb works the counter at a deli in town, slicing, weighing, and wrapping orders for a
+line of hungry customers that gets longer every day. Waiting customers are starting to lose track of
+who is next, so he wants numbered tickets they can use to track the order in which they arrive.
 
-To make the customers feel special, he does not want the ticket to have only a number on it.
-They shall get a proper English sentence with their name and number on it.
+To make the customers feel special, he does not want the ticket to have only a number on it. They
+shall get a proper English sentence with their name and number on it.
 
 ## Instructions
 
-Given a name and a number, your task is to produce a sentence using that name and that number as an [ordinal numeral][ordinal-numeral].
-Yaʻqūb expects to use numbers from 1 up to 999.
+Given a name and a number, your task is to produce a sentence using that name and that number as an
+[ordinal numeral][ordinal-numeral]. Yaʻqūb expects to use numbers from 1 up to 999.
 
 Rules:
 
@@ -39,4 +40,5 @@ Examples:
 
 ### Based on
 
-mk-mxp, based on previous work from Exercism contributors codedge and neenjaw - https://forum.exercism.org/t/new-exercise-ordinal-numbers/19147
+mk-mxp, based on previous work from Exercism contributors codedge and neenjaw -
+https://forum.exercism.org/t/new-exercise-ordinal-numbers/19147

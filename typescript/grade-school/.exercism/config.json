@@ -1,22 +1,10 @@
 {
-  "authors": [
-    "masters3d"
-  ],
-  "contributors": [
-    "lukaszklis",
-    "pedrorolo",
-    "SleeplessByte"
-  ],
+  "authors": ["masters3d"],
+  "contributors": ["lukaszklis", "pedrorolo", "SleeplessByte"],
   "files": {
-    "solution": [
-      "grade-school.ts"
-    ],
-    "test": [
-      "grade-school.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["grade-school.ts"],
+    "test": ["grade-school.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Given students' names along with the grade that they are in, create a roster for the school.",
   "custom": {

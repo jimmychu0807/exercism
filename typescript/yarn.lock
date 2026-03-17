@@ -3811,6 +3811,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"exercism-ts-monorepo@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "exercism-ts-monorepo@workspace:."
+  dependencies:
+    "@trivago/prettier-plugin-sort-imports": "npm:^6.0.2"
+    eslint-config-prettier: "npm:^10.1.8"
+    eslint-plugin-prettier: "npm:^5.5.5"
+    typescript: "npm:~5.6.3"
+  languageName: unknown
+  linkType: soft
+
 "exit@npm:^0.1.2":
   version: 0.1.2
   resolution: "exit@npm:0.1.2"
@@ -6885,17 +6896,6 @@ __metadata:
   checksum: 10c0/9c1bef1887ee984e63cbf4f4321f22ed232b192597400b74220aaecd42235bccc3c7786e002d283f81e1a0812a1c6d83ea5860bffa5e87d119204ecb9db0296a
   languageName: node
   linkType: hard
-
-"typescript-monorepo@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "typescript-monorepo@workspace:."
-  dependencies:
-    "@trivago/prettier-plugin-sort-imports": "npm:^6.0.2"
-    eslint-config-prettier: "npm:^10.1.8"
-    eslint-plugin-prettier: "npm:^5.5.5"
-    typescript: "npm:~5.6.3"
-  languageName: unknown
-  linkType: soft
 
 "typescript@npm:~5.6.3":
   version: 5.6.3

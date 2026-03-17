@@ -1,7 +1,7 @@
 # Matrix
 
-Welcome to Matrix on Exercism's TypeScript Track.
-If you need help running the tests or submitting your code, check out `HELP.md`.
+Welcome to Matrix on Exercism's TypeScript Track. If you need help running the tests or submitting
+your code, check out `HELP.md`.
 
 ## Instructions
 
@@ -55,4 +55,5 @@ And its columns:
 
 ### Based on
 
-Exercise by the JumpstartLab team for students at The Turing School of Software and Design. - https://turing.edu
+Exercise by the JumpstartLab team for students at The Turing School of Software and Design. -
+https://turing.edu

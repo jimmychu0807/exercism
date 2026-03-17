@@ -15,13 +15,13 @@ type Color = keyof typeof Colors;
 
 export function decodedResistorValue(colors: Color[]): string {
   if (colors.length < 3) {
-    throw new Error('At least three color bands are required');
+    throw new Error("At least three color bands are required");
   }
 
   const [color1, color2, color3] = colors;
 
   const base = Colors[color1] * 10 + Colors[color2];
-  const exp = Colors[color3]; 
+  const exp = Colors[color3];
 
   const totalOhms = base * Math.pow(10, exp);
 

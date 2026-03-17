@@ -12,6 +12,6 @@ export enum Colors {
 }
 type Color = keyof typeof Colors;
 
-export function decodedValue([color1,color2]:Color[]):number {
-  return Number(`${Colors[color1]}${Colors[color2]}`)
+export function decodedValue([color1, color2]: Color[]): number {
+  return Number(`${Colors[color1]}${Colors[color2]}`);
 }

@@ -1,22 +1,24 @@
 # Secret Handshake
 
-Welcome to Secret Handshake on Exercism's TypeScript Track.
-If you need help running the tests or submitting your code, check out `HELP.md`.
+Welcome to Secret Handshake on Exercism's TypeScript Track. If you need help running the tests or
+submitting your code, check out `HELP.md`.
 
 ## Introduction
 
-You are starting a secret coding club with some friends and friends-of-friends.
-Not everyone knows each other, so you and your friends have decided to create a secret handshake that you can use to recognize that someone is a member.
-You don't want anyone who isn't in the know to be able to crack the code.
+You are starting a secret coding club with some friends and friends-of-friends. Not everyone knows
+each other, so you and your friends have decided to create a secret handshake that you can use to
+recognize that someone is a member. You don't want anyone who isn't in the know to be able to crack
+the code.
 
-You've designed the code so that one person says a number between 1 and 31, and the other person turns it into a series of actions.
+You've designed the code so that one person says a number between 1 and 31, and the other person
+turns it into a series of actions.
 
 ## Instructions
 
 Your task is to convert a number between 1 and 31 to a sequence of actions in the secret handshake.
 
-The sequence of actions is chosen by looking at the rightmost five digits of the number once it's been converted to binary.
-Start at the right-most digit and move left.
+The sequence of actions is chosen by looking at the rightmost five digits of the number once it's
+been converted to binary. Start at the right-most digit and move left.
 
 The actions for each number place are:
 
@@ -54,11 +56,11 @@ The secret handshake for 26 is therefore:
 jump, double blink
 ```
 
-~~~~exercism/note
+```exercism/note
 If you aren't sure what binary is or how it works, check out [this binary tutorial][intro-to-binary].
 
 [intro-to-binary]: https://medium.com/basecs/bits-bytes-building-with-binary-13cb4289aafa
-~~~~
+```
 
 ## Source
 

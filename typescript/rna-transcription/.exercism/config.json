@@ -1,22 +1,10 @@
 {
-  "authors": [
-    "masters3d"
-  ],
-  "contributors": [
-    "DFXLuna",
-    "lukaszklis",
-    "SleeplessByte"
-  ],
+  "authors": ["masters3d"],
+  "contributors": ["DFXLuna", "lukaszklis", "SleeplessByte"],
   "files": {
-    "solution": [
-      "rna-transcription.ts"
-    ],
-    "test": [
-      "rna-transcription.test.ts"
-    ],
-    "example": [
-      ".meta/proof.ci.ts"
-    ]
+    "solution": ["rna-transcription.ts"],
+    "test": ["rna-transcription.test.ts"],
+    "example": [".meta/proof.ci.ts"]
   },
   "blurb": "Given a DNA strand, return its RNA complement.",
   "custom": {
