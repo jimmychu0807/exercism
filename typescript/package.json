@@ -30,7 +30,8 @@
     "wordy",
     "word-count",
     "difference-of-squares",
-    "gigasecond"
+    "gigasecond",
+    "square-root"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
