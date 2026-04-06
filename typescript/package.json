@@ -32,7 +32,8 @@
     "difference-of-squares",
     "gigasecond",
     "square-root",
-    "reverse-string"
+    "reverse-string",
+    "triangle"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
