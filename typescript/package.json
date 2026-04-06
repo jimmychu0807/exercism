@@ -38,7 +38,8 @@
     "etl",
     "protein-translation",
     "raindrops",
-    "hamming"
+    "hamming",
+    "nucleotide-count"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
