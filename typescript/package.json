@@ -31,7 +31,8 @@
     "word-count",
     "difference-of-squares",
     "gigasecond",
-    "square-root"
+    "square-root",
+    "reverse-string"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
