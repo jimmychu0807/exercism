@@ -34,7 +34,8 @@
     "square-root",
     "reverse-string",
     "triangle",
-    "collatz-conjecture"
+    "collatz-conjecture",
+    "etl"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
