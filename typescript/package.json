@@ -19,16 +19,19 @@
     "robot-name",
     "grade-school",
     "clock",
+    "split-second-stopwatch",
     "secret-handshake",
     "binary-search",
     "linked-list",
     "prism",
     "rational-numbers",
     "atbash-cipher",
+    "simple-cipher",
     "wordy",
     "word-count",
     "difference-of-squares",
-    "gigasecond"
+    "gigasecond",
+    "square-root"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {

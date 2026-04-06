@@ -1961,9 +1961,69 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@exercism/typescript-simple-cipher@workspace:simple-cipher":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-simple-cipher@workspace:simple-cipher"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
 "@exercism/typescript-space-age@workspace:space-age":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-space-age@workspace:space-age"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-split-second-stopwatch@workspace:split-second-stopwatch":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-split-second-stopwatch@workspace:split-second-stopwatch"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-square-root@workspace:square-root":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-square-root@workspace:square-root"
   dependencies:
     "@exercism/babel-preset-typescript": "npm:^0.6.0"
     "@exercism/eslint-config-typescript": "npm:^0.8.0"
