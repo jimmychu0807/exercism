@@ -37,7 +37,8 @@
     "collatz-conjecture",
     "etl",
     "protein-translation",
-    "raindrops"
+    "raindrops",
+    "hamming"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
