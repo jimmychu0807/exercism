@@ -33,7 +33,8 @@
     "gigasecond",
     "square-root",
     "reverse-string",
-    "triangle"
+    "triangle",
+    "collatz-conjecture"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {

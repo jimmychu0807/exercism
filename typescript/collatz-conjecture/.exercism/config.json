@@ -1,0 +1,20 @@
+{
+  "authors": ["CRivasGomez"],
+  "contributors": ["masters3d", "SleeplessByte"],
+  "files": {
+    "solution": ["collatz-conjecture.ts"],
+    "test": ["collatz-conjecture.test.ts"],
+    "example": [".meta/proof.ci.ts"]
+  },
+  "blurb": "Calculate the number of steps to reach 1 using the Collatz conjecture.",
+  "custom": {
+    "version.tests.compatibility": "jest-29",
+    "flag.tests.task-per-describe": false,
+    "flag.tests.may-run-long": false,
+    "flag.tests.includes-optional": false,
+    "flag.tests.jest": true,
+    "flag.tests.tstyche": false
+  },
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Collatz_conjecture"
+}
