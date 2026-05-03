@@ -39,7 +39,10 @@
     "protein-translation",
     "raindrops",
     "hamming",
-    "nucleotide-count"
+    "nucleotide-count",
+    "allergies",
+    "complex-numbers",
+    "sum-of-multiples"
   ],
   "packageManager": "yarn@4.5.1",
   "scripts": {
