@@ -40,6 +40,8 @@
     "raindrops",
     "hamming",
     "nucleotide-count",
+    "camicia",
+    "scrabble-score",
     "allergies",
     "complex-numbers",
     "sum-of-multiples"

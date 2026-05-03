@@ -1581,6 +1581,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@exercism/typescript-camicia@workspace:camicia":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-camicia@workspace:camicia"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
 "@exercism/typescript-clock@workspace:clock":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-clock@workspace:clock"
@@ -2104,6 +2124,26 @@ __metadata:
 "@exercism/typescript-robot-name@workspace:robot-name":
   version: 0.0.0-use.local
   resolution: "@exercism/typescript-robot-name@workspace:robot-name"
+  dependencies:
+    "@exercism/babel-preset-typescript": "npm:^0.6.0"
+    "@exercism/eslint-config-typescript": "npm:^0.8.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/node": "npm:~22.7.6"
+    babel-jest: "npm:^29.7.0"
+    core-js: "npm:~3.38.1"
+    eslint: "npm:^9.12.0"
+    expect: "npm:^29.7.0"
+    jest: "npm:^29.7.0"
+    prettier: "npm:^3.3.3"
+    tstyche: "npm:^2.1.1"
+    typescript: "npm:~5.6.3"
+    typescript-eslint: "npm:^8.10.0"
+  languageName: unknown
+  linkType: soft
+
+"@exercism/typescript-scrabble-score@workspace:scrabble-score":
+  version: 0.0.0-use.local
+  resolution: "@exercism/typescript-scrabble-score@workspace:scrabble-score"
   dependencies:
     "@exercism/babel-preset-typescript": "npm:^0.6.0"
     "@exercism/eslint-config-typescript": "npm:^0.8.0"
